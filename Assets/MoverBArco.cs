@@ -11,11 +11,12 @@ public class MoverBArco : MonoBehaviour
     [SerializeField] private float velocidad;//Velocidad a la que se va a mover el barco
 
     public Transform destino { get; set; }//Lugar al que se va a mover le barco
+
+    public string islaActual;
     
 
     [SerializeField] private Camera cam;
     [SerializeField] private bool isMoving = false;
-
 
     void Start()
     {
@@ -34,16 +35,17 @@ public class MoverBArco : MonoBehaviour
 
     private void Clicked()
     {
-        Debug.Log("Da click");
-        Debug.Log(InputManager.Instance.MouseDelta());
+        
         Ray ray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
         if(Physics.Raycast(ray, out RaycastHit hit))
         {
             IClickable clickable = hit.collider.GetComponent<IClickable>();
             if (clickable != null)
             {
-                Debug.Log("Es una isla");
+                
                 clickable.OnClick();
+                islaActual = destino.parent.gameObject.name;
+                GameManager.Instance.islaActual = islaActual;
                 StartCoroutine(MoverAIsla());
             }
         }
@@ -67,4 +69,6 @@ public class MoverBArco : MonoBehaviour
         isMoving = false;
         SceneManager.LoadScene("Islas");
     }
+
+
 }

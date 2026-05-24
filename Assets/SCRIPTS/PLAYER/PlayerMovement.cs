@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,24 +15,45 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Jump")]
     [SerializeField] private float jumpForce;
+    [SerializeField] private bool _jumpRequested;
 
-    private void Start()
+    private void Awake()
     {
         inputManager = InputManager.Instance;
         rb = GetComponent<Rigidbody>();
         checker = GetComponent<GroundChecker>();
+        if (GameManager.Instance.islaSeleccionada != null)
+        {
+            transform.position = GameManager.Instance.islaSeleccionada.posicionDeSpawn;
+
+        }
 
     }
+    private void OnEnable()
+    {
+        if (inputManager != null)
+        {
+            inputManager.OnJumpPerformed += RequestJump;
+            inputManager.OnInteractPerformed += HandleInteraction;
+        }
+
+    }
+
+    private void OnDisable()
+    {
+        if (inputManager != null)
+        {
+            inputManager.OnJumpPerformed -= RequestJump;
+            inputManager.OnInteractPerformed -= HandleInteraction;
+        }
+    }
+
 
     private void FixedUpdate()
     {
         Movement();
         Jump();
 
-        if (inputManager.Interact())
-        {
-            SceneManager.LoadScene("MapaIslas");
-        }
     }
 
 
@@ -49,9 +69,20 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-        if (inputManager.isJumpPressed() && checker.IsGrounded())
+        if (_jumpRequested && checker.IsGrounded())
         {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Force);
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            _jumpRequested = false;
         }
+    }
+
+    private void RequestJump()
+    {
+        _jumpRequested = true;
+    }
+
+    private void HandleInteraction()
+    {
+        SceneManager.LoadScene("MapaIslas");
     }
 }

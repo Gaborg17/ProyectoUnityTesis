@@ -1,12 +1,16 @@
+using System;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
     private static InputManager _instance = null;
 
-    public static InputManager Instance { get => _instance; private set => _instance = value;}
+    public static InputManager Instance { get => _instance; private set => _instance = value; }
 
     private CharacterControls controls;
+
+    public event Action OnJumpPerformed;
+    public event Action OnInteractPerformed;
 
     private void Awake()
     {
@@ -17,7 +21,7 @@ public class InputManager : MonoBehaviour
         else
         {
             _instance = this;
-            Debug.Log("Instance created");
+            
         }
         controls = new CharacterControls();
     }
@@ -25,10 +29,17 @@ public class InputManager : MonoBehaviour
     private void OnEnable()
     {
         controls.Enable();
+
+        controls.Pirata.Jump.performed += ctx => OnJumpPerformed?.Invoke();
+        controls.Pirata.Interact.performed += ctx => OnInteractPerformed?.Invoke();
     }
 
     private void OnDisable()
     {
+
+        controls.Pirata.Jump.performed -= ctx => OnJumpPerformed?.Invoke();
+        controls.Pirata.Interact.performed -= ctx => OnInteractPerformed?.Invoke();
+
         controls.Disable();
     }
 
