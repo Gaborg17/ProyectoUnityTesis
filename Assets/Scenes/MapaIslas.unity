@@ -3701,7 +3701,7 @@ MonoBehaviour:
   IslaSeleccionada: {fileID: 0}
   islasAccesibles:
   - {fileID: 1268733422}
-  - {fileID: 1211619260}
+  - {fileID: 388938240}
   islaDisponibleMaterial: {fileID: 2100000, guid: dec1aeb8f26af2442b9f39f88cb2a2a4, type: 2}
   islaBloqueadaMaterial: {fileID: 2100000, guid: 1c5d5fb96913b0c4daf63162675f07e2, type: 2}
 --- !u!23 &1422081293
