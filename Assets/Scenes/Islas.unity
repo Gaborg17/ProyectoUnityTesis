@@ -119,6 +119,90 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &896799500
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 896799502}
+  - component: {fileID: 896799501}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &896799501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 896799500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19dedec62dcc58d48834b90306dc5a15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  boatPosition: {x: -1.4, y: 0, z: 0}
+  boatRotation: {x: 0, y: 0, z: 0, w: 1}
+  islaSeleccionada: {fileID: 0}
+  islaActual: Isla_Temp_Inicio
+  todasLasIslas:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  islasDesiertas:
+  - {fileID: 11400000, guid: cf61bde1bfd7af34ea47b53e29fd2c96, type: 2}
+  islasTesoro:
+  - {fileID: 11400000, guid: cf61bde1bfd7af34ea47b53e29fd2c96, type: 2}
+  islasPueblo:
+  - {fileID: 11400000, guid: cf61bde1bfd7af34ea47b53e29fd2c96, type: 2}
+  comida: 0
+  oro: 0
+  madera: 0
+  nTripulantes: 0
+  valorDeViaje: 15
+  recompensa: 0
+--- !u!4 &896799502
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 896799500}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.27792, y: -0, z: -0.82315}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1943296271
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,3 +378,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 1943296275}
   - {fileID: 6543443336373782666}
+  - {fileID: 896799502}

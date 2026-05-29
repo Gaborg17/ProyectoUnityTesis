@@ -19,18 +19,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        inputManager = InputManager.Instance;
+        
         rb = GetComponent<Rigidbody>();
         checker = GetComponent<GroundChecker>();
-        if (GameManager.Instance.islaSeleccionada != null)
-        {
-            transform.position = GameManager.Instance.islaSeleccionada.posicionDeSpawn;
 
-        }
 
     }
     private void OnEnable()
     {
+        inputManager = InputManager.Instance;
         if (inputManager != null)
         {
             inputManager.OnJumpPerformed += RequestJump;
@@ -47,7 +44,14 @@ public class PlayerMovement : MonoBehaviour
             inputManager.OnInteractPerformed -= HandleInteraction;
         }
     }
+    private void Start()
+    {
+        if (GameManager.Instance.islaSeleccionada != null)
+        {
+            transform.position = GameManager.Instance.islaSeleccionada.posicionDeSpawn;
 
+        }
+    }
 
     private void FixedUpdate()
     {

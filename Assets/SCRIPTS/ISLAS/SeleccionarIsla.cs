@@ -20,6 +20,9 @@ public class SeleccionarIsla : MonoBehaviour, IClickable
     public Material islaDisponibleMaterial;
     public Material islaBloqueadaMaterial;
 
+
+
+    [SerializeField] private Vector3 newCamPosition;
     private void Awake()
     {
         if (islaACargar.ContainsKey(nombreDeIsla))
@@ -64,6 +67,7 @@ public class SeleccionarIsla : MonoBehaviour, IClickable
         if(IslaSeleccionada == null)
         {
             //Get Random Isle
+            IslaSeleccionada = GameManager.Instance.RandomIsleSelector();
         }
 
         GameManager.Instance.islaSeleccionada = IslaSeleccionada;
@@ -88,5 +92,21 @@ public class SeleccionarIsla : MonoBehaviour, IClickable
     {
         yield return null;
         ActivarIslas();
+    }
+
+
+    public void MoverCamera()
+    {
+        StartCoroutine(MovimientoCam());
+    }
+
+    public IEnumerator MovimientoCam()
+    {
+        while (Vector3.Distance(Camera.main.transform.position, newCamPosition) > 0.01f)
+        { 
+            Camera.main.transform.position = Vector3.MoveTowards(Camera.main.transform.position, newCamPosition, 15 * Time.deltaTime);
+            GameManager.Instance.CamPosition = newCamPosition;
+            yield return null;
+        }
     }
 }

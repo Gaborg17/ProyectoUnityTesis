@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -13,7 +12,9 @@ public class MoverBArco : MonoBehaviour
     public Transform destino { get; set; }//Lugar al que se va a mover le barco
 
     public string islaActual;
-    
+
+    private Vector3 midpoint;
+    private bool tryEvent;
 
     [SerializeField] private Camera cam;
     [SerializeField] private bool isMoving = false;
@@ -22,6 +23,7 @@ public class MoverBArco : MonoBehaviour
     {
         barco.position = GameManager.Instance.boatPosition;
         barco.rotation = GameManager.Instance.boatRotation;
+        cam.transform.position = GameManager.Instance.CamPosition;
     }
 
     
@@ -42,10 +44,15 @@ public class MoverBArco : MonoBehaviour
             IClickable clickable = hit.collider.GetComponent<IClickable>();
             if (clickable != null)
             {
-                
+                if (GameManager.Instance.comida < GameManager.Instance.valorDeViaje)
+                {
+                    Debug.Log("No tienes suficiente comida");
+                    return;
+                }
                 clickable.OnClick();
                 islaActual = destino.parent.gameObject.name;
                 GameManager.Instance.islaActual = islaActual;
+                midpoint = (barco.position + destino.position) / 2;
                 StartCoroutine(MoverAIsla());
             }
         }
@@ -53,11 +60,20 @@ public class MoverBArco : MonoBehaviour
 
     public IEnumerator MoverAIsla()
     {
-        while(Vector3.Distance(barco.position, destino.position) > 0.01f)
+        GameManager.Instance.comida -= GameManager.Instance.valorDeViaje;
+        
+        while (Vector3.Distance(barco.position, destino.position) > 0.01f)
         {
+            if (Vector3.Distance(barco.position, midpoint) < 0.1f && !tryEvent)
+            {
+                //try event
+                Debug.Log("Intento de Evento");
+                tryEvent = true;
+            }
             isMoving = true;
             barco.LookAt(destino);
             barco.position = Vector3.MoveTowards(barco.position, destino.position, velocidad * Time.deltaTime);
+
             yield return null;
         }
         barco.position = destino.position;
@@ -67,6 +83,7 @@ public class MoverBArco : MonoBehaviour
         
         yield return new WaitForSeconds(.3f);
         isMoving = false;
+        tryEvent = false;
         SceneManager.LoadScene("Islas");
     }
 

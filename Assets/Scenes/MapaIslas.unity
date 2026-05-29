@@ -187,13 +187,14 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  nombreDeIsla: 
+  nombreDeIsla: Isla11
   IslaSeleccionada: {fileID: 0}
   islasAccesibles:
   - {fileID: 602150667}
   - {fileID: 74790415}
   islaDisponibleMaterial: {fileID: 2100000, guid: dec1aeb8f26af2442b9f39f88cb2a2a4, type: 2}
   islaBloqueadaMaterial: {fileID: 2100000, guid: 1c5d5fb96913b0c4daf63162675f07e2, type: 2}
+  newCamPosition: {x: 0, y: 0, z: 0}
 --- !u!23 &22867297
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -335,12 +336,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  nombreDeIsla: 
+  nombreDeIsla: IslaFinal
   IslaSeleccionada: {fileID: 0}
   islasAccesibles:
   - {fileID: 425600268}
   islaDisponibleMaterial: {fileID: 2100000, guid: dec1aeb8f26af2442b9f39f88cb2a2a4, type: 2}
   islaBloqueadaMaterial: {fileID: 2100000, guid: 1c5d5fb96913b0c4daf63162675f07e2, type: 2}
+  newCamPosition: {x: 0, y: 0, z: 0}
 --- !u!23 &43223995
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -482,7 +484,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  nombreDeIsla: 
+  nombreDeIsla: Isla15
   IslaSeleccionada: {fileID: 0}
   islasAccesibles:
   - {fileID: 22867295}
@@ -490,6 +492,7 @@ MonoBehaviour:
   - {fileID: 1772614743}
   islaDisponibleMaterial: {fileID: 2100000, guid: dec1aeb8f26af2442b9f39f88cb2a2a4, type: 2}
   islaBloqueadaMaterial: {fileID: 2100000, guid: 1c5d5fb96913b0c4daf63162675f07e2, type: 2}
+  newCamPosition: {x: 0, y: 0, z: 0}
 --- !u!23 &74790417
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -830,7 +833,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  nombreDeIsla: 
+  nombreDeIsla: Isla3
   IslaSeleccionada: {fileID: 0}
   islasAccesibles:
   - {fileID: 1268733422}
@@ -838,6 +841,7 @@ MonoBehaviour:
   - {fileID: 1790071639}
   islaDisponibleMaterial: {fileID: 2100000, guid: dec1aeb8f26af2442b9f39f88cb2a2a4, type: 2}
   islaBloqueadaMaterial: {fileID: 2100000, guid: 1c5d5fb96913b0c4daf63162675f07e2, type: 2}
+  newCamPosition: {x: 0, y: 0, z: 0}
 --- !u!23 &388938242
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1213,13 +1217,14 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  nombreDeIsla: 
+  nombreDeIsla: isla13
   IslaSeleccionada: {fileID: 0}
   islasAccesibles:
   - {fileID: 602150667}
   - {fileID: 959555234}
   islaDisponibleMaterial: {fileID: 2100000, guid: dec1aeb8f26af2442b9f39f88cb2a2a4, type: 2}
   islaBloqueadaMaterial: {fileID: 2100000, guid: 1c5d5fb96913b0c4daf63162675f07e2, type: 2}
+  newCamPosition: {x: 0, y: 0, z: 0}
 --- !u!23 &415965922
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1361,13 +1366,14 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  nombreDeIsla: 
+  nombreDeIsla: IslaPiratas
   IslaSeleccionada: {fileID: 0}
   islasAccesibles:
   - {fileID: 472241141}
   - {fileID: 43223993}
   islaDisponibleMaterial: {fileID: 2100000, guid: dec1aeb8f26af2442b9f39f88cb2a2a4, type: 2}
   islaBloqueadaMaterial: {fileID: 2100000, guid: 1c5d5fb96913b0c4daf63162675f07e2, type: 2}
+  newCamPosition: {x: 0, y: 0, z: 0}
 --- !u!23 &425600270
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1509,13 +1515,26 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  nombreDeIsla: 
+      - m_Target: {fileID: 472241142}
+        m_TargetAssemblyTypeName: SeleccionarIsla, Assembly-CSharp
+        m_MethodName: MoverCamera
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nombreDeIsla: IslaNieve
   IslaSeleccionada: {fileID: 0}
   islasAccesibles:
   - {fileID: 1590766791}
   - {fileID: 425600268}
   islaDisponibleMaterial: {fileID: 2100000, guid: dec1aeb8f26af2442b9f39f88cb2a2a4, type: 2}
   islaBloqueadaMaterial: {fileID: 2100000, guid: 1c5d5fb96913b0c4daf63162675f07e2, type: 2}
+  newCamPosition: {x: 215, y: 42.5, z: 0}
 --- !u!23 &472241143
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1761,6 +1780,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 528499037}
+        m_TargetAssemblyTypeName: SeleccionarIsla, Assembly-CSharp
+        m_MethodName: MoverCamera
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   nombreDeIsla: IslaInicio
   IslaSeleccionada: {fileID: 0}
   islasAccesibles:
@@ -1768,6 +1799,7 @@ MonoBehaviour:
   - {fileID: 545557923}
   islaDisponibleMaterial: {fileID: 2100000, guid: dec1aeb8f26af2442b9f39f88cb2a2a4, type: 2}
   islaBloqueadaMaterial: {fileID: 2100000, guid: 1c5d5fb96913b0c4daf63162675f07e2, type: 2}
+  newCamPosition: {x: 35, y: 42.5, z: 0}
 --- !u!1 &545557922
 GameObject:
   m_ObjectHideFlags: 0
@@ -1917,6 +1949,7 @@ MonoBehaviour:
   - {fileID: 528499033}
   islaDisponibleMaterial: {fileID: 2100000, guid: dec1aeb8f26af2442b9f39f88cb2a2a4, type: 2}
   islaBloqueadaMaterial: {fileID: 2100000, guid: 1c5d5fb96913b0c4daf63162675f07e2, type: 2}
+  newCamPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &602150666
 GameObject:
   m_ObjectHideFlags: 0
@@ -1985,7 +2018,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  nombreDeIsla: 
+      - m_Target: {fileID: 602150668}
+        m_TargetAssemblyTypeName: SeleccionarIsla, Assembly-CSharp
+        m_MethodName: MoverCamera
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nombreDeIsla: IslaReino
   IslaSeleccionada: {fileID: 0}
   islasAccesibles:
   - {fileID: 893613315}
@@ -1996,6 +2041,7 @@ MonoBehaviour:
   - {fileID: 415965920}
   islaDisponibleMaterial: {fileID: 2100000, guid: dec1aeb8f26af2442b9f39f88cb2a2a4, type: 2}
   islaBloqueadaMaterial: {fileID: 2100000, guid: 1c5d5fb96913b0c4daf63162675f07e2, type: 2}
+  newCamPosition: {x: 105, y: 42.5, z: 0}
 --- !u!23 &602150669
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2310,15 +2356,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  nombreDeIsla: 
+  nombreDeIsla: Isla5
   IslaSeleccionada: {fileID: 0}
   islasAccesibles:
   - {fileID: 388938240}
   - {fileID: 1211619260}
   - {fileID: 1791240793}
+  - {fileID: 1790071639}
   - {fileID: 602150667}
   islaDisponibleMaterial: {fileID: 2100000, guid: dec1aeb8f26af2442b9f39f88cb2a2a4, type: 2}
   islaBloqueadaMaterial: {fileID: 2100000, guid: 1c5d5fb96913b0c4daf63162675f07e2, type: 2}
+  newCamPosition: {x: 0, y: 0, z: 0}
 --- !u!23 &893613317
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2553,13 +2601,14 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  nombreDeIsla: 
+  nombreDeIsla: Isla14
   IslaSeleccionada: {fileID: 0}
   islasAccesibles:
   - {fileID: 415965920}
   - {fileID: 1772614743}
   islaDisponibleMaterial: {fileID: 2100000, guid: dec1aeb8f26af2442b9f39f88cb2a2a4, type: 2}
   islaBloqueadaMaterial: {fileID: 2100000, guid: 1c5d5fb96913b0c4daf63162675f07e2, type: 2}
+  newCamPosition: {x: 0, y: 0, z: 0}
 --- !u!23 &959555236
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2812,13 +2861,14 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  nombreDeIsla: 
+  nombreDeIsla: Isla6
   IslaSeleccionada: {fileID: 0}
   islasAccesibles:
   - {fileID: 545557923}
   - {fileID: 1791240793}
   islaDisponibleMaterial: {fileID: 2100000, guid: dec1aeb8f26af2442b9f39f88cb2a2a4, type: 2}
   islaBloqueadaMaterial: {fileID: 2100000, guid: 1c5d5fb96913b0c4daf63162675f07e2, type: 2}
+  newCamPosition: {x: 0, y: 0, z: 0}
 --- !u!23 &1137228838
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2960,13 +3010,14 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  nombreDeIsla: 
+  nombreDeIsla: Isla12
   IslaSeleccionada: {fileID: 0}
   islasAccesibles:
   - {fileID: 602150667}
   - {fileID: 74790415}
   islaDisponibleMaterial: {fileID: 2100000, guid: dec1aeb8f26af2442b9f39f88cb2a2a4, type: 2}
   islaBloqueadaMaterial: {fileID: 2100000, guid: 1c5d5fb96913b0c4daf63162675f07e2, type: 2}
+  newCamPosition: {x: 0, y: 0, z: 0}
 --- !u!23 &1164513834
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3108,13 +3159,14 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  nombreDeIsla: 
+  nombreDeIsla: Isla4
   IslaSeleccionada: {fileID: 0}
   islasAccesibles:
   - {fileID: 545557923}
   - {fileID: 893613315}
   islaDisponibleMaterial: {fileID: 2100000, guid: dec1aeb8f26af2442b9f39f88cb2a2a4, type: 2}
   islaBloqueadaMaterial: {fileID: 2100000, guid: 1c5d5fb96913b0c4daf63162675f07e2, type: 2}
+  newCamPosition: {x: 0, y: 0, z: 0}
 --- !u!23 &1211619262
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3329,7 +3381,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  nombreDeIsla: 
+  nombreDeIsla: Isla1
   IslaSeleccionada: {fileID: 0}
   islasAccesibles:
   - {fileID: 1422081291}
@@ -3337,6 +3389,7 @@ MonoBehaviour:
   - {fileID: 528499033}
   islaDisponibleMaterial: {fileID: 2100000, guid: dec1aeb8f26af2442b9f39f88cb2a2a4, type: 2}
   islaBloqueadaMaterial: {fileID: 2100000, guid: 1c5d5fb96913b0c4daf63162675f07e2, type: 2}
+  newCamPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &1275216693
 GameObject:
   m_ObjectHideFlags: 0
@@ -3518,13 +3571,14 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  nombreDeIsla: 
+  nombreDeIsla: Isla17
   IslaSeleccionada: {fileID: 0}
   islasAccesibles:
   - {fileID: 1772614743}
   - {fileID: 1590766791}
   islaDisponibleMaterial: {fileID: 2100000, guid: dec1aeb8f26af2442b9f39f88cb2a2a4, type: 2}
   islaBloqueadaMaterial: {fileID: 2100000, guid: 1c5d5fb96913b0c4daf63162675f07e2, type: 2}
+  newCamPosition: {x: 0, y: 0, z: 0}
 --- !u!23 &1340896826
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3697,13 +3751,14 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  nombreDeIsla: 
+  nombreDeIsla: Isla7
   IslaSeleccionada: {fileID: 0}
   islasAccesibles:
   - {fileID: 1268733422}
-  - {fileID: 388938240}
+  - {fileID: 1790071639}
   islaDisponibleMaterial: {fileID: 2100000, guid: dec1aeb8f26af2442b9f39f88cb2a2a4, type: 2}
   islaBloqueadaMaterial: {fileID: 2100000, guid: 1c5d5fb96913b0c4daf63162675f07e2, type: 2}
+  newCamPosition: {x: 0, y: 0, z: 0}
 --- !u!23 &1422081293
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3845,13 +3900,14 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  nombreDeIsla: 
+  nombreDeIsla: Isla18
   IslaSeleccionada: {fileID: 0}
   islasAccesibles:
   - {fileID: 1772614743}
   - {fileID: 472241141}
   islaDisponibleMaterial: {fileID: 2100000, guid: dec1aeb8f26af2442b9f39f88cb2a2a4, type: 2}
   islaBloqueadaMaterial: {fileID: 2100000, guid: 1c5d5fb96913b0c4daf63162675f07e2, type: 2}
+  newCamPosition: {x: 0, y: 0, z: 0}
 --- !u!23 &1460107551
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4024,13 +4080,14 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  nombreDeIsla: 
+  nombreDeIsla: Isla19
   IslaSeleccionada: {fileID: 0}
   islasAccesibles:
   - {fileID: 1340896824}
   - {fileID: 472241141}
   islaDisponibleMaterial: {fileID: 2100000, guid: dec1aeb8f26af2442b9f39f88cb2a2a4, type: 2}
   islaBloqueadaMaterial: {fileID: 2100000, guid: 1c5d5fb96913b0c4daf63162675f07e2, type: 2}
+  newCamPosition: {x: 0, y: 0, z: 0}
 --- !u!23 &1590766793
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4257,7 +4314,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  nombreDeIsla: 
+      - m_Target: {fileID: 1772614744}
+        m_TargetAssemblyTypeName: SeleccionarIsla, Assembly-CSharp
+        m_MethodName: MoverCamera
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nombreDeIsla: IslaRuinas
   IslaSeleccionada: {fileID: 0}
   islasAccesibles:
   - {fileID: 959555234}
@@ -4266,6 +4335,7 @@ MonoBehaviour:
   - {fileID: 1460107549}
   islaDisponibleMaterial: {fileID: 2100000, guid: dec1aeb8f26af2442b9f39f88cb2a2a4, type: 2}
   islaBloqueadaMaterial: {fileID: 2100000, guid: 1c5d5fb96913b0c4daf63162675f07e2, type: 2}
+  newCamPosition: {x: 155, y: 42.5, z: 0}
 --- !u!23 &1772614745
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4438,7 +4508,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  nombreDeIsla: 
+  nombreDeIsla: Isla9
   IslaSeleccionada: {fileID: 0}
   islasAccesibles:
   - {fileID: 388938240}
@@ -4446,6 +4516,7 @@ MonoBehaviour:
   - {fileID: 602150667}
   islaDisponibleMaterial: {fileID: 2100000, guid: dec1aeb8f26af2442b9f39f88cb2a2a4, type: 2}
   islaBloqueadaMaterial: {fileID: 2100000, guid: 1c5d5fb96913b0c4daf63162675f07e2, type: 2}
+  newCamPosition: {x: 0, y: 0, z: 0}
 --- !u!23 &1790071641
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4587,7 +4658,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  nombreDeIsla: 
+  nombreDeIsla: Isla8
   IslaSeleccionada: {fileID: 0}
   islasAccesibles:
   - {fileID: 1137228836}
@@ -4595,6 +4666,7 @@ MonoBehaviour:
   - {fileID: 602150667}
   islaDisponibleMaterial: {fileID: 2100000, guid: dec1aeb8f26af2442b9f39f88cb2a2a4, type: 2}
   islaBloqueadaMaterial: {fileID: 2100000, guid: 1c5d5fb96913b0c4daf63162675f07e2, type: 2}
+  newCamPosition: {x: 0, y: 0, z: 0}
 --- !u!23 &1791240795
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4978,9 +5050,18 @@ MonoBehaviour:
   - {fileID: 472241140}
   - {fileID: 425600267}
   - {fileID: 43223992}
-  islasDesiertas: []
-  islasTesoro: []
-  islasPueblo: []
+  islasDesiertas:
+  - {fileID: 11400000, guid: cf61bde1bfd7af34ea47b53e29fd2c96, type: 2}
+  islasTesoro:
+  - {fileID: 11400000, guid: cf61bde1bfd7af34ea47b53e29fd2c96, type: 2}
+  islasPueblo:
+  - {fileID: 11400000, guid: cf61bde1bfd7af34ea47b53e29fd2c96, type: 2}
+  comida: 0
+  oro: 0
+  madera: 0
+  nTripulantes: 0
+  valorDeViaje: 15
+  recompensa: 0
 --- !u!1 &2089683087
 GameObject:
   m_ObjectHideFlags: 0
