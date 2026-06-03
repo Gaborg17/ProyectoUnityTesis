@@ -22,7 +22,7 @@ Material:
   stringTagMap: {}
   disabledShaderPasses:
   - MOTIONVECTORS
-  m_LockedProperties: 
+  m_LockedProperties: _Peak_1
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
