@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class EnemyGroundedState : EnemyBaseState
 {
     public EnemyGroundedState(EnemyStateMachine currentContext, EnemyStateFactory playerStateFactory)
@@ -8,7 +10,10 @@ public class EnemyGroundedState : EnemyBaseState
     }
     public override void CheckSwitchState()
     {
-
+        if(Ctx.InCombat == true)
+        {
+            SwitchState(Factory.InCombat());
+        }
     }
 
     public override void EnterState()
@@ -18,7 +23,7 @@ public class EnemyGroundedState : EnemyBaseState
 
     public override void ExitState()
     {
-
+        
     }
 
     public override void InitializeSubState()

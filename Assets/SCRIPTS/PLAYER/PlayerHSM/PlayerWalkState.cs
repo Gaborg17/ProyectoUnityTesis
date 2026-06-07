@@ -12,11 +12,16 @@ public class PlayerWalkState : PlayerBaseState
             SwitchState(Factory.Idle());
         }
 
+        if (Ctx.InputManager.AttackIsPressed())
+        {
+            SwitchState(Factory.InCombat());
+        }
+
     }
 
     public override void EnterState()
     {
-        //Animacion walk = true
+        Ctx.PAnimator.SetBool(Ctx.IsWalkingHash, true);
         Ctx.isWalking = true;
     }
 

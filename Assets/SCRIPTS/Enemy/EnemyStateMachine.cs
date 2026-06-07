@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,17 +8,24 @@ public class EnemyStateMachine : MonoBehaviour
 
     private NavMeshAgent agent;
 
+    protected Transform player;
+
     [SerializeField] private Transform[] destinos;
 
-    [SerializeField]private bool _isWalking;
+    [SerializeField] private bool _isWalking;
+
+    [SerializeField]protected bool _isInCombat;
 
 
     public Animator EnemyAnimator { get { return enemyAnim; } }
     public NavMeshAgent Agent { get { return agent; } }
 
     public Transform[] Destinos { get { return destinos; } }
+    public Transform Player {  get { return player; } }
 
     public bool isWalking { get { return _isWalking; } set { _isWalking = value; } }
+
+    public bool InCombat { get { return _isInCombat; } set { _isInCombat = value; } }
 
     EnemyBaseState _currentState;
     EnemyStateFactory _stateFactory;
@@ -31,10 +38,16 @@ public class EnemyStateMachine : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         _stateFactory = new EnemyStateFactory(this);
         _currentState = _stateFactory.Grounded();
-        _currentState.EnterState();
+        _currentState.EnterStates();
+    }
+
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
     private void Update()
     {
         _currentState.UpdateStates();
     }
+    
 }

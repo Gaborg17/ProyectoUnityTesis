@@ -11,6 +11,7 @@ public class InputManager : MonoBehaviour
 
     public event Action OnJumpPerformed;
     public event Action OnInteractPerformed;
+    public event Action OnInventoryPerformed;
 
     private void Awake()
     {
@@ -32,6 +33,7 @@ public class InputManager : MonoBehaviour
 
         controls.Pirata.Jump.performed += ctx => OnJumpPerformed?.Invoke();
         controls.Pirata.Interact.performed += ctx => OnInteractPerformed?.Invoke();
+        controls.Pirata.Inventory.performed += ctx => OnInventoryPerformed?.Invoke();
     }
 
     private void OnDisable()
@@ -39,6 +41,8 @@ public class InputManager : MonoBehaviour
 
         controls.Pirata.Jump.performed -= ctx => OnJumpPerformed?.Invoke();
         controls.Pirata.Interact.performed -= ctx => OnInteractPerformed?.Invoke();
+        controls.Pirata.Inventory.performed -= ctx => OnInventoryPerformed?.Invoke();
+
 
         controls.Disable();
     }
@@ -70,6 +74,16 @@ public class InputManager : MonoBehaviour
     public Vector2 MouseDeltaPirata()
     {
         return controls.Pirata.MoverCamara.ReadValue<Vector2>();
+    }
+
+    public bool AttackIsPressed()
+    {
+        return controls.Pirata.Attack.IsPressed();
+    }
+
+    public bool InventoryPressed()
+    {
+        return controls.Pirata.Inventory.IsPressed();
     }
 
 

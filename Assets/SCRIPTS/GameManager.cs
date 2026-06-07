@@ -33,6 +33,18 @@ public class GameManager : MonoBehaviour
     public int valorDeViaje;
     public int recompensa;
 
+    [Header("Aliados")]
+    public int maxAllies;
+
+    public AlliesSO[] allies;
+
+    public ChefSO chef;
+    public NavigatorSO navigator;
+    public ArqueologistSO arqueologist;
+    public CarpenterSO carpenter;
+    public DoctorSO doctor;
+    public WarriorSO warrior;
+
     private void Awake()
     {
         if (Instance == null)
@@ -83,9 +95,18 @@ public class GameManager : MonoBehaviour
     [ContextMenu("islarandom")]
     public IslasSO RandomIsleSelector()
     {
-        List<float> isleTypeWeights = new List<float> { 33f, 33f, 33f };
-
-        int index = ProbabilityManager.GetRandomIndex(isleTypeWeights);
+        int index;
+        if(navigator == null)
+        {
+            List<float> isleTypeWeights = new List<float> { 33f, 33f, 33f };
+            index = ProbabilityManager.GetRandomIndex(isleTypeWeights);
+            
+        }
+        else
+        {
+            index = ProbabilityManager.GetRandomIndex(navigator.probabilities);
+        }
+        
 
         switch (index)
         {
@@ -110,5 +131,16 @@ public class GameManager : MonoBehaviour
         int randomTipoDeIsla = Random.Range(0, islasDeTipo.Length);
 
         return islasDeTipo[randomTipoDeIsla];
+    }
+
+    public int CalculateFoodCost()
+    {
+        if(chef == null)
+        {
+            return valorDeViaje;
+        }
+        float total = valorDeViaje - (valorDeViaje * chef.foodCostModifier);
+
+        return (int)total;
     }
 }

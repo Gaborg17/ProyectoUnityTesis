@@ -10,11 +10,14 @@ public class EnemyWalkState : EnemyBaseState
         {
             SwitchState(Factory.Idle());            
         }
+
     }
 
     public override void EnterState()
     {
-        Ctx.Agent.isStopped = false;
+        
+        AgentModifiers();
+        Ctx.EnemyAnimator.SetBool("IsWalking", true);
         Ctx.isWalking = true;
     }
 
@@ -39,5 +42,10 @@ public class EnemyWalkState : EnemyBaseState
     {
         Ctx.Agent.SetDestination(Ctx.Destinos[0].position);
         
+    }
+    private void AgentModifiers()
+    {
+        Ctx.Agent.isStopped = false;
+        Ctx.Agent.stoppingDistance = 0;
     }
 }

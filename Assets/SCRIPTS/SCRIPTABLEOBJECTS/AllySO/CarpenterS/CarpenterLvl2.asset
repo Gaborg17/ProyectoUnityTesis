@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3a66410ef0224f468f369babb9df14c, type: 3}
+  m_Name: CarpenterLvl2
+  m_EditorClassIdentifier: Assembly-CSharp::CarpenterSO
+  allyName: CarpenterLvl2
+  allyLevel: 2
+  health: 0
+  maxHealth: 0
+  moveSpeed: 0
+  recruitmentPrice: 60
+  damage: 0
+  minBoatLvlRepair: 2
+  maxBoatLvlRepair: 5

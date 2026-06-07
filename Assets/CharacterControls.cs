@@ -175,6 +175,24 @@ public partial class @CharacterControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""79445692-2746-41a3-8a1c-720132528fba"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Inventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""8d04a351-0598-49ed-b364-4c96a6b5ab4d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -265,6 +283,28 @@ public partial class @CharacterControls: IInputActionCollection2, IDisposable
                     ""action"": ""MoverCamara"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""256acbb3-da3e-43bb-ad75-37d9d983f5cd"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""785f17c9-9173-46ce-a375-1fb3304ba280"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -281,6 +321,8 @@ public partial class @CharacterControls: IInputActionCollection2, IDisposable
         m_Pirata_Jump = m_Pirata.FindAction("Jump", throwIfNotFound: true);
         m_Pirata_Interact = m_Pirata.FindAction("Interact", throwIfNotFound: true);
         m_Pirata_MoverCamara = m_Pirata.FindAction("MoverCamara", throwIfNotFound: true);
+        m_Pirata_Attack = m_Pirata.FindAction("Attack", throwIfNotFound: true);
+        m_Pirata_Inventory = m_Pirata.FindAction("Inventory", throwIfNotFound: true);
     }
 
     ~@CharacterControls()
@@ -473,6 +515,8 @@ public partial class @CharacterControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Pirata_Jump;
     private readonly InputAction m_Pirata_Interact;
     private readonly InputAction m_Pirata_MoverCamara;
+    private readonly InputAction m_Pirata_Attack;
+    private readonly InputAction m_Pirata_Inventory;
     /// <summary>
     /// Provides access to input actions defined in input action map "Pirata".
     /// </summary>
@@ -500,6 +544,14 @@ public partial class @CharacterControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Pirata/MoverCamara".
         /// </summary>
         public InputAction @MoverCamara => m_Wrapper.m_Pirata_MoverCamara;
+        /// <summary>
+        /// Provides access to the underlying input action "Pirata/Attack".
+        /// </summary>
+        public InputAction @Attack => m_Wrapper.m_Pirata_Attack;
+        /// <summary>
+        /// Provides access to the underlying input action "Pirata/Inventory".
+        /// </summary>
+        public InputAction @Inventory => m_Wrapper.m_Pirata_Inventory;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -538,6 +590,12 @@ public partial class @CharacterControls: IInputActionCollection2, IDisposable
             @MoverCamara.started += instance.OnMoverCamara;
             @MoverCamara.performed += instance.OnMoverCamara;
             @MoverCamara.canceled += instance.OnMoverCamara;
+            @Attack.started += instance.OnAttack;
+            @Attack.performed += instance.OnAttack;
+            @Attack.canceled += instance.OnAttack;
+            @Inventory.started += instance.OnInventory;
+            @Inventory.performed += instance.OnInventory;
+            @Inventory.canceled += instance.OnInventory;
         }
 
         /// <summary>
@@ -561,6 +619,12 @@ public partial class @CharacterControls: IInputActionCollection2, IDisposable
             @MoverCamara.started -= instance.OnMoverCamara;
             @MoverCamara.performed -= instance.OnMoverCamara;
             @MoverCamara.canceled -= instance.OnMoverCamara;
+            @Attack.started -= instance.OnAttack;
+            @Attack.performed -= instance.OnAttack;
+            @Attack.canceled -= instance.OnAttack;
+            @Inventory.started -= instance.OnInventory;
+            @Inventory.performed -= instance.OnInventory;
+            @Inventory.canceled -= instance.OnInventory;
         }
 
         /// <summary>
@@ -651,5 +715,19 @@ public partial class @CharacterControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMoverCamara(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Attack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnAttack(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Inventory" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnInventory(InputAction.CallbackContext context);
     }
 }

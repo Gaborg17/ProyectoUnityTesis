@@ -19,6 +19,8 @@ public class MoverBArco : MonoBehaviour
     [SerializeField] private Camera cam;
     [SerializeField] private bool isMoving = false;
 
+    private Coroutine moveCoroutine;
+
     void Start()
     {
         barco.position = GameManager.Instance.boatPosition;
@@ -44,24 +46,22 @@ public class MoverBArco : MonoBehaviour
             IClickable clickable = hit.collider.GetComponent<IClickable>();
             if (clickable != null)
             {
-                if (GameManager.Instance.comida < GameManager.Instance.valorDeViaje)
-                {
-                    Debug.Log("No tienes suficiente comida");
-                    return;
-                }
                 clickable.OnClick();
                 islaActual = destino.parent.gameObject.name;
                 GameManager.Instance.islaActual = islaActual;
                 midpoint = (barco.position + destino.position) / 2;
-                StartCoroutine(MoverAIsla());
+                if(moveCoroutine == null)
+                {
+                    moveCoroutine = StartCoroutine(MoverAIsla());
+                }
             }
         }
     }
 
     public IEnumerator MoverAIsla()
     {
-        GameManager.Instance.comida -= GameManager.Instance.valorDeViaje;
-        
+        GameManager.Instance.comida -= GameManager.Instance.CalculateFoodCost();
+
         while (Vector3.Distance(barco.position, destino.position) > 0.01f)
         {
             if (Vector3.Distance(barco.position, midpoint) < 0.1f && !tryEvent)
@@ -82,6 +82,7 @@ public class MoverBArco : MonoBehaviour
         GameManager.Instance.boatRotation = destino.rotation;
         
         yield return new WaitForSeconds(.3f);
+        moveCoroutine = null;
         isMoving = false;
         tryEvent = false;
         SceneManager.LoadScene("Islas");

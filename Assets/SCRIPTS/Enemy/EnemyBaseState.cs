@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public abstract class EnemyBaseState
 {
     private bool _isRootState = false;
@@ -23,7 +25,14 @@ public abstract class EnemyBaseState
     public abstract void InitializeSubState();
 
 
-
+    public void EnterStates()
+    {
+        EnterState();
+        if (_currentSubState != null)
+        {
+            _currentSubState.EnterStates();
+        }
+    }
     public void UpdateStates()
     {
         UpdateState();
@@ -38,12 +47,14 @@ public abstract class EnemyBaseState
         if (_currentSubState != null)
         {
             _currentSubState.ExitState();
+            _currentSubState = null;
         }
     }
     protected void SwitchState(EnemyBaseState newState)
     {
-        ExitState();
-        newState.EnterState();
+        
+        ExitStates();
+        
 
         if (_isRootState)
         {
@@ -53,6 +64,7 @@ public abstract class EnemyBaseState
         {
             _currentSuperState.SetSubState(newState);
         }
+        newState.EnterStates();
     }
     protected void SetSuperState(EnemyBaseState newSuperState)
     {
@@ -62,5 +74,6 @@ public abstract class EnemyBaseState
     {
         _currentSubState = newSubState;
         newSubState.SetSuperState(this);
+
     }
 }

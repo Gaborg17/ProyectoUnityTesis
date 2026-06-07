@@ -19,6 +19,7 @@ public class PlayerJumpState : PlayerBaseState
     public override void EnterState()
     {
         InitializeSubState();
+        Ctx.PAnimator.SetTrigger(Ctx.IsJumpHash);
         Jump();
     }
 

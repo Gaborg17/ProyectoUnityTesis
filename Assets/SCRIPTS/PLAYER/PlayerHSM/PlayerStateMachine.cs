@@ -10,6 +10,8 @@ public class PlayerStateMachine : MonoBehaviour
     [SerializeField] private Animator p_Animator;
     
     int _isWalkingHash;
+    int _isAttackingHash;
+    int _isJumpHash;
 
     [Header("Movement")]
     [SerializeField] private float _walkSpeed;
@@ -28,12 +30,18 @@ public class PlayerStateMachine : MonoBehaviour
     public InputManager InputManager { get { return inputManager; } }
     public Transform Transform { get { return transform; } }
 
+    public int IsWalkingHash {  get { return _isWalkingHash; }}
+    public int IsAttackingHash {  get { return _isAttackingHash; }}
+    public int IsJumpHash { get { return _isJumpHash; }}
+
     PlayerBaseState _currentState;
     PlayerStateFactory _stateFactory;
 
     public PlayerBaseState CurrentState { get { return _currentState; } set { _currentState = value; }}
 
     public bool isWalking;
+
+    public GameObject temporalDamageCollider;
     private void Awake()
     {
         inputManager = InputManager.Instance;
@@ -43,7 +51,9 @@ public class PlayerStateMachine : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         checker = GetComponent<GroundChecker>();
 
-        _isWalkingHash = Animator.StringToHash("isWalking");
+        _isWalkingHash = Animator.StringToHash("IsWalking");
+        _isAttackingHash = Animator.StringToHash("Hit");
+        _isJumpHash = Animator.StringToHash("Jump");
     }
 
     private void OnEnable()
@@ -52,7 +62,8 @@ public class PlayerStateMachine : MonoBehaviour
         if (inputManager != null)
         {
             inputManager.OnJumpPerformed += RequestJump;
-            inputManager.OnInteractPerformed += HandleInteraction;
+            //inputManager.OnInteractPerformed += HandleInteraction;
+            inputManager.OnInventoryPerformed += HandleInteraction;
         }
 
     }
@@ -62,7 +73,9 @@ public class PlayerStateMachine : MonoBehaviour
         if (inputManager != null)
         {
             inputManager.OnJumpPerformed -= RequestJump;
-            inputManager.OnInteractPerformed -= HandleInteraction;
+            //inputManager.OnInteractPerformed -= HandleInteraction;
+            inputManager.OnInventoryPerformed -= HandleInteraction;
+
         }
     }
     private void Start()

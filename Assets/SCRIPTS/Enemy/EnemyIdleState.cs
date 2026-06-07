@@ -11,10 +11,12 @@ public class EnemyIdleState : EnemyBaseState
             SwitchState(Factory.Walk());
             
         }
+
     }
 
     public override void EnterState()
     {
+        Ctx.EnemyAnimator.SetBool("IsWalking", false);
         Ctx.isWalking = false;
     }
 

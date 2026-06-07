@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -52,6 +51,7 @@ public class SeleccionarIsla : MonoBehaviour, IClickable
         GameManager.Instance.AddToArray(this.gameObject);
         if (GameManager.Instance.islaActual == this.gameObject.name)
         {
+            colliderisla.enabled = false;
             StartCoroutine(ActivarIslasConRetraso());
         }
     }
@@ -80,7 +80,7 @@ public class SeleccionarIsla : MonoBehaviour, IClickable
     public void ActivarIslas()
     {
         GameManager.Instance.DeactivateIsles(islaBloqueadaMaterial);
-        colliderisla.enabled = true;
+        
         foreach(Collider isla in islasAccesibles)
         {
             isla.enabled = true;

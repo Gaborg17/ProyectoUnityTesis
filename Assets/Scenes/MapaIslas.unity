@@ -484,6 +484,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 74790416}
+        m_TargetAssemblyTypeName: SeleccionarIsla, Assembly-CSharp
+        m_MethodName: MoverCamera
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   nombreDeIsla: Isla15
   IslaSeleccionada: {fileID: 0}
   islasAccesibles:
@@ -492,7 +504,7 @@ MonoBehaviour:
   - {fileID: 1772614743}
   islaDisponibleMaterial: {fileID: 2100000, guid: dec1aeb8f26af2442b9f39f88cb2a2a4, type: 2}
   islaBloqueadaMaterial: {fileID: 2100000, guid: 1c5d5fb96913b0c4daf63162675f07e2, type: 2}
-  newCamPosition: {x: 0, y: 0, z: 0}
+  newCamPosition: {x: 85, y: 42.5, z: 0}
 --- !u!23 &74790417
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1366,6 +1378,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 425600269}
+        m_TargetAssemblyTypeName: SeleccionarIsla, Assembly-CSharp
+        m_MethodName: MoverCamera
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   nombreDeIsla: IslaPiratas
   IslaSeleccionada: {fileID: 0}
   islasAccesibles:
@@ -1373,7 +1397,7 @@ MonoBehaviour:
   - {fileID: 43223993}
   islaDisponibleMaterial: {fileID: 2100000, guid: dec1aeb8f26af2442b9f39f88cb2a2a4, type: 2}
   islaBloqueadaMaterial: {fileID: 2100000, guid: 1c5d5fb96913b0c4daf63162675f07e2, type: 2}
-  newCamPosition: {x: 0, y: 0, z: 0}
+  newCamPosition: {x: 215, y: 0, z: 0}
 --- !u!23 &425600270
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2041,7 +2065,7 @@ MonoBehaviour:
   - {fileID: 415965920}
   islaDisponibleMaterial: {fileID: 2100000, guid: dec1aeb8f26af2442b9f39f88cb2a2a4, type: 2}
   islaBloqueadaMaterial: {fileID: 2100000, guid: 1c5d5fb96913b0c4daf63162675f07e2, type: 2}
-  newCamPosition: {x: 105, y: 42.5, z: 0}
+  newCamPosition: {x: 85, y: 42.5, z: 0}
 --- !u!23 &602150669
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2356,6 +2380,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 893613316}
+        m_TargetAssemblyTypeName: SeleccionarIsla, Assembly-CSharp
+        m_MethodName: MoverCamera
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   nombreDeIsla: Isla5
   IslaSeleccionada: {fileID: 0}
   islasAccesibles:
@@ -2366,7 +2402,7 @@ MonoBehaviour:
   - {fileID: 602150667}
   islaDisponibleMaterial: {fileID: 2100000, guid: dec1aeb8f26af2442b9f39f88cb2a2a4, type: 2}
   islaBloqueadaMaterial: {fileID: 2100000, guid: 1c5d5fb96913b0c4daf63162675f07e2, type: 2}
-  newCamPosition: {x: 0, y: 0, z: 0}
+  newCamPosition: {x: 35, y: 42.5, z: 0}
 --- !u!23 &893613317
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2601,6 +2637,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 959555235}
+        m_TargetAssemblyTypeName: SeleccionarIsla, Assembly-CSharp
+        m_MethodName: MoverCamera
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   nombreDeIsla: Isla14
   IslaSeleccionada: {fileID: 0}
   islasAccesibles:
@@ -2608,7 +2656,7 @@ MonoBehaviour:
   - {fileID: 1772614743}
   islaDisponibleMaterial: {fileID: 2100000, guid: dec1aeb8f26af2442b9f39f88cb2a2a4, type: 2}
   islaBloqueadaMaterial: {fileID: 2100000, guid: 1c5d5fb96913b0c4daf63162675f07e2, type: 2}
-  newCamPosition: {x: 0, y: 0, z: 0}
+  newCamPosition: {x: 85, y: 42.5, z: 0}
 --- !u!23 &959555236
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4335,7 +4383,7 @@ MonoBehaviour:
   - {fileID: 1460107549}
   islaDisponibleMaterial: {fileID: 2100000, guid: dec1aeb8f26af2442b9f39f88cb2a2a4, type: 2}
   islaBloqueadaMaterial: {fileID: 2100000, guid: 1c5d5fb96913b0c4daf63162675f07e2, type: 2}
-  newCamPosition: {x: 155, y: 42.5, z: 0}
+  newCamPosition: {x: 185, y: 42.5, z: 0}
 --- !u!23 &1772614745
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4508,6 +4556,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1790071640}
+        m_TargetAssemblyTypeName: SeleccionarIsla, Assembly-CSharp
+        m_MethodName: MoverCamera
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   nombreDeIsla: Isla9
   IslaSeleccionada: {fileID: 0}
   islasAccesibles:
@@ -4516,7 +4576,7 @@ MonoBehaviour:
   - {fileID: 602150667}
   islaDisponibleMaterial: {fileID: 2100000, guid: dec1aeb8f26af2442b9f39f88cb2a2a4, type: 2}
   islaBloqueadaMaterial: {fileID: 2100000, guid: 1c5d5fb96913b0c4daf63162675f07e2, type: 2}
-  newCamPosition: {x: 0, y: 0, z: 0}
+  newCamPosition: {x: 35, y: 42.5, z: 0}
 --- !u!23 &1790071641
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4658,6 +4718,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1791240794}
+        m_TargetAssemblyTypeName: SeleccionarIsla, Assembly-CSharp
+        m_MethodName: MoverCamera
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   nombreDeIsla: Isla8
   IslaSeleccionada: {fileID: 0}
   islasAccesibles:
@@ -4666,7 +4738,7 @@ MonoBehaviour:
   - {fileID: 602150667}
   islaDisponibleMaterial: {fileID: 2100000, guid: dec1aeb8f26af2442b9f39f88cb2a2a4, type: 2}
   islaBloqueadaMaterial: {fileID: 2100000, guid: 1c5d5fb96913b0c4daf63162675f07e2, type: 2}
-  newCamPosition: {x: 0, y: 0, z: 0}
+  newCamPosition: {x: 35, y: 42.5, z: 0}
 --- !u!23 &1791240795
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5023,6 +5095,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   boatPosition: {x: -1.4, y: 0, z: 0}
+  CamPosition: {x: 35, y: 42.5, z: 0}
   boatRotation: {x: 0, y: 0, z: 0, w: 1}
   islaSeleccionada: {fileID: 0}
   islaActual: Isla_Temp_Inicio
