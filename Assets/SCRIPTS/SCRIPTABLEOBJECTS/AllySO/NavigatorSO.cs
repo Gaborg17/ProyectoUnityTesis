@@ -5,4 +5,6 @@ using UnityEngine;
 public class NavigatorSO : AlliesSO
 {
     public List<float> probabilities;
+    public override string Description =>
+        $"Aumenta la probabilidad de encontrar mejores islas";
 }

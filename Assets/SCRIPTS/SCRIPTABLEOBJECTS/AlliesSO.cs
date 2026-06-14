@@ -17,7 +17,9 @@ public abstract class AlliesSO : ScriptableObject
 
     public int damage;
 
-    
+    public abstract string Description { get; }
+
+
 
     public virtual void AllyAbility()
     {

@@ -4,6 +4,8 @@ using UnityEngine;
 public class ArqueologistSO : AlliesSO
 {
     public List<float> probabilities;
+    public override string Description =>
+        $"Aumenta la probabilidad de obtener mejores recompensas de los tesoros ";
     public override void AllyAbility()
     {
         
