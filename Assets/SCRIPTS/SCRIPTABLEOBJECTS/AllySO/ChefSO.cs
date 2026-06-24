@@ -13,4 +13,14 @@ public class ChefSO : AlliesSO
     {
         
     }
+
+    public override void OnAddedToTeam()
+    {
+        GameManager.Instance.chef = this;
+    }
+
+    public override void OnRemovedOfTeam()
+    {
+        GameManager.Instance.chef = null;
+    }
 }

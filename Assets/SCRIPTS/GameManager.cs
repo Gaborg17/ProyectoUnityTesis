@@ -6,8 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public Vector3 boatPosition = new Vector3(-1.4f,0f,0f);
-    public Vector3 CamPosition = new Vector3(35f,42.5f,0f);
+    public Vector3 boatPosition = new Vector3(-1.4f, 0f, 0f);
+    public Vector3 CamPosition = new Vector3(35f, 42.5f, 0f);
     public Quaternion boatRotation = Quaternion.identity;
 
     public IslasSO islaSeleccionada;
@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     public int comida;
     public int oro;
     public int madera;
-    
+
     public int nTripulantes;
 
     [Header("EstadisticasActuales")]
@@ -35,15 +35,19 @@ public class GameManager : MonoBehaviour
 
     [Header("Aliados")]
     public int maxAllies;
+    public int baseAllies;
 
-    public AlliesSO[] allies;
+    public List<AlliesSO> allies;
 
     public ChefSO chef;
     public NavigatorSO navigator;
     public ArqueologistSO arqueologist;
     public CarpenterSO carpenter;
     public DoctorSO doctor;
-    public WarriorSO warrior;
+    public List<WarriorSO> warriors;
+
+    public BountyManager bountyManager { get; private set; }
+
 
     private void Awake()
     {
@@ -52,12 +56,16 @@ public class GameManager : MonoBehaviour
             Instance = this;
             SceneManager.sceneLoaded += OnSceneLoaded;
             DontDestroyOnLoad(this.gameObject);
+
+            bountyManager = GetComponentInChildren<BountyManager>();
         }
         else
         {
             Destroy(this.gameObject);
         }
     }
+
+
     private void OnDestroy()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
@@ -81,7 +89,7 @@ public class GameManager : MonoBehaviour
     public void AddToArray(GameObject isla)
     {
 
-        if(isla != null && !todasLasIslas.Contains(isla))
+        if (isla != null && !todasLasIslas.Contains(isla))
         {
             todasLasIslas.Add(isla);
         }
@@ -96,23 +104,23 @@ public class GameManager : MonoBehaviour
     public IslasSO RandomIsleSelector()
     {
         int index;
-        if(navigator == null)
+        if (navigator == null)
         {
             List<float> isleTypeWeights = new List<float> { 33f, 33f, 33f };
             index = ProbabilityManager.GetRandomIndex(isleTypeWeights);
-            
+
         }
         else
         {
             index = ProbabilityManager.GetRandomIndex(navigator.probabilities);
         }
-        
+
 
         switch (index)
         {
             case 0:
                 Debug.Log("TipoDeIsla: Desierta");
-                isle =  RandomIsleTypeSelector(islasDesiertas);
+                isle = RandomIsleTypeSelector(islasDesiertas);
                 break;
             case 1:
                 Debug.Log("TipoDeIsla: Pueblo");
@@ -135,12 +143,60 @@ public class GameManager : MonoBehaviour
 
     public int CalculateFoodCost()
     {
-        if(chef == null)
+        if (chef == null)
         {
             return valorDeViaje;
         }
         float total = valorDeViaje - (valorDeViaje * chef.foodCostModifier);
 
         return (int)total;
+    }
+
+    [ContextMenu("UpdateLimit")]
+    public void UpdateTripulationLimit()
+    {
+        maxAllies = baseAllies + nTripulantes;
+        //Cambiar por la cantidad que agrga cada barco/barco en uso
+        if (maxAllies < 8)
+        {
+            for (int i = maxAllies; i < 8 && i < allies.Count; i++)
+            {
+                if (allies[i] != null)
+                {
+                    allies[i].OnRemovedOfTeam();
+                    allies[i] = null;
+                }
+            }
+        }
+    }
+
+
+    public bool AddAlly(AlliesSO allyToAdd)
+    {
+        if (allyToAdd == null) return false;
+        for (int i = 0; i < maxAllies && i < allies.Count; i++)
+        {
+            if (allies[i] == null)
+            {
+                if (oro < allyToAdd.recruitmentPrice) return false;
+                oro -= allyToAdd.recruitmentPrice;
+                allies[i] = allyToAdd;
+                allyToAdd.OnAddedToTeam();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void RemoveAlly(AlliesSO allyToRemove)
+    {
+        if (allyToRemove == null) return;
+        int index = allies.IndexOf(allyToRemove);
+        if (index != -1 && index < maxAllies) // solo si está dentro del límite
+        {
+            allies[index] = null;
+            allyToRemove.OnRemovedOfTeam();
+
+        }
     }
 }

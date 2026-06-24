@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 026fc50bbeeadbf429cdb70ba72d7733, type: 3}
   m_Name: ChefLvl1
   m_EditorClassIdentifier: Assembly-CSharp::ChefSO
-  allyName: ChefLvl1
+  allyName: Chef
   allyLevel: 1
   health: 0
   maxHealth: 0
   moveSpeed: 0
   recruitmentPrice: 20
   damage: 0
+  maxInTeam: 1
   foodCostModifier: 0.2

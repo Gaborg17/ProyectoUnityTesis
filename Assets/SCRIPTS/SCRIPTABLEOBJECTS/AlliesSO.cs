@@ -16,7 +16,7 @@ public abstract class AlliesSO : ScriptableObject
     public int recruitmentPrice;
 
     public int damage;
-
+    public int maxInTeam;
     public abstract string Description { get; }
 
 
@@ -25,6 +25,9 @@ public abstract class AlliesSO : ScriptableObject
     {
 
     }
+
+    public virtual void OnAddedToTeam() { }
+    public virtual void OnRemovedOfTeam() { }
 
 }
 

@@ -13,5 +13,13 @@ public class DoctorSO : AlliesSO
         
     }
 
+    public override void OnAddedToTeam()
+    {
+        GameManager.Instance.doctor = this;
+    }
 
+    public override void OnRemovedOfTeam()
+    {
+        GameManager.Instance.doctor = null;
+    }
 }

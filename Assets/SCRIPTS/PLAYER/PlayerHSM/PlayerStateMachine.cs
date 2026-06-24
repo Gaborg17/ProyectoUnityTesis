@@ -20,9 +20,13 @@ public class PlayerStateMachine : MonoBehaviour
     [SerializeField] private float _jumpForce;
     [SerializeField] private bool _jumpRequested;
 
+    [Header("Stats")]
+    [SerializeField]private int _damage;
     public bool JumpRequested { get { return _jumpRequested; } set { _jumpRequested = value; } }
     public float JumpForce { get { return _jumpForce; }}
     public float WalkSpeed {  get { return _walkSpeed; }}
+
+    public int Damage { get { return _damage; }}
 
     public Rigidbody Rb { get { return rb; }}
     public Animator PAnimator { get { return p_Animator; }}
@@ -95,7 +99,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void HandleInteraction()
     {
-        SceneManager.LoadScene("MapaIslas");
+        //SceneManager.LoadScene("MapaIslas");
     }
 
     private void FixedUpdate()

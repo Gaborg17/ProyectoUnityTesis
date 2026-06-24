@@ -188,6 +188,7 @@ MonoBehaviour:
   _walkSpeed: 1.7
   _jumpForce: 7
   _jumpRequested: 0
+  _damage: 1
   isWalking: 0
   temporalDamageCollider: {fileID: 5557000571083478949}
 --- !u!114 &4662460703534924177
@@ -245,6 +246,7 @@ GameObject:
   - component: {fileID: 4165311486559223769}
   - component: {fileID: 5489797116312574745}
   - component: {fileID: 6198408305968701229}
+  - component: {fileID: 6676430954242913549}
   m_Layer: 3
   m_Name: DmgCollider
   m_TagString: Untagged
@@ -282,7 +284,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -345,6 +347,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5557000571083478949}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &6676430954242913549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5557000571083478949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bee6d5c35795f3a4fa6c1a9873b66863, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerDamageHandler
+  playerStateMachine: {fileID: 0}
 --- !u!1 &6920497102858018776
 GameObject:
   m_ObjectHideFlags: 0

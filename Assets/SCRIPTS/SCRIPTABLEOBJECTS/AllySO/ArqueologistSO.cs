@@ -10,4 +10,15 @@ public class ArqueologistSO : AlliesSO
     {
         
     }
+
+
+    public override void OnAddedToTeam()
+    {
+        GameManager.Instance.arqueologist = this;
+    }
+
+    public override void OnRemovedOfTeam()
+    {
+        GameManager.Instance.arqueologist = null;
+    }
 }

@@ -193,6 +193,15 @@ public partial class @CharacterControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""6474c870-4651-481f-81f4-cb05f52d0aca"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -305,6 +314,17 @@ public partial class @CharacterControls: IInputActionCollection2, IDisposable
                     ""action"": ""Inventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e8fc216c-23ba-49eb-920b-fe62767f5fa9"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -323,6 +343,7 @@ public partial class @CharacterControls: IInputActionCollection2, IDisposable
         m_Pirata_MoverCamara = m_Pirata.FindAction("MoverCamara", throwIfNotFound: true);
         m_Pirata_Attack = m_Pirata.FindAction("Attack", throwIfNotFound: true);
         m_Pirata_Inventory = m_Pirata.FindAction("Inventory", throwIfNotFound: true);
+        m_Pirata_Pause = m_Pirata.FindAction("Pause", throwIfNotFound: true);
     }
 
     ~@CharacterControls()
@@ -517,6 +538,7 @@ public partial class @CharacterControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Pirata_MoverCamara;
     private readonly InputAction m_Pirata_Attack;
     private readonly InputAction m_Pirata_Inventory;
+    private readonly InputAction m_Pirata_Pause;
     /// <summary>
     /// Provides access to input actions defined in input action map "Pirata".
     /// </summary>
@@ -552,6 +574,10 @@ public partial class @CharacterControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Pirata/Inventory".
         /// </summary>
         public InputAction @Inventory => m_Wrapper.m_Pirata_Inventory;
+        /// <summary>
+        /// Provides access to the underlying input action "Pirata/Pause".
+        /// </summary>
+        public InputAction @Pause => m_Wrapper.m_Pirata_Pause;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -596,6 +622,9 @@ public partial class @CharacterControls: IInputActionCollection2, IDisposable
             @Inventory.started += instance.OnInventory;
             @Inventory.performed += instance.OnInventory;
             @Inventory.canceled += instance.OnInventory;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         /// <summary>
@@ -625,6 +654,9 @@ public partial class @CharacterControls: IInputActionCollection2, IDisposable
             @Inventory.started -= instance.OnInventory;
             @Inventory.performed -= instance.OnInventory;
             @Inventory.canceled -= instance.OnInventory;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         /// <summary>
@@ -729,5 +761,12 @@ public partial class @CharacterControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnInventory(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Pause" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPause(InputAction.CallbackContext context);
     }
 }
