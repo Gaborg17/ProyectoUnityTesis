@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: IslasDesiertas
+  m_Name: IslasDesiertas 1
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -29,11 +29,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 2e3a68b27f1dc134ea252ef9c70768d2, type: 3}
+        m_Texture: {fileID: 2800000, guid: b21661f0538a20c4d83b582b5c3f2f4a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 96118ef0354f82c42852d657aece636f, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0f2de77c69532f143a105877d3debd87, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -53,11 +53,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 2e3a68b27f1dc134ea252ef9c70768d2, type: 3}
+        m_Texture: {fileID: 2800000, guid: b21661f0538a20c4d83b582b5c3f2f4a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: af716d0a5e39e63498caf0150edeb8e3, type: 3}
+        m_Texture: {fileID: 2800000, guid: c637837b084883c4fa6ab970a00b06d2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -65,7 +65,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
-        m_Texture: {fileID: 2800000, guid: c6b25907b29029e4b973370e1302f149, type: 3}
+        m_Texture: {fileID: 2800000, guid: fe2bc7528d441b64f94d7f649f849b6e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:

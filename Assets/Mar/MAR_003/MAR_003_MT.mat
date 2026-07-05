@@ -49,9 +49,9 @@ Material:
     - _Cull: 2
     - _DstBlend: 10
     - _DstBlendAlpha: 10
-    - _Foam_Amount: 0.5
+    - _Foam_Amount: 1.69
     - _Foam_CutOff: 0.98
-    - _Foam_Scale: 100
+    - _Foam_Scale: 49.36
     - _Foam_Speed: 1
     - _Frequency: 0.6
     - _Frequency_1: 0.6
@@ -69,19 +69,19 @@ Material:
     - _SrcBlendAlpha: 1
     - _Surface: 1
     - _Water_Depth: 0.27
-    - _WaveHeight: 0.005
-    - _WaveHeight_1: 0.005
+    - _WaveHeight: 0.003
+    - _WaveHeight_1: 0.003
     - _WorkflowMode: 0
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
     - _Absorption_Color: {r: 0, g: 1, b: 0.88069296, a: 1}
-    - _Deep_Water: {r: 0, g: 0.6761074, b: 1, a: 1}
+    - _Deep_Water: {r: 0, g: 0.41705418, b: 0.7254902, a: 1}
     - _Direction: {r: 0.38, g: 0, b: 0, a: 0}
     - _Direction_1: {r: 0.38, g: 0, b: -1, a: 0}
-    - _Foam_Color: {r: 0.013207495, g: 1, b: 0.946865, a: 1}
-    - _Shallow_Water: {r: 0, g: 1, b: 0.9624662, a: 1}
+    - _Foam_Color: {r: 0.740566, g: 1, b: 0.9864475, a: 1}
+    - _Shallow_Water: {r: 0.48584908, g: 1, b: 0.9798373, a: 1}
     - _Water_Color: {r: 0, g: 0.926527, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
