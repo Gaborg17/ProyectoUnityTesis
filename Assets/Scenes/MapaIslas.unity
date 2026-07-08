@@ -5125,16 +5125,27 @@ MonoBehaviour:
   - {fileID: 43223992}
   islasDesiertas:
   - {fileID: 11400000, guid: cf61bde1bfd7af34ea47b53e29fd2c96, type: 2}
+  - {fileID: 11400000, guid: 8ee016a2363da244c981520d694e78bd, type: 2}
+  - {fileID: 11400000, guid: e08615649696321419c6aa1493af0841, type: 2}
   islasTesoro:
-  - {fileID: 11400000, guid: cf61bde1bfd7af34ea47b53e29fd2c96, type: 2}
+  - {fileID: 11400000, guid: a43dd507c480da94bab50453ca0cfe1e, type: 2}
   islasPueblo:
-  - {fileID: 11400000, guid: cf61bde1bfd7af34ea47b53e29fd2c96, type: 2}
+  - {fileID: 11400000, guid: 88d562c8243e64b4eb023e6a0fc2fcf7, type: 2}
   comida: 0
   oro: 0
   madera: 0
   nTripulantes: 0
   valorDeViaje: 15
   recompensa: 0
+  maxAllies: 0
+  baseAllies: 0
+  allies: []
+  chef: {fileID: 0}
+  navigator: {fileID: 0}
+  arqueologist: {fileID: 0}
+  carpenter: {fileID: 0}
+  doctor: {fileID: 0}
+  warriors: []
 --- !u!1 &2089683087
 GameObject:
   m_ObjectHideFlags: 0

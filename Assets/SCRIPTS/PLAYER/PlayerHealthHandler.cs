@@ -12,6 +12,7 @@ public class PlayerHealthHandler : MonoBehaviour, IDamageable
     void Start()
     {
         _playerHealth = _playerMaxHealth;
+        GameManager.Instance.UpdateHealthUI(PlayerHealth);
     }
 
     void Update()
@@ -22,8 +23,8 @@ public class PlayerHealthHandler : MonoBehaviour, IDamageable
     public void OnTakeDamage(int damage)
     {
         _playerHealth -= damage;
-
-        if( _playerHealth <= 0)
+        GameManager.Instance.UpdateHealthUI(PlayerHealth);
+        if ( _playerHealth <= 0)
         {
             OnDeath();
         }

@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7825c7bc73c5cd46b435782f29c8c99, type: 3}
-  m_Name: IslaPruebas
+  m_Name: IslaPueblo1
   m_EditorClassIdentifier: Assembly-CSharp::IslasSO
-  tipoDeIsla: 0
-  isla: 0
-  posicionDeSpawn: {x: 0, y: 100, z: 0}
+  tipoDeIsla: 2
+  isla: 1
+  posicionDeSpawn: {x: -0.3, y: -2, z: 135}

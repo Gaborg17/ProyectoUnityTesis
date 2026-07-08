@@ -72,12 +72,12 @@ public class Cofre : MonoBehaviour, IInteractable
         int madera = Random.Range(cofreSeleccionado.minMadera, cofreSeleccionado.maxMadera + 1);
 
         Debug.Log($"Comida {comida}, Oro {oro}, Madera {madera}");
-        
 
 
         gameManager.comida += comida;
         gameManager.oro += oro;
         gameManager.madera += madera;
 
+        GameManager.Instance.UpdateResourcesUI();
     }
 }

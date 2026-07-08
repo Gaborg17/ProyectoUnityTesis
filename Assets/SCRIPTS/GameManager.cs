@@ -1,10 +1,16 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+
+    public event Action UpdateResources;
+    public event Action<int> UpdatePlayerHealth;
+    public event Action Allies;
 
     public Vector3 boatPosition = new Vector3(-1.4f, 0f, 0f);
     public Vector3 CamPosition = new Vector3(35f, 42.5f, 0f);
@@ -47,6 +53,8 @@ public class GameManager : MonoBehaviour
     public List<WarriorSO> warriors;
 
     public BountyManager bountyManager { get; private set; }
+
+
 
 
     private void Awake()
@@ -199,4 +207,19 @@ public class GameManager : MonoBehaviour
 
         }
     }
+
+
+    public void UpdateHealthUI(int health)
+    {
+        UpdatePlayerHealth?.Invoke(health);
+    }
+    public void UpdateResourcesUI()
+    {
+        UpdateResources?.Invoke();
+    }
+    public void UpdateAlliesUI()
+    {
+        Allies?.Invoke();
+    }
+
 }

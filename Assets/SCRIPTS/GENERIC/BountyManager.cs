@@ -26,6 +26,10 @@ public class BountyManager : MonoBehaviour
 
     public event Action bountyChanged;
 
+    private void Start()
+    {
+        bountyChanged?.Invoke();
+    }
     public void ChangeBounty(Crime crime)
     {
         if(BountyValues.TryGetValue(crime, out int bounty))
