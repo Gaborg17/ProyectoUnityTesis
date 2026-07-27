@@ -28898,14 +28898,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4165311486559223769, guid: 42c4dac1f976886488841bc802619079, type: 3}
-      propertyPath: m_Size.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4165311486559223769, guid: 42c4dac1f976886488841bc802619079, type: 3}
-      propertyPath: m_Size.y
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4643784291090185704, guid: 42c4dac1f976886488841bc802619079, type: 3}
       propertyPath: m_Name
       value: Player
@@ -28949,22 +28941,6 @@ PrefabInstance:
     - target: {fileID: 6251989413596571125, guid: 42c4dac1f976886488841bc802619079, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6888185061992840154, guid: 42c4dac1f976886488841bc802619079, type: 3}
-      propertyPath: _damage
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6888185061992840154, guid: 42c4dac1f976886488841bc802619079, type: 3}
-      propertyPath: _walkSpeed
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7729501571291986645, guid: 42c4dac1f976886488841bc802619079, type: 3}
-      propertyPath: m_Antialiasing
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7729501571291986645, guid: 42c4dac1f976886488841bc802619079, type: 3}
-      propertyPath: m_RenderPostProcessing
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

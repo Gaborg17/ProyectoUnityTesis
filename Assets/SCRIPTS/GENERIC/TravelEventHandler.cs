@@ -112,7 +112,7 @@ public class TravelEventHandler : MonoBehaviour
     [SerializeField] private AllyFamily[] allyTypes;
     public AlliesSO GetRandomCrewmate()
     {
-        possibleCrewmate = new List<float> { 16.67f, 16.67f, 16.67f, 16.67f, 16.67f, 16.67f };
+        possibleCrewmate = new List<float> { 16.67f, 16.67f, 16.67f, 16.67f/*, 16.67f, 16.67f*/ };
         crewmateLvl = new List<float> { 60f, 30f, 10f };
 
         int ally = ProbabilityManager.GetRandomIndex(possibleCrewmate);

@@ -84,9 +84,26 @@ public class PlayerStateMachine : MonoBehaviour
     }
     private void Start()
     {
+        inputManager = InputManager.Instance;
+        if (inputManager != null)
+        {
+            inputManager.OnJumpPerformed += RequestJump;
+            //inputManager.OnInteractPerformed += HandleInteraction;
+            inputManager.OnInventoryPerformed += HandleInteraction;
+        }
         if (GameManager.Instance.islaSeleccionada != null)
         {
             transform.position = GameManager.Instance.islaSeleccionada.posicionDeSpawn;
+
+        }
+    }
+    private void OnDestroy()
+    {
+        if (inputManager != null)
+        {
+            inputManager.OnJumpPerformed -= RequestJump;
+            //inputManager.OnInteractPerformed -= HandleInteraction;
+            inputManager.OnInventoryPerformed -= HandleInteraction;
 
         }
     }
