@@ -74,8 +74,10 @@ public class RecruitmentManager : MonoBehaviour
     [SerializeField] private GameObject cameraTab;
     [SerializeField] private GameObject playerCam;
     [SerializeField] private GameObject canvasTab;
+    [SerializeField] private GameObject playerHUD;
     public void CloseRecruitmentTab()
     {
+        playerHUD.SetActive(true);
         cameraTab.SetActive(false);
         canvasTab.SetActive(false);
         playerCam.SetActive(true);
@@ -84,6 +86,10 @@ public class RecruitmentManager : MonoBehaviour
     public void RecruitAlly()
     {
         if (GameManager.Instance.oro < actualAlly.recruitmentPrice) return;
+
+        if (actualAlly.allyLevel > 1 && !GameManager.Instance.allowLvl2Allies) return;
+
+        if(actualAlly.allyLevel > 2 && !GameManager.Instance.allowLvl3Allies) return;
 
         if(ContainsAllyType() == true) return;
 

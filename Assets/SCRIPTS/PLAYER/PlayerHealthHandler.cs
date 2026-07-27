@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class PlayerHealthHandler : MonoBehaviour, IDamageable
 {
@@ -33,5 +35,8 @@ public class PlayerHealthHandler : MonoBehaviour, IDamageable
     public void OnDeath()
     {
         Debug.Log("Player Died");
+        GameManager.Instance.shipHealth--;
+        Scene actualScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(actualScene.name);
     }
 }

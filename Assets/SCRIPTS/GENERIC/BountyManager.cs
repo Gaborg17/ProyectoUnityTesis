@@ -23,7 +23,7 @@ public class BountyManager : MonoBehaviour
 
     public int TotalBounty { get { return _totalbounty; } }
 
-
+    public float eventProbability;
     public event Action bountyChanged;
 
     private void Start()
@@ -35,7 +35,22 @@ public class BountyManager : MonoBehaviour
         if(BountyValues.TryGetValue(crime, out int bounty))
         {
             _totalbounty += bounty;
-            bountyChanged?.Invoke();
+
+            if(_totalbounty < 1000)
+            {
+                eventProbability = 10f;
+            }
+            else if(_totalbounty < 50000)
+            {
+                eventProbability = 20f;
+                GameManager.Instance.allowLvl2Allies = true;
+
+            }
+            else
+            {
+                eventProbability = 30f;
+                GameManager.Instance.allowLvl3Allies = true;
+            }
         }
         else
         {
@@ -44,5 +59,10 @@ public class BountyManager : MonoBehaviour
 
 
     }
-    
+
+    public void UpdateBounty()
+    {
+        bountyChanged?.Invoke();
+    }
+
 }

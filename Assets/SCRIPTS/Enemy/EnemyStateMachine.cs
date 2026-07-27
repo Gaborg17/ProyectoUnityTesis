@@ -16,6 +16,8 @@ public class EnemyStateMachine : MonoBehaviour
 
     [SerializeField]protected bool _isInCombat;
 
+    [SerializeField] protected BoxCollider _damageZone;
+
 
     public Animator EnemyAnimator { get { return enemyAnim; } }
     public NavMeshAgent Agent { get { return agent; } }
@@ -26,6 +28,8 @@ public class EnemyStateMachine : MonoBehaviour
     public bool isWalking { get { return _isWalking; } set { _isWalking = value; } }
 
     public bool InCombat { get { return _isInCombat; } set { _isInCombat = value; } }
+
+    public BoxCollider  DamageZone {  get { return _damageZone; } }
 
     EnemyBaseState _currentState;
     EnemyStateFactory _stateFactory;

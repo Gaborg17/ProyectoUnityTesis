@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public event Action UpdateResources;
     public event Action<int> UpdatePlayerHealth;
     public event Action Allies;
+    public event Action Tripulation;
 
     public Vector3 boatPosition = new Vector3(-1.4f, 0f, 0f);
     public Vector3 CamPosition = new Vector3(35f, 42.5f, 0f);
@@ -27,6 +28,12 @@ public class GameManager : MonoBehaviour
 
     private IslasSO isle;
 
+
+    [Header("ShipData")]
+    public BarcoSO actualBoat;
+    public int shipHealth;
+    public int maxshipHealth;
+
     [Header("Rercursos")]
 
     public int comida;
@@ -35,6 +42,8 @@ public class GameManager : MonoBehaviour
 
     public int nTripulantes;
 
+    public int mapFragments = 0;
+
     [Header("EstadisticasActuales")]
     public int valorDeViaje;
     public int recompensa;
@@ -42,6 +51,9 @@ public class GameManager : MonoBehaviour
     [Header("Aliados")]
     public int maxAllies;
     public int baseAllies;
+
+    public bool allowLvl2Allies = false;
+    public bool allowLvl3Allies = false;
 
     public List<AlliesSO> allies;
 
@@ -53,6 +65,7 @@ public class GameManager : MonoBehaviour
     public List<WarriorSO> warriors;
 
     public BountyManager bountyManager { get; private set; }
+    public TravelEventHandler travelEventHandler { get; private set; }
 
 
 
@@ -66,6 +79,7 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
 
             bountyManager = GetComponentInChildren<BountyManager>();
+            travelEventHandler = GetComponentInChildren<TravelEventHandler>();
         }
         else
         {
@@ -163,8 +177,7 @@ public class GameManager : MonoBehaviour
     [ContextMenu("UpdateLimit")]
     public void UpdateTripulationLimit()
     {
-        maxAllies = baseAllies + nTripulantes;
-        //Cambiar por la cantidad que agrga cada barco/barco en uso
+        maxAllies = baseAllies + actualBoat.maxAllies;
         if (maxAllies < 8)
         {
             for (int i = maxAllies; i < 8 && i < allies.Count; i++)
@@ -200,7 +213,7 @@ public class GameManager : MonoBehaviour
     {
         if (allyToRemove == null) return;
         int index = allies.IndexOf(allyToRemove);
-        if (index != -1 && index < maxAllies) // solo si está dentro del límite
+        if (index != -1 && index < maxAllies)
         {
             allies[index] = null;
             allyToRemove.OnRemovedOfTeam();
@@ -222,4 +235,9 @@ public class GameManager : MonoBehaviour
         Allies?.Invoke();
     }
 
+
+    public void UpdateTripulationTab()
+    {
+        Tripulation?.Invoke();
+    }
 }

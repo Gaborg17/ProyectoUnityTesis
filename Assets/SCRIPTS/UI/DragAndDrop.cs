@@ -3,10 +3,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerClickHandler
 {
 
-    [HideInInspector] public AlliesSO personajeData; // Asignar al instanciar
+    [HideInInspector] public AlliesSO personajeData;
 
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
@@ -15,6 +15,10 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
     private bool isLocked = false;
     private bool isDragging = false;
     private Vector2 originalAnchoredPosition;
+
+    [Header("Context Menu")]
+    [SerializeField] private GameObject contextMenuPrefab;
+    private GameObject currentMenuInstance;
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -135,5 +139,95 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
             img.color= Color.cyan;
         }
         
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (isDragging || isLocked || personajeData == null)
+            return;
+
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            CloseContextMenu();
+
+            
+            if (contextMenuPrefab != null)
+            {
+                currentMenuInstance = Instantiate(contextMenuPrefab, GetComponentInParent<Canvas>().transform);
+                RectTransform menuRect = currentMenuInstance.GetComponent<RectTransform>();
+                Vector2 localPoint;
+                RectTransform canvasRect = GetComponentInParent<Canvas>().GetComponent<RectTransform>();
+                if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, eventData.position, null, out localPoint))
+                {
+                    menuRect.anchoredPosition = ClampPositionToScreen(localPoint, menuRect.rect.size, canvasRect.rect.size);
+                }
+
+                ConfigurarMenu(currentMenuInstance);
+            }
+        }
+    }
+
+    private Vector2 ClampPositionToScreen(Vector2 pos, Vector2 menuSize, Vector2 screenSize)
+    {
+        float x = Mathf.Clamp(pos.x, -screenSize.x / 2 + menuSize.x / 2, screenSize.x / 2 - menuSize.x / 2);
+        float y = Mathf.Clamp(pos.y, -screenSize.y / 2 + menuSize.y / 2, screenSize.y / 2 - menuSize.y / 2);
+        return new Vector2(x, y);
+    }
+
+    private void ConfigurarMenu(GameObject menu)
+    {
+        Button btnExpulsar = menu.transform.Find("Abandon")?.GetComponent<Button>();
+        Button btnHabilidad = menu.transform.Find("AllyAbilityUse")?.GetComponent<Button>();
+
+        if (btnExpulsar != null)
+        {
+            btnExpulsar.onClick.RemoveAllListeners();
+            btnExpulsar.onClick.AddListener(() =>
+            {
+                AbandonAlly();
+                ActualizarLista();
+            });
+        }
+
+        if (btnHabilidad != null)
+        {
+            btnHabilidad.onClick.RemoveAllListeners();
+            btnHabilidad.onClick.AddListener(() =>
+            {
+                AllyAbilityUse();
+                CloseContextMenu();
+            });
+        }
+    }
+
+    private void AbandonAlly()
+    {
+        CloseContextMenu();
+        if (personajeData == null) return;
+
+        GameManager.Instance.RemoveAlly(personajeData);
+        GameManager.Instance.UpdateTripulationTab();
+    }
+
+    private void AllyAbilityUse()
+    {
+        CloseContextMenu();
+        if (personajeData == null) return;
+
+        personajeData.AllyAbility();
+    }
+
+    private void CloseContextMenu()
+    {
+        if (currentMenuInstance != null)
+        {
+            Destroy(currentMenuInstance);
+            currentMenuInstance = null;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        CloseContextMenu();
     }
 }

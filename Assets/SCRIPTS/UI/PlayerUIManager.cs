@@ -32,9 +32,33 @@ public class PlayerUIManager : MonoBehaviour
 
 
         GameManager.Instance.UpdateResourcesUI();
+        GameManager.Instance.bountyManager.UpdateBounty();
+
+    }
+    private void OnEnable()
+    {
+        if(GameManager.Instance != null)
+        {
+            GameManager.Instance.UpdatePlayerHealth += HealthUpdate;
+            GameManager.Instance.UpdateResources += ResourceUpdate;
+            GameManager.Instance.Allies += AlliesUpdate;
+            GameManager.Instance.bountyManager.bountyChanged += BountyUpdate;
+
+
+            GameManager.Instance.UpdateResourcesUI();
+            GameManager.Instance.bountyManager.UpdateBounty();
+
+        }
+    }
+    private void OnDisable()
+    {
+        GameManager.Instance.UpdatePlayerHealth -= HealthUpdate;
+        GameManager.Instance.UpdateResources -= ResourceUpdate;
+        GameManager.Instance.Allies -= AlliesUpdate;
+        GameManager.Instance.bountyManager.bountyChanged -= BountyUpdate;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         GameManager.Instance.UpdatePlayerHealth -= HealthUpdate;
         GameManager.Instance.UpdateResources -= ResourceUpdate;
@@ -58,6 +82,7 @@ public class PlayerUIManager : MonoBehaviour
     private void BountyUpdate()
     {
         bountyCount.text = GameManager.Instance.bountyManager.TotalBounty.ToString();
+        Debug.Log("New Bounty");
     }
 
     private void AlliesUpdate()

@@ -7,6 +7,7 @@ public class OpenTabern : MonoBehaviour, IInteractable
     private bool inRange;
 
     [SerializeField] private GameObject canvas;
+    [SerializeField] private GameObject playerHUD;
     [SerializeField] private GameObject cameraTaberna;
     [SerializeField] private GameObject playerCam;
 
@@ -40,7 +41,7 @@ public class OpenTabern : MonoBehaviour, IInteractable
     {
         if (inRange == false) return;
 
-
+        playerHUD.SetActive(false);
         cameraTaberna.SetActive(true);
         canvas.SetActive(true);
         playerCam.SetActive(false);

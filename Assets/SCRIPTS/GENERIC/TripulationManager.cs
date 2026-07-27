@@ -1,25 +1,48 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TripulationManager : MonoBehaviour
 {
-    
-    public Transform gridParent;       // El objeto con GridLayoutGroup
+    public GameObject[] hearts;
+
+
+    public Transform gridParent;
     private GameManager gm;
 
     private void OnEnable()
     {
+        GameManager.Instance.Tripulation += UpdateShipHealth;
+        GameManager.Instance.Tripulation += CargarPersonajes;
         CargarPersonajes();
+        UpdateShipHealth();
     }
     private void Start()
     {
+        GameManager.Instance.Tripulation += UpdateShipHealth;
+        GameManager.Instance.Tripulation += CargarPersonajes;
         gm = GameManager.Instance;
         CargarPersonajes();
+        UpdateShipHealth();
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.Tripulation -= UpdateShipHealth;
+        GameManager.Instance.Tripulation -= CargarPersonajes;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.Tripulation -= UpdateShipHealth;
+        GameManager.Instance.Tripulation -= CargarPersonajes;
     }
 
 
     [ContextMenu("CargarP")]
     public void CargarPersonajes()
     {
+        if (gm == null) return;
+
         int cantidadAliados = gm.allies.Count;
         int cantidadHijos = gridParent.childCount;
         int limit = gm.maxAllies;
@@ -60,4 +83,30 @@ public class TripulationManager : MonoBehaviour
         }
     }
 
+
+    public void UpdateShipHealth()
+    {
+        if (gm == null) return;
+
+        for (int i = 0; i < hearts.Length; i++)
+        {
+            hearts[i].SetActive(false);
+
+            if(i < gm.shipHealth)
+            {
+                hearts[i].GetComponent<Image>().color = Color.red;
+            }
+            else
+            {
+                hearts[i].GetComponent <Image>().color = Color.black;
+            }
+        }
+
+        for(int i = 0;i < gm.maxshipHealth; i++)
+        {
+            hearts[i].SetActive(true);
+        }
+
+
+    }
 }
