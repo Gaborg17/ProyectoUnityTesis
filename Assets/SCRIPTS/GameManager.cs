@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
     public BountyManager bountyManager { get; private set; }
     public TravelEventHandler travelEventHandler { get; private set; }
 
-
+    public bool tutorialCompleted = false;
 
 
     private void Awake()

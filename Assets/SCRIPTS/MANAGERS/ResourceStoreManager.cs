@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -11,6 +12,9 @@ public class ResourceStoreManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI itemName;
     [SerializeField] private TextMeshProUGUI itemDescription;
     [SerializeField] private TextMeshProUGUI itemPrice;
+    [SerializeField] private TextMeshProUGUI messageDisplayed;
+
+    private Coroutine messageToShow;
 
     private GameManager gm;
 
@@ -27,7 +31,17 @@ public class ResourceStoreManager : MonoBehaviour
            
             gm.oro -= inStoreItems[itemInDisplay].price;
             inStoreItems[itemInDisplay].OnBuy();
-
+            if (messageToShow == null)
+            {
+                messageToShow = StartCoroutine(DisplayMessage($"{inStoreItems[itemInDisplay].name} was bought!"));
+            }
+        }
+        else
+        {
+            if (messageToShow == null)
+            {
+                messageToShow = StartCoroutine(DisplayMessage($"You don't have enough money"));
+            }
         }
 
 
@@ -39,6 +53,10 @@ public class ResourceStoreManager : MonoBehaviour
         {
             inStoreItems[itemInDisplay].OnRob();
             GameManager.Instance.bountyManager.UpdateBounty();
+            if (messageToShow == null)
+            {
+                messageToShow = StartCoroutine(DisplayMessage($"You took {inStoreItems[itemInDisplay].name}, your bounty has raised to {GameManager.Instance.bountyManager.TotalBounty}"));
+            }
         }
     }
 
@@ -81,5 +99,15 @@ public class ResourceStoreManager : MonoBehaviour
         cameraTab.SetActive(false);
         canvasTab.SetActive(false);
         playerCam.SetActive(true);
+    }
+
+
+    public IEnumerator DisplayMessage(string messageText)
+    {
+        messageDisplayed.gameObject.SetActive(true);
+        messageDisplayed.text = messageText;
+        yield return new WaitForSeconds(0.8f);
+        messageDisplayed.gameObject.SetActive(false);
+        messageToShow = null;
     }
 }

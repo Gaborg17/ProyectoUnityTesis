@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -14,6 +15,8 @@ public class RecruitmentManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI allyType;
     [SerializeField] private TextMeshProUGUI allyDescription;
     [SerializeField] private TextMeshProUGUI allyPrice;
+    [SerializeField] private TextMeshProUGUI Message;
+    [SerializeField] private TextMeshProUGUI GoldCount;
 
     [SerializeField] private AlliesSO actualAlly;
 
@@ -25,9 +28,11 @@ public class RecruitmentManager : MonoBehaviour
     private int currentAllyType = 0;
     private int currentLevel;
 
+    private Coroutine messageCoroutine;
     private void OnEnable()
     {
         allyType.text = allyTypes[currentAllyType].name;
+        GoldCount.text = $"Gold: {GameManager.Instance.oro}";
         SetInfo(0);
     }
 
@@ -85,15 +90,58 @@ public class RecruitmentManager : MonoBehaviour
 
     public void RecruitAlly()
     {
-        if (GameManager.Instance.oro < actualAlly.recruitmentPrice) return;
+        if(GameManager.Instance.maxAllies == 0)
+        {
+            if (messageCoroutine == null)
+            {
+                messageCoroutine = StartCoroutine(ShowMessage($"You need to get a better boat to recruit someone"));
+            }
+            return;
+        }
 
-        if (actualAlly.allyLevel > 1 && !GameManager.Instance.allowLvl2Allies) return;
+        if (GameManager.Instance.oro < actualAlly.recruitmentPrice)
+        { 
+            if(messageCoroutine == null)
+            {
+                messageCoroutine = StartCoroutine(ShowMessage($"You don't have enough money"));
+            }
+            return; 
+        }
 
-        if(actualAlly.allyLevel > 2 && !GameManager.Instance.allowLvl3Allies) return;
+        if (actualAlly.allyLevel > 1 && !GameManager.Instance.allowLvl2Allies)
+        {
+            if (messageCoroutine == null)
+            {
+                messageCoroutine = StartCoroutine(ShowMessage($"You need a higher bounty to recruit a Level 2 or higher {actualAlly.allyName}"));
+            }
+            return;
+        }
 
-        if(ContainsAllyType() == true) return;
+        if (actualAlly.allyLevel > 2 && !GameManager.Instance.allowLvl3Allies)
+        {
+            if (messageCoroutine == null)
+            {
+                messageCoroutine = StartCoroutine(ShowMessage($"You need a higher bounty to recruit a Level 3 {actualAlly.allyName}"));
+            }
+            return;
+        }
+
+        if (ContainsAllyType() == true)
+        {
+            if (messageCoroutine == null)
+            {
+                messageCoroutine = StartCoroutine(ShowMessage($"You already have a {actualAlly.allyName} in your crew"));
+            }
+            return;
+        }
+
 
         GameManager.Instance.AddAlly(actualAlly);
+        GoldCount.text = $"Gold: {GameManager.Instance.oro}";
+        if (messageCoroutine == null && ContainsAllyType() == true)
+        {
+            messageCoroutine = StartCoroutine(ShowMessage($"{actualAlly.allyName} has been recruited!!"));
+        }
 
 
     }
@@ -117,5 +165,16 @@ public class RecruitmentManager : MonoBehaviour
         }
         return false;
     }
+
+
+    public IEnumerator ShowMessage(string message)
+    {
+        Message.text = message;
+        Message.gameObject.SetActive(true);
+        yield return new WaitForSeconds(.8f);
+        Message.gameObject.SetActive(false);
+        messageCoroutine = null;
+    }
+
 
 }
