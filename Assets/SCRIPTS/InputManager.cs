@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
@@ -12,17 +13,19 @@ public class InputManager : MonoBehaviour
     public event Action OnJumpPerformed;
     public event Action OnInteractPerformed;
     public event Action OnInventoryPerformed;
+    public event Action OnAttackPerformed;
+    public event Action OnMovementPerformed;
 
     private void Awake()
     {
-        if(_instance != null && _instance != this)
+        if (_instance != null && _instance != this)
         {
             Destroy(this.gameObject);
         }
         else
         {
             _instance = this;
-            
+
         }
         controls = new CharacterControls();
     }
@@ -34,6 +37,10 @@ public class InputManager : MonoBehaviour
         controls.Pirata.Jump.performed += ctx => OnJumpPerformed?.Invoke();
         controls.Pirata.Interact.performed += ctx => OnInteractPerformed?.Invoke();
         controls.Pirata.Inventory.performed += ctx => OnInventoryPerformed?.Invoke();
+        controls.Pirata.Attack.performed += ctx => OnAttackPerformed?.Invoke();
+        controls.Pirata.Mover.performed += ctx => OnMovementPerformed?.Invoke();
+        MoveKeyBindings();
+
     }
 
     private void OnDisable()
@@ -42,6 +49,8 @@ public class InputManager : MonoBehaviour
         controls.Pirata.Jump.performed -= ctx => OnJumpPerformed?.Invoke();
         controls.Pirata.Interact.performed -= ctx => OnInteractPerformed?.Invoke();
         controls.Pirata.Inventory.performed -= ctx => OnInventoryPerformed?.Invoke();
+        controls.Pirata.Attack.performed -= ctx => OnAttackPerformed?.Invoke();
+        controls.Pirata.Mover.performed -= ctx => OnMovementPerformed?.Invoke();
 
 
         controls.Disable();
@@ -54,11 +63,13 @@ public class InputManager : MonoBehaviour
 
     public Vector2 MouseDelta()
     {
+
         return controls.MoverBarco.MouseDelta.ReadValue<Vector2>();
     }
 
     public Vector2 MoveDirection()
     {
+
         return controls.Pirata.Mover.ReadValue<Vector2>();
     }
 
@@ -86,5 +97,25 @@ public class InputManager : MonoBehaviour
         return controls.Pirata.Inventory.IsPressed();
     }
 
+    [HideInInspector]public string upKey;
+    [HideInInspector]public string downKey;
+    [HideInInspector]public string leftKey;
+    [HideInInspector]public string rightKey;
 
+
+    public void MoveKeyBindings()
+    {
+        int upIdx = controls.Pirata.Mover.bindings.IndexOf(b => b.name == "up");
+        int downIdx = controls.Pirata.Mover.bindings.IndexOf(b => b.name == "down");
+        int leftIdx = controls.Pirata.Mover.bindings.IndexOf(b => b.name == "left");
+        int rightIdx = controls.Pirata.Mover.bindings.IndexOf(b => b.name == "right");
+
+        
+        upKey = controls.Pirata.Mover.GetBindingDisplayString(upIdx);
+        downKey = controls.Pirata.Mover.GetBindingDisplayString(downIdx);
+        leftKey = controls.Pirata.Mover.GetBindingDisplayString(leftIdx);
+        rightKey = controls.Pirata.Mover.GetBindingDisplayString(rightIdx);
+
+        Debug.Log($"Controls: {upKey}/{leftKey}/{downKey}/{rightKey}");
+    }
 }

@@ -27,5 +27,12 @@ public class EnemyHealthHandler : MonoBehaviour, IDamageable
     {
         gameObject.SetActive(false);
         GetComponent<DropOnDeath>().DropLoot(dropAmount);
+
+        if (TutorialManager.Instance != null)
+        {
+            if (TutorialManager.Instance.actualMission.missionType != MissionData.MissionType.DefeatEnemy || TutorialManager.Instance.actualMission == null) return;
+            TutorialManager.Instance.DefeatMissionValidate();
+
+        }
     }
 }
