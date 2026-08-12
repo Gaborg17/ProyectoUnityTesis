@@ -14,6 +14,7 @@ public class TutorialTrigger : MonoBehaviour
     void OnEnable()
     {
         if (InputManager.Instance == null) return;
+        if (TutorialManager.Instance == null) return;
         InputManager.Instance.OnInteractPerformed += TryForInteraction;
         TutorialManager.Instance.OnChangedMission += CheckForRay;
     }

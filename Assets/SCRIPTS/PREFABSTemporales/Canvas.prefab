@@ -2050,7 +2050,7 @@ MonoBehaviour:
   ally4: {fileID: 8234152798976410176}
   bountyCount: {fileID: 111447698241775387}
   GameOverPanel: {fileID: 7410989004769147111}
-  GameCompletedPanel: {fileID: 0}
+  GameCompletedPanel: {fileID: 6562157324605926550}
 --- !u!1 &2238161178054173807
 GameObject:
   m_ObjectHideFlags: 0

@@ -35,6 +35,7 @@ public class PlayerUIManager : MonoBehaviour
         GameManager.Instance.Allies += AlliesUpdate;
         GameManager.Instance.bountyManager.bountyChanged += BountyUpdate;
         GameManager.Instance.GameOver += GameOver;
+        GameManager.Instance.OnEndgame += OnGameCompleted;
 
         GameManager.Instance.UpdateResourcesUI();
         GameManager.Instance.bountyManager.UpdateBounty();
@@ -49,6 +50,7 @@ public class PlayerUIManager : MonoBehaviour
             GameManager.Instance.Allies += AlliesUpdate;
             GameManager.Instance.bountyManager.bountyChanged += BountyUpdate;
             GameManager.Instance.GameOver += GameOver;
+            GameManager.Instance.OnEndgame += OnGameCompleted;
 
 
             GameManager.Instance.UpdateResourcesUI();
@@ -63,6 +65,7 @@ public class PlayerUIManager : MonoBehaviour
         GameManager.Instance.Allies -= AlliesUpdate;
         GameManager.Instance.bountyManager.bountyChanged -= BountyUpdate;
         GameManager.Instance.GameOver -= GameOver;
+        GameManager.Instance.OnEndgame -= OnGameCompleted;
 
     }
 
@@ -73,6 +76,7 @@ public class PlayerUIManager : MonoBehaviour
         GameManager.Instance.Allies -= AlliesUpdate;
         GameManager.Instance.bountyManager.bountyChanged -= BountyUpdate;
         GameManager.Instance.GameOver -= GameOver;
+        GameManager.Instance.OnEndgame -= OnGameCompleted;
 
     }
 
@@ -102,7 +106,6 @@ public class PlayerUIManager : MonoBehaviour
 
     public void GameOver()
     {
-        Time.timeScale = 0f;
         GameOverPanel.SetActive(true);
     }
 
@@ -113,6 +116,6 @@ public class PlayerUIManager : MonoBehaviour
 
     public void ExitToMenu()
     {
-        SceneManager.LoadScene("Pruebas");
+        SceneManager.LoadScene("MapaIslas");
     }
 }
