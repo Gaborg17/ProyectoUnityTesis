@@ -133,7 +133,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8130212037950406857}
+  - {fileID: 654866878843078532}
   - {fileID: 5423938856149128089}
   - {fileID: 4743218539011647065}
   - {fileID: 1002237804517260546}
@@ -204,7 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74b6157494bab0f488fc980e8f7b839b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStateMachine
-  enemyAnim: {fileID: 2752961686093585075}
+  enemyAnim: {fileID: 6914891438528503294}
   destinos:
   - {fileID: 0}
   _isWalking: 0
@@ -313,7 +313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDetection
   timeToStop: 0.4
---- !u!1001 &8601569317628077858
+--- !u!1001 &1052774178431770735
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -321,70 +321,66 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4142185993005337477}
     m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 0215be93466fa4849986a13276929db8, type: 3}
+    - target: {fileID: -8679921383154817045, guid: f5d0cec54e4aa194b9c14f526a1b53c9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 0215be93466fa4849986a13276929db8, type: 3}
+    - target: {fileID: -8679921383154817045, guid: f5d0cec54e4aa194b9c14f526a1b53c9, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.5
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 0215be93466fa4849986a13276929db8, type: 3}
+    - target: {fileID: -8679921383154817045, guid: f5d0cec54e4aa194b9c14f526a1b53c9, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 0215be93466fa4849986a13276929db8, type: 3}
+    - target: {fileID: -8679921383154817045, guid: f5d0cec54e4aa194b9c14f526a1b53c9, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 0215be93466fa4849986a13276929db8, type: 3}
+    - target: {fileID: -8679921383154817045, guid: f5d0cec54e4aa194b9c14f526a1b53c9, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 0215be93466fa4849986a13276929db8, type: 3}
+    - target: {fileID: -8679921383154817045, guid: f5d0cec54e4aa194b9c14f526a1b53c9, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 0215be93466fa4849986a13276929db8, type: 3}
+    - target: {fileID: -8679921383154817045, guid: f5d0cec54e4aa194b9c14f526a1b53c9, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 0215be93466fa4849986a13276929db8, type: 3}
+    - target: {fileID: -8679921383154817045, guid: f5d0cec54e4aa194b9c14f526a1b53c9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 0215be93466fa4849986a13276929db8, type: 3}
+    - target: {fileID: -8679921383154817045, guid: f5d0cec54e4aa194b9c14f526a1b53c9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 0215be93466fa4849986a13276929db8, type: 3}
+    - target: {fileID: -8679921383154817045, guid: f5d0cec54e4aa194b9c14f526a1b53c9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 0215be93466fa4849986a13276929db8, type: 3}
+    - target: {fileID: 919132149155446097, guid: f5d0cec54e4aa194b9c14f526a1b53c9, type: 3}
       propertyPath: m_Name
-      value: Pirata
+      value: Char_PirataMalo
       objectReference: {fileID: 0}
-    - target: {fileID: 5866666021909216657, guid: 0215be93466fa4849986a13276929db8, type: 3}
+    - target: {fileID: 5866666021909216657, guid: f5d0cec54e4aa194b9c14f526a1b53c9, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: fe385ac40b8ed104fbe357fbc3368b4f, type: 2}
-    - target: {fileID: 5866666021909216657, guid: 0215be93466fa4849986a13276929db8, type: 3}
-      propertyPath: m_ApplyRootMotion
-      value: 0
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 9100000, guid: 02cf53f2f0c79734da23e0d44c8fd98a, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0215be93466fa4849986a13276929db8, type: 3}
---- !u!95 &2752961686093585075 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 0215be93466fa4849986a13276929db8, type: 3}
-  m_PrefabInstance: {fileID: 8601569317628077858}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &8130212037950406857 stripped
+  m_SourcePrefab: {fileID: 100100000, guid: f5d0cec54e4aa194b9c14f526a1b53c9, type: 3}
+--- !u!4 &654866878843078532 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0215be93466fa4849986a13276929db8, type: 3}
-  m_PrefabInstance: {fileID: 8601569317628077858}
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f5d0cec54e4aa194b9c14f526a1b53c9, type: 3}
+  m_PrefabInstance: {fileID: 1052774178431770735}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6914891438528503294 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: f5d0cec54e4aa194b9c14f526a1b53c9, type: 3}
+  m_PrefabInstance: {fileID: 1052774178431770735}
   m_PrefabAsset: {fileID: 0}

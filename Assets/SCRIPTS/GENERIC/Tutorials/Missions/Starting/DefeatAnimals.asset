@@ -16,5 +16,5 @@ MonoBehaviour:
   missionType: 8
   useLightRay: 0
   keyNeeded: 
-  amountNeeded: 1
-  Description: Defeat {0}/1 animals
+  amountNeeded: 3
+  Description: Defeat {0}/3 animals

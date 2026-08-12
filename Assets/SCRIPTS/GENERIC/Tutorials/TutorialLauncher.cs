@@ -10,6 +10,7 @@ public class TutorialLauncher : MonoBehaviour
 
     private void Start()
     {
+        if (GameManager.Instance.tutorialCompleted == true) return;
         TutorialManager.Instance.StartMissionSet(startingMissions);
     }
 

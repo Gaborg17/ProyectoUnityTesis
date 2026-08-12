@@ -36,6 +36,11 @@ public class PlayerHealthHandler : MonoBehaviour, IDamageable
     {
         Debug.Log("Player Died");
         GameManager.Instance.shipHealth--;
+        if(GameManager.Instance.shipHealth <= 0 && GameManager.Instance.actualBoat.boatName != "Bote")
+        {
+            GameManager.Instance.OnShipDeath();
+            return;
+        }
         Scene actualScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(actualScene.name);
     }

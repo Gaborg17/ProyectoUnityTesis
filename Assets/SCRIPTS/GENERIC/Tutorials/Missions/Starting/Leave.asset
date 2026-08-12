@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 494c50ebf2460b64c87293a709b4fda8, type: 3}
+  m_Name: Leave
+  m_EditorClassIdentifier: Assembly-CSharp::MissionData
+  idMission: Go to your ship
+  missionType: 9
+  useLightRay: 1
+  keyNeeded: 
+  amountNeeded: 0
+  Description: Go to your ship and press E to start your journey

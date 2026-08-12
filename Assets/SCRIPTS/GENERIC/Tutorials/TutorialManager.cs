@@ -15,7 +15,7 @@ public class TutorialManager : MonoBehaviour
 
     private List<MissionData> activeMissions = new List<MissionData>();
     private int actualindex;
-    private bool activeTutorial;
+    public static bool activeTutorial;
 
     public MissionData actualMission => (activeTutorial && actualindex < activeMissions.Count)? activeMissions[actualindex]: null;
 
@@ -78,7 +78,7 @@ public class TutorialManager : MonoBehaviour
             //missionName.text = actualMission.name;
             description.text = actualMission.Description;
 
-            if(actualMission.missionType == MissionData.MissionType.DefeatNpc || actualMission.missionType == MissionData.MissionType.DefeatNpc)
+            if(actualMission.missionType == MissionData.MissionType.DefeatNpc || actualMission.missionType == MissionData.MissionType.DefeatEnemy)
             {
                 description.text = string.Format(actualMission.Description, actualKills);
             }
@@ -95,13 +95,14 @@ public class TutorialManager : MonoBehaviour
         tutorialPanel.SetActive(false);
         activeMissions.Clear();
         if (GuideRay.Instance != null) GuideRay.Instance.HideRay();
+        GameManager.Instance.tutorialCompleted = true;
     }
 
     private int actualKills = 0;
     
     public void DefeatMissionValidate()
     {
-        if(actualMission.missionType == MissionData.MissionType.DefeatNpc || actualMission.missionType == MissionData.MissionType.DefeatNpc)
+        if(actualMission.missionType == MissionData.MissionType.DefeatNpc || actualMission.missionType == MissionData.MissionType.DefeatEnemy)
         {
             actualKills++;
             UpdatePanel();

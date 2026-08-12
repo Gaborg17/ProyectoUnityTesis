@@ -2,7 +2,7 @@ using UnityEngine;
 
 public enum TypeOfCollectible
 {
-    Gold, Food, Wood
+    Gold, Food, Wood, MapFragment
 }
 
 public class Collectible : MonoBehaviour
@@ -31,6 +31,10 @@ public class Collectible : MonoBehaviour
                     break;
                 case TypeOfCollectible.Wood:
                     gameManager.madera += amountToAdd;
+                    break;
+                case TypeOfCollectible.MapFragment:
+                    gameManager.mapFragments += amountToAdd;
+                    GameManager.Instance.OnFragment();
                     break;
             }
 

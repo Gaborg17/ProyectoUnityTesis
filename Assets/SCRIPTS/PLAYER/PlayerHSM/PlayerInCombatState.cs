@@ -38,7 +38,7 @@ public class PlayerInCombatState : PlayerBaseState
     private void ChecarAnim()
     {
         AnimatorStateInfo stateInfo = Ctx.PAnimator.GetCurrentAnimatorStateInfo(0);
-        if (!stateInfo.IsName("Hit")) return;
+        if (!stateInfo.IsName("Armature|Punch_Cross")) return;
         if (stateInfo.normalizedTime >= 0.95f && !stateInfo.loop)
         {
             SwitchState(Factory.Walk());

@@ -58,7 +58,6 @@ public class NpcStateMachine : MonoBehaviour
         if (!_isEscaping)
         {
             _isEscaping = true;
-            Debug.Log("aaaaaaaa");
         }
     }
 }

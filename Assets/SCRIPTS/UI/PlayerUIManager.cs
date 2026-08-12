@@ -1,5 +1,7 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerUIManager : MonoBehaviour
@@ -22,6 +24,9 @@ public class PlayerUIManager : MonoBehaviour
     [Header("Bounty")]
     [SerializeField] private TextMeshProUGUI bountyCount;
 
+    [Header("GameOver")]
+    [SerializeField] private GameObject GameOverPanel;
+    [SerializeField] private GameObject GameCompletedPanel;
 
     private void Start()
     {
@@ -29,7 +34,7 @@ public class PlayerUIManager : MonoBehaviour
         GameManager.Instance.UpdateResources += ResourceUpdate;
         GameManager.Instance.Allies += AlliesUpdate;
         GameManager.Instance.bountyManager.bountyChanged += BountyUpdate;
-
+        GameManager.Instance.GameOver += GameOver;
 
         GameManager.Instance.UpdateResourcesUI();
         GameManager.Instance.bountyManager.UpdateBounty();
@@ -43,6 +48,7 @@ public class PlayerUIManager : MonoBehaviour
             GameManager.Instance.UpdateResources += ResourceUpdate;
             GameManager.Instance.Allies += AlliesUpdate;
             GameManager.Instance.bountyManager.bountyChanged += BountyUpdate;
+            GameManager.Instance.GameOver += GameOver;
 
 
             GameManager.Instance.UpdateResourcesUI();
@@ -56,6 +62,8 @@ public class PlayerUIManager : MonoBehaviour
         GameManager.Instance.UpdateResources -= ResourceUpdate;
         GameManager.Instance.Allies -= AlliesUpdate;
         GameManager.Instance.bountyManager.bountyChanged -= BountyUpdate;
+        GameManager.Instance.GameOver -= GameOver;
+
     }
 
     private void OnDestroy()
@@ -64,6 +72,8 @@ public class PlayerUIManager : MonoBehaviour
         GameManager.Instance.UpdateResources -= ResourceUpdate;
         GameManager.Instance.Allies -= AlliesUpdate;
         GameManager.Instance.bountyManager.bountyChanged -= BountyUpdate;
+        GameManager.Instance.GameOver -= GameOver;
+
     }
 
     private void ResourceUpdate()
@@ -82,7 +92,7 @@ public class PlayerUIManager : MonoBehaviour
     private void BountyUpdate()
     {
         bountyCount.text = GameManager.Instance.bountyManager.TotalBounty.ToString();
-        Debug.Log("New Bounty");
+        
     }
 
     private void AlliesUpdate()
@@ -90,4 +100,19 @@ public class PlayerUIManager : MonoBehaviour
 
     }
 
+    public void GameOver()
+    {
+        Time.timeScale = 0f;
+        GameOverPanel.SetActive(true);
+    }
+
+    public void OnGameCompleted()
+    {
+        GameCompletedPanel.SetActive(true);
+    }
+
+    public void ExitToMenu()
+    {
+        SceneManager.LoadScene("Pruebas");
+    }
 }

@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     public event Action<int> UpdatePlayerHealth;
     public event Action Allies;
     public event Action Tripulation;
+    public event Action GameOver;
+    public event Action OnEndgame;
 
     public Vector3 boatPosition = new Vector3(-1.4f, 0f, 0f);
     public Vector3 CamPosition = new Vector3(35f, 42.5f, 0f);
@@ -239,5 +241,22 @@ public class GameManager : MonoBehaviour
     public void UpdateTripulationTab()
     {
         Tripulation?.Invoke();
+    }
+
+
+    public void OnShipDeath()
+    {
+        if(shipHealth <= 0)
+        {
+            GameOver?.Invoke();
+        }
+    }
+
+    public void OnFragment()
+    {
+        if(mapFragments > 0)
+        {
+            OnEndgame?.Invoke();
+        }
     }
 }
