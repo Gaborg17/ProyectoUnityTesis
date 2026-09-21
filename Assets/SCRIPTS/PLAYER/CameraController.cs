@@ -1,6 +1,5 @@
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.FilePathAttribute;
 
 public class CameraController : MonoBehaviour
 {

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1731271751044419561}
   - component: {fileID: 7501676449795411079}
   - component: {fileID: 7269063315870493024}
-  - component: {fileID: 334433674629221868}
   - component: {fileID: 5160575642361914990}
   - component: {fileID: 6888185061992840154}
   - component: {fileID: 4662460703534924177}
@@ -65,7 +64,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!136 &7501676449795411079
 CapsuleCollider:
@@ -74,7 +73,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4643784291090185704}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 46733f837661653469c84bd314918143, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -108,24 +107,6 @@ MonoBehaviour:
     m_Bits: 64
   detectionRange: 0.2
   isGrounded: 0
---- !u!114 &334433674629221868
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4643784291090185704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 463d66102bd859247b4233e42c139001, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CameraController
-  cameraCenter: {fileID: 0}
-  ySensibility: 0.2
-  xSensibility: 0.2
-  smoothness: 1
-  minVerticalAngle: -80
-  maxVerticalAngle: 45
 --- !u!114 &5160575642361914990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,6 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStateMachine
   p_Animator: {fileID: 8977722550264483443}
+  Camera: {fileID: 0}
   _walkSpeed: 2
   _jumpForce: 7
   _jumpRequested: 0
