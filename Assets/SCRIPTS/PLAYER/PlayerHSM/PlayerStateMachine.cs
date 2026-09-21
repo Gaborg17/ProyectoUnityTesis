@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerStateMachine : MonoBehaviour
 {
@@ -8,7 +7,8 @@ public class PlayerStateMachine : MonoBehaviour
     private GroundChecker checker;
 
     [SerializeField] private Animator p_Animator;
-    
+    [SerializeField] private Transform Camera;
+
     int _isWalkingHash;
     int _isAttackingHash;
     int _isJumpHash;
@@ -21,27 +21,27 @@ public class PlayerStateMachine : MonoBehaviour
     [SerializeField] private bool _jumpRequested;
 
     [Header("Stats")]
-    [SerializeField]private int _damage;
+    [SerializeField] private int _damage;
     public bool JumpRequested { get { return _jumpRequested; } set { _jumpRequested = value; } }
-    public float JumpForce { get { return _jumpForce; }}
-    public float WalkSpeed {  get { return _walkSpeed; }}
+    public float JumpForce { get { return _jumpForce; } }
+    public float WalkSpeed { get { return _walkSpeed; } }
 
-    public int Damage { get { return _damage; }}
+    public int Damage { get { return _damage; } }
 
-    public Rigidbody Rb { get { return rb; }}
-    public Animator PAnimator { get { return p_Animator; }}
-    public GroundChecker GroundChecker { get { return checker; }}
+    public Rigidbody Rb { get { return rb; } }
+    public Animator PAnimator { get { return p_Animator; } }
+    public GroundChecker GroundChecker { get { return checker; } }
     public InputManager InputManager { get { return inputManager; } }
     public Transform Transform { get { return transform; } }
 
-    public int IsWalkingHash {  get { return _isWalkingHash; }}
-    public int IsAttackingHash {  get { return _isAttackingHash; }}
-    public int IsJumpHash { get { return _isJumpHash; }}
+    public int IsWalkingHash { get { return _isWalkingHash; } }
+    public int IsAttackingHash { get { return _isAttackingHash; } }
+    public int IsJumpHash { get { return _isJumpHash; } }
 
     PlayerBaseState _currentState;
     PlayerStateFactory _stateFactory;
 
-    public PlayerBaseState CurrentState { get { return _currentState; } set { _currentState = value; }}
+    public PlayerBaseState CurrentState { get { return _currentState; } set { _currentState = value; } }
 
     public bool isWalking;
 
@@ -62,7 +62,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void OnEnable()
     {
-        
+
         if (inputManager != null)
         {
             inputManager.OnJumpPerformed += RequestJump;
@@ -110,8 +110,8 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void RequestJump()
     {
-        if(checker.IsGrounded())
-        _jumpRequested = true;
+        if (checker.IsGrounded())
+            _jumpRequested = true;
     }
 
     private void HandleInteraction()
@@ -122,15 +122,39 @@ public class PlayerStateMachine : MonoBehaviour
     private void FixedUpdate()
     {
         _currentState.UpdateStates();
+
+        HandleRotation();
         Movement();
-        
-        //HandleRotation();
     }
 
 
     private void Movement()
     {
-        rb.linearVelocity = transform.localRotation * new Vector3(inputManager.MoveDirection().x * Speed(), rb.linearVelocity.y, inputManager.MoveDirection().y * Speed());
+        Vector3 direction = CameraDirection();
+
+        if (direction.magnitude > 0.05f)
+        {
+            Vector3 velocity = CameraDirection() * Speed();
+            velocity.y = rb.linearVelocity.y;
+            rb.linearVelocity = velocity;
+
+            rb.useGravity = true;
+        }
+        else
+        {
+            if (checker.IsGrounded())
+            {
+                rb.linearVelocity = Vector3.zero;
+                rb.useGravity = false;
+            }
+            else
+            {
+                rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
+                rb.useGravity = true;
+            }
+        }
+
+
     }
 
     private float Speed()
@@ -138,24 +162,39 @@ public class PlayerStateMachine : MonoBehaviour
         return _walkSpeed * Time.deltaTime * 100f;
     }
 
-
+    private Quaternion targetRotation;
     private void HandleRotation()
     {
-        Vector3 positionToLookAt;
 
-        positionToLookAt.x = inputManager.MoveDirection().x;
-        positionToLookAt.y = 0f;
-        positionToLookAt.z = inputManager.MoveDirection().y;
-
-        Quaternion currentRotation = transform.rotation;
-
-
-        if(inputManager.MoveDirection().magnitude > 0f)
+        if (inputManager.MoveDirection().sqrMagnitude > 0.01f)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(positionToLookAt);
 
-            transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, 10 * Time.deltaTime);
+            targetRotation = Quaternion.LookRotation(CameraDirection());
+
+            transform.rotation = Quaternion.RotateTowards(
+                transform.rotation,
+                targetRotation,
+                540f * Time.deltaTime
+            );
+
         }
 
+    }
+
+    private Vector3 CameraDirection()
+    {
+        Vector2 input = inputManager.MoveDirection();
+        Vector3 frwd = Camera.forward;
+        Vector3 right = Camera.right;
+
+        frwd.y = 0;
+        right.y = 0;
+
+        frwd.Normalize();
+        right.Normalize();
+
+        Vector3 direction = frwd * input.y + right * input.x;
+        if (direction.sqrMagnitude < 0.01f) return Vector3.zero;
+        return direction.normalized;
     }
 }
