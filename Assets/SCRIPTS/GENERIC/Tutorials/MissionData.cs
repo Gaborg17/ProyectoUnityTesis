@@ -15,6 +15,7 @@ public class MissionData : ScriptableObject
     public string keyNeeded;
 
     public int amountNeeded;
+    public bool needsPlayerInRange;
 
     [TextArea(2,5)]
     public string Description;

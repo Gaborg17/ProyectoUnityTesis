@@ -7,6 +7,7 @@ enum PlayerStates
     jump,
     grounded,
     inCombat,
+    run,
 }
 public class PlayerStateFactory
 {
@@ -20,6 +21,7 @@ public class PlayerStateFactory
         _states[PlayerStates.jump] = new PlayerJumpState(_context, this);
         _states[PlayerStates.grounded] = new PlayerGroundedState(_context, this);
         _states[PlayerStates.inCombat] = new PlayerInCombatState(_context, this);
+        _states[PlayerStates.run] = new PlayerRunState(_context, this);
     }
 
     public PlayerBaseState Idle()
@@ -30,10 +32,10 @@ public class PlayerStateFactory
     {
         return _states[PlayerStates.walk];
     }
-    //public PlayerBaseState Run()
-    //{
-    //    return 
-    //}
+    public PlayerBaseState Run()
+    {
+        return _states[PlayerStates.run];
+    }
     public PlayerBaseState Jump()
     {
         return _states[PlayerStates.jump];

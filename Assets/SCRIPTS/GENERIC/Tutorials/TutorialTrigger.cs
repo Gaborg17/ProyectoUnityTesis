@@ -49,7 +49,7 @@ public class TutorialTrigger : MonoBehaviour
 
         playerinRange = true;
 
-        if (!requiresInteraction)
+        if (requiresInteraction == false)
         {
             Complete();
         }
@@ -62,7 +62,7 @@ public class TutorialTrigger : MonoBehaviour
 
     private void TryForInteraction()
     {
-        if (requiresInteraction && playerinRange)
+        if (requiresInteraction == true && playerinRange == true)
         {
             Complete();
         }

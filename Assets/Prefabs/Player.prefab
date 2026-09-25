@@ -136,6 +136,7 @@ MonoBehaviour:
   p_Animator: {fileID: 8977722550264483443}
   Camera: {fileID: 0}
   _walkSpeed: 2
+  _runSpeed: 3
   _jumpForce: 7
   _jumpRequested: 0
   _damage: 1
@@ -332,7 +333,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c9e0b66498947a54fa2fae1910d159af, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c9e0b66498947a54fa2fae1910d159af, type: 3}
       propertyPath: m_LocalRotation.w

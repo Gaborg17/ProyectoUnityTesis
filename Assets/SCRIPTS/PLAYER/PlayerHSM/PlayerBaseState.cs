@@ -42,15 +42,18 @@ public abstract class PlayerBaseState
     }
     protected void SwitchState(PlayerBaseState newState)
     {
-        ExitState();
-        newState.EnterState();
+        if (!_ctx.CanEnterState(newState)) return;
+
 
         if (_isRootState)
         {
+            ExitStates();
+            newState.EnterState();
             _ctx.CurrentState = newState;
         }
         else if(_currentSuperState != null)
         {
+            ExitState();
             _currentSuperState.SetSubState(newState);
         }
     }
@@ -62,5 +65,6 @@ public abstract class PlayerBaseState
     {
         _currentSubState = newSubState;
         newSubState.SetSuperState(this);
+        newSubState.EnterState();
     }
 }

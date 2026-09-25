@@ -28,9 +28,11 @@ public class TutorialInputsListener : MonoBehaviour
 
     private void ValidateInput(MissionData.MissionType pressedKey)
     {
+        if (GameManager.Instance.IsPaused == true) return;
+
         MissionData actualMission = TutorialManager.Instance.actualMission;
         if (actualMission == null) return;
-        if (actualMission != null && actualMission.missionType == pressedKey)
+        if (actualMission != null && actualMission.missionType == pressedKey && !actualMission.needsPlayerInRange)
         {
             TutorialManager.Instance.CompleteActiveMission(actualMission.idMission);
         }
@@ -38,6 +40,8 @@ public class TutorialInputsListener : MonoBehaviour
 
     private void ValidateMovement()
     {
+        if (GameManager.Instance.IsPaused == true) return;
+
         MissionData actualMission = TutorialManager.Instance.actualMission;
 
         if (actualMission == null) return;

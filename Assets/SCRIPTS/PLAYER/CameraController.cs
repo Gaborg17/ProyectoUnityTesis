@@ -24,10 +24,13 @@ public class CameraController : MonoBehaviour
     private void Start()
     {
         input = InputManager.Instance;
+        GameManager.Instance.showCursor = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
     {
+        if (GameManager.Instance.IsPaused == true) return;
         RotateCamera();
     }
 

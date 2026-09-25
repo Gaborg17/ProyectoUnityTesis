@@ -7,7 +7,14 @@ public class PlayerIdleState : PlayerBaseState
     {
         if (Ctx.InputManager.MoveDirection().magnitude > 0.01f)
         {
-            SwitchState(Factory.Walk());
+            if (Ctx.InputManager.isRunning() == true)
+            {
+                SwitchState(Factory.Run());
+            }
+            else
+            {
+                SwitchState(Factory.Walk());
+            }
         }
         if (Ctx.InputManager.AttackIsPressed())
         {
@@ -17,8 +24,8 @@ public class PlayerIdleState : PlayerBaseState
 
     public override void EnterState()
     {
-        //animacionWalk = false
         Ctx.PAnimator.SetBool(Ctx.IsWalkingHash, false);
+        Ctx.PAnimator.SetBool(Ctx.IsRunningHash, false);
         Ctx.isWalking = false;
     }
 

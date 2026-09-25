@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerInCombatState : PlayerBaseState
 {
 
-    
+
     public PlayerInCombatState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
         : base(currentContext, playerStateFactory) { }
     public override void CheckSwitchState()
@@ -16,7 +16,8 @@ public class PlayerInCombatState : PlayerBaseState
     {
         Ctx.PAnimator.SetTrigger(Ctx.IsAttackingHash);
         Ctx.temporalDamageCollider.SetActive(true);
-        
+        Ctx.isWalking = false;
+
     }
 
     public override void ExitState()
@@ -41,7 +42,23 @@ public class PlayerInCombatState : PlayerBaseState
         if (!stateInfo.IsName("Armature|Punch_Cross")) return;
         if (stateInfo.normalizedTime >= 0.95f && !stateInfo.loop)
         {
-            SwitchState(Factory.Walk());
+
+            if (Ctx.InputManager.MoveDirection().magnitude < 0.1f)
+            {
+                SwitchState(Factory.Idle());
+            }
+            else
+            {
+                if (Ctx.InputManager.isRunning() == true)
+                {
+                    SwitchState(Factory.Run());
+                }
+                else
+                {
+                    SwitchState(Factory.Walk());
+                }
+            }
+
         }
     }
 }

@@ -17,4 +17,5 @@ MonoBehaviour:
   useLightRay: 1
   keyNeeded: 
   amountNeeded: 0
+  needsPlayerInRange: 1
   Description: Go to your house and press E to talk to your mom

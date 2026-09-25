@@ -11,6 +11,11 @@ public class PlayerWalkState : PlayerBaseState
         {
             SwitchState(Factory.Idle());
         }
+        if (Ctx.InputManager.isRunning() == true)
+        {
+            SwitchState(Factory.Run());
+        }
+
 
         if (Ctx.InputManager.AttackIsPressed())
         {
@@ -23,11 +28,16 @@ public class PlayerWalkState : PlayerBaseState
     {
         Ctx.PAnimator.SetBool(Ctx.IsWalkingHash, true);
         Ctx.isWalking = true;
+        Ctx.ActualSpeed = Ctx.WalkSpeed;
+
     }
 
     public override void ExitState()
     {
-        
+        Ctx.PAnimator.SetBool(Ctx.IsWalkingHash, false);
+
+        Ctx.isWalking = false;
+
     }
 
     public override void InitializeSubState()

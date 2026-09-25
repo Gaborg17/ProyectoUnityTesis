@@ -17,4 +17,5 @@ MonoBehaviour:
   useLightRay: 0
   keyNeeded: 
   amountNeeded: 0
+  needsPlayerInRange: 1
   Description: Press E to Interact and Collect the Loot

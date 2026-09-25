@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public event Action Tripulation;
     public event Action GameOver;
     public event Action OnEndgame;
+    public event Action OnPause;
 
     public Vector3 boatPosition = new Vector3(-1.4f, 0f, 0f);
     public Vector3 CamPosition = new Vector3(35f, 42.5f, 0f);
@@ -71,7 +72,10 @@ public class GameManager : MonoBehaviour
 
     public bool tutorialCompleted = false;
 
+    public bool IsPaused;
+    public bool showCursor = false;
 
+    private InputManager inputManager;
     private void Awake()
     {
         if (Instance == null)
@@ -88,14 +92,34 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+    private void Start()
+    {
+        inputManager = InputManager.Instance;
+    }
+    private void Update()
+    {
+        if (inputManager != null)
+        {
 
+        }
+        else
+        {
+            inputManager = InputManager.Instance;
+        }
 
+        if (inputManager.IsPausePressed() && IsPaused == false)
+        {
+            Pause();
+        }
+
+    }
     private void OnDestroy()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+
         todasLasIslas.Clear();
     }
     public void DeactivateIsles(Material material)
@@ -257,6 +281,35 @@ public class GameManager : MonoBehaviour
         if(mapFragments > 0)
         {
             OnEndgame?.Invoke();
+        }
+    }
+
+    public void ToggleCursor()
+    {
+        showCursor = !showCursor;
+        switch (showCursor)
+        {
+            case true:
+                Cursor.lockState = CursorLockMode.None; 
+                break;
+            case false:
+                Cursor.lockState = CursorLockMode.Locked;
+                break;
+        }
+    }
+    public void Pause()
+    {
+        IsPaused = !IsPaused;
+        ToggleCursor();
+        OnPause?.Invoke();
+
+        if (IsPaused == true)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
         }
     }
 }

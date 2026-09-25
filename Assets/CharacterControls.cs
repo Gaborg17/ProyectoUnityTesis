@@ -202,6 +202,15 @@ public partial class @CharacterControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Sprint"",
+                    ""type"": ""Button"",
+                    ""id"": ""41e1a07f-d5f0-4e56-aa2e-23e2fe3db655"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -325,6 +334,17 @@ public partial class @CharacterControls: IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2bae88eb-9b54-4cea-af21-295dae6c42bf"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -344,6 +364,7 @@ public partial class @CharacterControls: IInputActionCollection2, IDisposable
         m_Pirata_Attack = m_Pirata.FindAction("Attack", throwIfNotFound: true);
         m_Pirata_Inventory = m_Pirata.FindAction("Inventory", throwIfNotFound: true);
         m_Pirata_Pause = m_Pirata.FindAction("Pause", throwIfNotFound: true);
+        m_Pirata_Sprint = m_Pirata.FindAction("Sprint", throwIfNotFound: true);
     }
 
     ~@CharacterControls()
@@ -539,6 +560,7 @@ public partial class @CharacterControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Pirata_Attack;
     private readonly InputAction m_Pirata_Inventory;
     private readonly InputAction m_Pirata_Pause;
+    private readonly InputAction m_Pirata_Sprint;
     /// <summary>
     /// Provides access to input actions defined in input action map "Pirata".
     /// </summary>
@@ -578,6 +600,10 @@ public partial class @CharacterControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Pirata/Pause".
         /// </summary>
         public InputAction @Pause => m_Wrapper.m_Pirata_Pause;
+        /// <summary>
+        /// Provides access to the underlying input action "Pirata/Sprint".
+        /// </summary>
+        public InputAction @Sprint => m_Wrapper.m_Pirata_Sprint;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -625,6 +651,9 @@ public partial class @CharacterControls: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @Sprint.started += instance.OnSprint;
+            @Sprint.performed += instance.OnSprint;
+            @Sprint.canceled += instance.OnSprint;
         }
 
         /// <summary>
@@ -657,6 +686,9 @@ public partial class @CharacterControls: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @Sprint.started -= instance.OnSprint;
+            @Sprint.performed -= instance.OnSprint;
+            @Sprint.canceled -= instance.OnSprint;
         }
 
         /// <summary>
@@ -768,5 +800,12 @@ public partial class @CharacterControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnPause(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Sprint" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSprint(InputAction.CallbackContext context);
     }
 }

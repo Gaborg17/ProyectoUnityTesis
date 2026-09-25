@@ -10,7 +10,7 @@ public class PlayerJumpState : PlayerBaseState
     }
     public override void CheckSwitchState()
     {
-        if (Ctx.JumpRequested == false)
+        if (Ctx.GroundChecker.IsGrounded() && Ctx.Rb.linearVelocity.y <= 0f)
         {
             SwitchState(Factory.Grounded());
         }
@@ -19,6 +19,8 @@ public class PlayerJumpState : PlayerBaseState
     public override void EnterState()
     {
         InitializeSubState();
+        Ctx.PAnimator.SetBool(Ctx.IsRunningHash, false);
+
         Ctx.PAnimator.SetTrigger(Ctx.IsJumpHash);
         Jump();
     }

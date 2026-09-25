@@ -12,9 +12,12 @@ public class PlayerStateMachine : MonoBehaviour
     int _isWalkingHash;
     int _isAttackingHash;
     int _isJumpHash;
+    int _isRunningHash;
 
     [Header("Movement")]
     [SerializeField] private float _walkSpeed;
+    [SerializeField] private float _runSpeed;
+    private float _actualSpeed;
 
     [Header("Jump")]
     [SerializeField] private float _jumpForce;
@@ -25,6 +28,8 @@ public class PlayerStateMachine : MonoBehaviour
     public bool JumpRequested { get { return _jumpRequested; } set { _jumpRequested = value; } }
     public float JumpForce { get { return _jumpForce; } }
     public float WalkSpeed { get { return _walkSpeed; } }
+    public float RunSpeed { get { return _runSpeed; } }
+    public float ActualSpeed { get { return _actualSpeed; } set { _actualSpeed = value; } }
 
     public int Damage { get { return _damage; } }
 
@@ -37,6 +42,7 @@ public class PlayerStateMachine : MonoBehaviour
     public int IsWalkingHash { get { return _isWalkingHash; } }
     public int IsAttackingHash { get { return _isAttackingHash; } }
     public int IsJumpHash { get { return _isJumpHash; } }
+    public int IsRunningHash { get { return _isRunningHash; } }
 
     PlayerBaseState _currentState;
     PlayerStateFactory _stateFactory;
@@ -44,6 +50,7 @@ public class PlayerStateMachine : MonoBehaviour
     public PlayerBaseState CurrentState { get { return _currentState; } set { _currentState = value; } }
 
     public bool isWalking;
+    
 
     public GameObject temporalDamageCollider;
     private void Awake()
@@ -58,6 +65,7 @@ public class PlayerStateMachine : MonoBehaviour
         _isWalkingHash = Animator.StringToHash("IsWalking");
         _isAttackingHash = Animator.StringToHash("Hit");
         _isJumpHash = Animator.StringToHash("Jump");
+        _isRunningHash = Animator.StringToHash("Run");
     }
 
     private void OnEnable()
@@ -96,6 +104,7 @@ public class PlayerStateMachine : MonoBehaviour
             transform.position = GameManager.Instance.islaSeleccionada.posicionDeSpawn;
 
         }
+        Cursor.lockState = CursorLockMode.Locked;
     }
     private void OnDestroy()
     {
@@ -127,7 +136,13 @@ public class PlayerStateMachine : MonoBehaviour
         Movement();
     }
 
+    public bool CanEnterState(PlayerBaseState target)
+    {
+        if (_currentState is PlayerJumpState && target is PlayerInCombatState)
+            return false;
 
+        return true;
+    }
     private void Movement()
     {
         Vector3 direction = CameraDirection();
@@ -135,6 +150,17 @@ public class PlayerStateMachine : MonoBehaviour
         if (direction.magnitude > 0.05f)
         {
             Vector3 velocity = CameraDirection() * Speed();
+
+            if (Physics.Raycast(transform.position, direction, out RaycastHit hit, 0.6f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
+            {
+                float wallAngle = Vector3.Angle(Vector3.up, hit.normal);
+
+                if (wallAngle > 45f && wallAngle < 92f)
+                {
+                    velocity = Vector3.ProjectOnPlane(velocity, hit.normal);
+                }
+            }
+
             velocity.y = rb.linearVelocity.y;
             rb.linearVelocity = velocity;
 
@@ -159,7 +185,8 @@ public class PlayerStateMachine : MonoBehaviour
 
     private float Speed()
     {
-        return _walkSpeed * Time.deltaTime * 100f;
+        
+        return _actualSpeed * Time.deltaTime * 100f;
     }
 
     private Quaternion targetRotation;
@@ -197,4 +224,5 @@ public class PlayerStateMachine : MonoBehaviour
         if (direction.sqrMagnitude < 0.01f) return Vector3.zero;
         return direction.normalized;
     }
+
 }

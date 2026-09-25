@@ -38,6 +38,10 @@ public class RegresarAlBarco : MonoBehaviour, IInteractable
             Debug.Log("No tienes suficiente comida");
             return;
         }
+        Cursor.lockState = CursorLockMode.None;
+        GameManager.Instance.IsPaused = false;
+        GameManager.Instance.showCursor = true;
+        Time.timeScale = 1f;
         SceneManager.LoadScene("MapaIslas");
     }
 

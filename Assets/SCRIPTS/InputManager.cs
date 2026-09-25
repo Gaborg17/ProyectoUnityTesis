@@ -15,6 +15,8 @@ public class InputManager : MonoBehaviour
     public event Action OnInventoryPerformed;
     public event Action OnAttackPerformed;
     public event Action OnMovementPerformed;
+    public event Action OnSprintPerformed;
+    public event Action OnPausePerformed;
 
     private void Awake()
     {
@@ -39,6 +41,8 @@ public class InputManager : MonoBehaviour
         controls.Pirata.Inventory.performed += ctx => OnInventoryPerformed?.Invoke();
         controls.Pirata.Attack.performed += ctx => OnAttackPerformed?.Invoke();
         controls.Pirata.Mover.performed += ctx => OnMovementPerformed?.Invoke();
+        controls.Pirata.Sprint.performed += ctx => OnSprintPerformed?.Invoke();
+        controls.Pirata.Pause.performed += ctx => OnPausePerformed?.Invoke();
         MoveKeyBindings();
 
     }
@@ -51,7 +55,8 @@ public class InputManager : MonoBehaviour
         controls.Pirata.Inventory.performed -= ctx => OnInventoryPerformed?.Invoke();
         controls.Pirata.Attack.performed -= ctx => OnAttackPerformed?.Invoke();
         controls.Pirata.Mover.performed -= ctx => OnMovementPerformed?.Invoke();
-
+        controls.Pirata.Sprint.performed -= ctx => OnSprintPerformed?.Invoke();
+        controls.Pirata.Pause.performed -= ctx => OnPausePerformed?.Invoke();
 
         controls.Disable();
     }
@@ -72,7 +77,10 @@ public class InputManager : MonoBehaviour
 
         return controls.Pirata.Mover.ReadValue<Vector2>();
     }
-
+    public bool isRunning()
+    {
+        return controls.Pirata.Sprint.IsPressed();
+    }
     public bool isJumpPressed()
     {
         return controls.Pirata.Jump.IsPressed();
@@ -95,6 +103,11 @@ public class InputManager : MonoBehaviour
     public bool InventoryPressed()
     {
         return controls.Pirata.Inventory.IsPressed();
+    }
+
+    public bool IsPausePressed()
+    {
+        return controls.Pirata.Pause.IsPressed();
     }
 
     [HideInInspector]public string upKey;
