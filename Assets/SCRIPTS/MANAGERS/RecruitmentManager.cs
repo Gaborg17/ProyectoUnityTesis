@@ -86,6 +86,8 @@ public class RecruitmentManager : MonoBehaviour
         cameraTab.SetActive(false);
         canvasTab.SetActive(false);
         playerCam.SetActive(true);
+        GameManager.Instance.ToggleCursor();
+
     }
 
     public void RecruitAlly()

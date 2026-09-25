@@ -45,5 +45,6 @@ public class OpenTabern : MonoBehaviour, IInteractable
         cameraTaberna.SetActive(true);
         canvas.SetActive(true);
         playerCam.SetActive(false);
+        GameManager.Instance.ToggleCursor();
     }
 }

@@ -59214,6 +59214,8 @@ MonoBehaviour:
   doctor: {fileID: 0}
   warriors: []
   tutorialCompleted: 0
+  IsPaused: 0
+  showCursor: 0
 --- !u!4 &1454793121
 Transform:
   m_ObjectHideFlags: 0
@@ -126619,7 +126621,7 @@ PrefabInstance:
     - target: {fileID: 3672328984231970037, guid: 04e41647b34adde40ad2f6d66497d6ab, type: 3}
       propertyPath: playerCam
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 619390538}
     - target: {fileID: 3672328984231970037, guid: 04e41647b34adde40ad2f6d66497d6ab, type: 3}
       propertyPath: playerHUD
       value: 
@@ -134521,7 +134523,7 @@ PrefabInstance:
     - target: {fileID: 7570340053442216560, guid: d8dae3e251999d948b90df46fa765b51, type: 3}
       propertyPath: playerCam
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 619390538}
     - target: {fileID: 7570340053442216560, guid: d8dae3e251999d948b90df46fa765b51, type: 3}
       propertyPath: playerHUD
       value: 
@@ -134847,7 +134849,7 @@ PrefabInstance:
     - target: {fileID: 5008041347906109909, guid: 4ebe5580024f67b41bf0d90730db17e7, type: 3}
       propertyPath: playerCam
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 619390538}
     - target: {fileID: 5008041347906109909, guid: 4ebe5580024f67b41bf0d90730db17e7, type: 3}
       propertyPath: playerHUD
       value: 

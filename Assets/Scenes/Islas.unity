@@ -12785,7 +12785,7 @@ PrefabInstance:
     - target: {fileID: 7570340053442216560, guid: d8dae3e251999d948b90df46fa765b51, type: 3}
       propertyPath: playerCam
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1605456996}
     - target: {fileID: 7570340053442216560, guid: d8dae3e251999d948b90df46fa765b51, type: 3}
       propertyPath: playerHUD
       value: 
@@ -14047,7 +14047,7 @@ MonoBehaviour:
   canvas: {fileID: 742671087}
   playerHUD: {fileID: 1487630835}
   cameraTaberna: {fileID: 502327197}
-  playerCam: {fileID: 0}
+  playerCam: {fileID: 1605456996}
 --- !u!65 &688201424
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15636,7 +15636,7 @@ PrefabInstance:
     - target: {fileID: 5008041347906109909, guid: 4ebe5580024f67b41bf0d90730db17e7, type: 3}
       propertyPath: playerCam
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1605456996}
     - target: {fileID: 5008041347906109909, guid: 4ebe5580024f67b41bf0d90730db17e7, type: 3}
       propertyPath: playerHUD
       value: 
@@ -29344,7 +29344,7 @@ MonoBehaviour:
   canvas: {fileID: 1756477417}
   playerHUD: {fileID: 1487630835}
   cameraTaberna: {fileID: 1230707322}
-  playerCam: {fileID: 0}
+  playerCam: {fileID: 1605456996}
 --- !u!65 &1448386154
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -36983,7 +36983,7 @@ PrefabInstance:
     - target: {fileID: 3672328984231970037, guid: 04e41647b34adde40ad2f6d66497d6ab, type: 3}
       propertyPath: playerCam
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1605456996}
     - target: {fileID: 3672328984231970037, guid: 04e41647b34adde40ad2f6d66497d6ab, type: 3}
       propertyPath: playerHUD
       value: 
@@ -42489,7 +42489,7 @@ MonoBehaviour:
   canvas: {fileID: 560287636}
   playerHUD: {fileID: 1487630835}
   cameraTaberna: {fileID: 450166968}
-  playerCam: {fileID: 0}
+  playerCam: {fileID: 1605456996}
 --- !u!65 &2062898872
 BoxCollider:
   m_ObjectHideFlags: 0

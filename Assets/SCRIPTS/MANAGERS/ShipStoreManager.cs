@@ -91,5 +91,6 @@ public class ShipStoreManager : MonoBehaviour
         cameraTab.SetActive(false);
         canvasTab.SetActive(false);
         playerCam.SetActive(true);
+        GameManager.Instance.ToggleCursor();
     }
 }
