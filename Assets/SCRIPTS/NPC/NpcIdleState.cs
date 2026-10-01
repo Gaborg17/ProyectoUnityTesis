@@ -18,6 +18,7 @@ public class NpcIdleState : NpcBaseState
 
         if (Ctx.Escaping == true)
         {
+            Ctx.CancelChange();
             SwitchState(Factory.IsEscaping());
         }
     }
@@ -27,7 +28,7 @@ public class NpcIdleState : NpcBaseState
         Debug.Log("Idle");
         Ctx.isWalking = false;
         Ctx.Escaping = false;
-        
+        Ctx.ChangeDestiny();
     }
 
     public override void ExitState()
@@ -44,4 +45,6 @@ public class NpcIdleState : NpcBaseState
         CheckSwitchState();
 
     }
+
+
 }

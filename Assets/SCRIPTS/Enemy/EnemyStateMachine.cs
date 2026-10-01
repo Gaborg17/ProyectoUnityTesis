@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,6 +12,7 @@ public class EnemyStateMachine : MonoBehaviour
     protected Transform player;
 
     [SerializeField] private Transform[] destinos;
+    private int destino;
 
     [SerializeField] private bool _isWalking;
 
@@ -23,6 +25,7 @@ public class EnemyStateMachine : MonoBehaviour
     public NavMeshAgent Agent { get { return agent; } }
 
     public Transform[] Destinos { get { return destinos; } }
+    public int Destino { get { return destino; } set { destino = value; } }
     public Transform Player {  get { return player; } }
 
     public bool isWalking { get { return _isWalking; } set { _isWalking = value; } }
@@ -36,6 +39,7 @@ public class EnemyStateMachine : MonoBehaviour
 
     public EnemyBaseState CurrentState { get { return _currentState; } set { _currentState = value; } }
 
+    public Coroutine waiting;
 
     private void Awake()
     {
@@ -53,5 +57,32 @@ public class EnemyStateMachine : MonoBehaviour
     {
         _currentState.UpdateStates();
     }
-    
+
+    private IEnumerator WaitToChange()
+    {
+        Destino = RandomNum();
+        yield return new WaitForSeconds(4);
+        Agent.isStopped = false;
+    }
+
+    public void ChangeDestiny()
+    {
+        waiting = StartCoroutine(WaitToChange());
+
+    }
+
+    public void CancelChange()
+    {
+        if(waiting != null)
+        {
+            StopCoroutine(waiting);
+        }
+        waiting = null;
+    }
+
+    private int RandomNum()
+    {
+        int randomNum = Random.Range(0, Destinos.Length - 1);
+        return randomNum;
+    }
 }

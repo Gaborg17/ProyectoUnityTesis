@@ -19,6 +19,7 @@ public class EnemyCombatState : EnemyBaseState
     {
         InitializeSubState();
         Ctx.Agent.isStopped = false;
+        Ctx.CancelChange();
     }
 
     public override void ExitState()

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,7 +11,7 @@ public class NpcStateMachine : MonoBehaviour
     protected Transform player;
 
     [SerializeField] private Transform[] destinos;
-
+    [SerializeField] private int destino;
     [SerializeField] private bool _isWalking;
 
     [SerializeField] protected bool _isEscaping;
@@ -22,6 +23,7 @@ public class NpcStateMachine : MonoBehaviour
     public NavMeshAgent Agent { get { return agent; } }
 
     public Transform[] Destinos { get { return destinos; } }
+    public int Destino { get { return destino; } set { destino = value; } }
     public Transform Player { get { return player; } }
 
     public bool isWalking { get { return _isWalking; } set { _isWalking = value; } }
@@ -35,6 +37,7 @@ public class NpcStateMachine : MonoBehaviour
 
     public NpcBaseState CurrentState { get { return _currentState; } set { _currentState = value; } }
 
+    public Coroutine waiting;
 
     private void Awake()
     {
@@ -59,5 +62,30 @@ public class NpcStateMachine : MonoBehaviour
         {
             _isEscaping = true;
         }
+    }
+
+    private IEnumerator WaitToChange()
+    {
+        Destino = RandomNum();
+        yield return new WaitForSeconds(4);
+        Agent.isStopped = false;
+    }
+
+    public void ChangeDestiny()
+    {
+        waiting = StartCoroutine(WaitToChange());
+        
+    }
+
+    public void CancelChange()
+    {
+        StopCoroutine(waiting);
+        waiting = null;
+    }
+
+    private int RandomNum()
+    {
+        int randomNum = Random.Range(0, Destinos.Length - 1);
+        return randomNum;
     }
 }

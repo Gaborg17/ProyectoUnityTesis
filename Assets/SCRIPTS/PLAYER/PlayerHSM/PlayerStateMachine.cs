@@ -151,7 +151,7 @@ public class PlayerStateMachine : MonoBehaviour
         {
             Vector3 velocity = CameraDirection() * Speed();
 
-            if (Physics.Raycast(transform.position, direction, out RaycastHit hit, 0.6f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
+            if (Physics.Raycast(transform.position, direction, out RaycastHit hit, 0.6f, 0, QueryTriggerInteraction.Ignore))
             {
                 float wallAngle = Vector3.Angle(Vector3.up, hit.normal);
 

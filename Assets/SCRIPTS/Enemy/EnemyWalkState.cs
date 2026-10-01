@@ -40,12 +40,12 @@ public class EnemyWalkState : EnemyBaseState
 
     private void Walk()
     {
-        Ctx.Agent.SetDestination(Ctx.Destinos[0].position);
+        Ctx.Agent.SetDestination(Ctx.Destinos[Ctx.Destino].position);
         
     }
     private void AgentModifiers()
     {
         Ctx.Agent.isStopped = false;
-        Ctx.Agent.stoppingDistance = 0;
+        Ctx.Agent.stoppingDistance = 1;
     }
 }

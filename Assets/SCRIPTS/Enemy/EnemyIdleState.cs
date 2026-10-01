@@ -18,6 +18,8 @@ public class EnemyIdleState : EnemyBaseState
     {
         Ctx.EnemyAnimator.SetBool("IsWalking", false);
         Ctx.isWalking = false;
+        Ctx.ChangeDestiny();
+
     }
 
     public override void ExitState()
