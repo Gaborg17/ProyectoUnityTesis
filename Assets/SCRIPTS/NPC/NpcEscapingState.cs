@@ -20,7 +20,6 @@ public class NpcEscapingState : NpcBaseState
     public override void EnterState()
     {
         Ctx.isWalking = false;
-        Debug.Log("Entering Escape State");
         Escape();
         AgentModifiers();
         //Ctx.NpcAnimator.SetBool("IsWalking", true);

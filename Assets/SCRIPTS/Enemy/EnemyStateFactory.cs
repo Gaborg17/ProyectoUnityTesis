@@ -7,7 +7,9 @@ enum EnemyStates
     combat,
     grounded,
     attack,
-    chase
+    chase,
+    retreat,
+    reposition
 }
 public class EnemyStateFactory
 {
@@ -22,6 +24,8 @@ public class EnemyStateFactory
         _states[EnemyStates.grounded] = new EnemyGroundedState(_context, this);
         _states[EnemyStates.attack] = new EnemyAttackState(_context, this);
         _states[EnemyStates.chase] = new EnemyChaseState(_context, this);
+        _states[EnemyStates.retreat] = new EnemyRetreatState(_context, this);
+        _states[EnemyStates.reposition] = new EnemyRepositionState(_context, this);
     }
 
     public EnemyBaseState Idle()
@@ -51,6 +55,14 @@ public class EnemyStateFactory
     public EnemyBaseState Chase()
     {
         return _states[EnemyStates.chase];
+    }
+    public EnemyBaseState Retreat()
+    {
+        return _states[EnemyStates.retreat];
+    }
+    public EnemyBaseState Reposition()
+    {
+        return _states[EnemyStates.reposition];
     }
 
 }

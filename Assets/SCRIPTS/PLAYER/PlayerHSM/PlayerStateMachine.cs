@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerStateMachine : MonoBehaviour
@@ -25,6 +26,8 @@ public class PlayerStateMachine : MonoBehaviour
 
     [Header("Stats")]
     [SerializeField] private int _damage;
+
+    private EnemySelection enemySelection;
     public bool JumpRequested { get { return _jumpRequested; } set { _jumpRequested = value; } }
     public float JumpForce { get { return _jumpForce; } }
     public float WalkSpeed { get { return _walkSpeed; } }
@@ -48,9 +51,10 @@ public class PlayerStateMachine : MonoBehaviour
     PlayerStateFactory _stateFactory;
 
     public PlayerBaseState CurrentState { get { return _currentState; } set { _currentState = value; } }
+    public EnemySelection EnemySelector { get { return enemySelection; } }
 
     public bool isWalking;
-    
+    public bool canAttack;
 
     public GameObject temporalDamageCollider;
     private void Awake()
@@ -61,6 +65,7 @@ public class PlayerStateMachine : MonoBehaviour
         _currentState.EnterState();
         rb = GetComponent<Rigidbody>();
         checker = GetComponent<GroundChecker>();
+        enemySelection = GetComponent<EnemySelection>();
 
         _isWalkingHash = Animator.StringToHash("IsWalking");
         _isAttackingHash = Animator.StringToHash("Hit");
@@ -145,6 +150,7 @@ public class PlayerStateMachine : MonoBehaviour
     }
     private void Movement()
     {
+        if (canAttack == false) return;
         Vector3 direction = CameraDirection();
 
         if (direction.magnitude > 0.05f)
@@ -185,7 +191,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     private float Speed()
     {
-        
+
         return _actualSpeed * Time.deltaTime * 100f;
     }
 
@@ -225,4 +231,45 @@ public class PlayerStateMachine : MonoBehaviour
         return direction.normalized;
     }
 
+    public IEnumerator Launch(GameObject target, float duration)
+    {
+        canAttack = false;
+
+        Vector3 direccion = target.transform.position - transform.position;
+        direccion.y = 0f;
+
+        if (direccion.sqrMagnitude > 0.01f)
+        {
+            transform.forward = direccion.normalized;
+        }
+
+        float distanciaFinal = .5f;
+
+        Vector3 direccionDesdeTarget = transform.position - target.transform.position;
+        direccionDesdeTarget.y = 0f;
+        direccionDesdeTarget.Normalize();
+
+        Vector3 puntoFinal = target.transform.position + direccionDesdeTarget * distanciaFinal;
+
+        float tiempoPasado = 0f;
+
+        while (tiempoPasado < duration)
+        {
+            transform.position = Vector3.MoveTowards(transform.position,puntoFinal,0.07f);
+
+            tiempoPasado += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = puntoFinal;
+
+        yield return new WaitForSeconds(.2f);
+
+        canAttack = true;
+    }
+
+    public void MoveToTarget(GameObject target, float duration)
+    {
+        StartCoroutine(Launch(target, duration));
+    }
 }

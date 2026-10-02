@@ -9,7 +9,7 @@ public class EnemyAttackState : EnemyBaseState
 : base(currentContext, playerStateFactory) { }
     public override void CheckSwitchState()
     {
-        SwitchState(Factory.Chase());
+        SwitchState(Factory.Retreat());
     }
 
     public override void EnterState()
@@ -28,7 +28,7 @@ public class EnemyAttackState : EnemyBaseState
     {
 
     }
-
+    
     public override void InitializeSubState()
     {
     }
@@ -40,11 +40,12 @@ public class EnemyAttackState : EnemyBaseState
         if(timer >= 0.3f)
         {
             Ctx.DamageZone.enabled = false;
+            CheckSwitchState();
+
         }
 
         if (timer >= attackDuration)
         {
-            CheckSwitchState();
 
         }
     }

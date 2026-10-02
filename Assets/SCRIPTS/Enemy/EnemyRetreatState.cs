@@ -1,30 +1,29 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
-public class EnemyChaseState : EnemyBaseState
+public class EnemyRetreatState : EnemyBaseState
 {
-    public EnemyChaseState(EnemyStateMachine currentContext, EnemyStateFactory playerStateFactory)
-: base(currentContext, playerStateFactory){}
+    public EnemyRetreatState(EnemyStateMachine currentContext, EnemyStateFactory playerStateFactory)
+: base(currentContext, playerStateFactory) { }
+
     public override void CheckSwitchState()
     {
         if (!Ctx.Agent.pathPending && Ctx.Agent.remainingDistance <= Ctx.Agent.stoppingDistance)
         {
-            SwitchState(Factory.Attack());
+            SwitchState(Factory.Reposition());
         }
     }
 
-    public override void EnterState()   
+    public override void EnterState()
     {
-        Debug.Log("Chase");
+        Ctx.Agent.updateRotation = false;
         AgentModifiers();
         Ctx.EnemyAnimator.SetBool("IsWalking", true);
-        Ctx.Agent.updateRotation = false;
-        
+        RetreatBack();
     }
 
     public override void ExitState()
     {
-        Ctx.Agent.updateRotation = true;
-
     }
 
     public override void InitializeSubState()
@@ -33,21 +32,19 @@ public class EnemyChaseState : EnemyBaseState
 
     public override void UpdateState()
     {
-        FollowPlayer();
         CheckSwitchState();
     }
 
-    private void FollowPlayer()
+    private void RetreatBack()
     {
-        Ctx.Agent.SetDestination(Ctx.Player.position);
+        Vector3 targetPosition = Ctx.transform.position + (Ctx.transform.forward * -2f);
+        Ctx.Agent.SetDestination(targetPosition);
         Ctx.transform.LookAt(Ctx.Player.position);
-
     }
-
     private void AgentModifiers()
     {
         Ctx.Agent.isStopped = false;
-        Ctx.Agent.stoppingDistance = .6f;
+        Ctx.Agent.stoppingDistance = 0f;
     }
-
 }
+

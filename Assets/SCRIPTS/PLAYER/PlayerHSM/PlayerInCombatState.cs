@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.UIElements;
+using static UnityEngine.GraphicsBuffer;
 
 public class PlayerInCombatState : PlayerBaseState
 {
@@ -14,7 +16,8 @@ public class PlayerInCombatState : PlayerBaseState
 
     public override void EnterState()
     {
-        Ctx.PAnimator.SetTrigger(Ctx.IsAttackingHash);
+        AttackCheck();
+        //Ctx.PAnimator.SetTrigger(Ctx.IsAttackingHash);
         Ctx.temporalDamageCollider.SetActive(true);
         Ctx.isWalking = false;
 
@@ -61,4 +64,72 @@ public class PlayerInCombatState : PlayerBaseState
 
         }
     }
+
+    private void AttackCheck()
+    {
+        if(Ctx.EnemySelector.CurrentTarge()  == null)
+        {
+            Attack(null, 0);
+            return;
+        }
+        else
+        {
+            Attack(Ctx.EnemySelector.target, TargetDistance(Ctx.EnemySelector.target));
+        }
+    }
+
+    int animationCount = 0;
+    string[] attacks;
+    public void Attack(GameObject target, float distance)
+    {
+        attacks = new string[] { "AirKick", "AirKick2", "AirPunch", "AirKick3" };
+        if (target == null)
+        {
+            AttackType("Hit", .2f, null, 0);
+            return;
+        }
+
+        if (distance < 5 && distance > 0.7f)
+        {
+            Debug.Log("Distance");
+            
+            //animationCount = (int)Mathf.Repeat((float)animationCount + 1, (float)attacks.Length);
+            //string attackString = isLastHit() ? attacks[Random.Range(0, attacks.Length)] : attacks[animationCount];
+            AttackType("Hit", .2f, target, .25f);
+        }
+        else
+        {
+            //lockedTarget = null;
+            AttackType("Hit", .2f, null, 0);
+        }
+    }
+
+    private void AttackType(string attackTrigger, float cooldown, GameObject target, float movementDuration)
+    {
+        Ctx.PAnimator.SetTrigger(attackTrigger);
+        if (target == null)
+            return;
+
+        //target.StopMoving();
+        Ctx.MoveToTarget(target, movementDuration);
+
+        //IEnumerator AttackCoroutine(float duration)
+        //{
+        //    movementInput.acceleration = 0;
+        //    isAttackingEnemy = true;
+        //    movementInput.enabled = false;
+        //    yield return new WaitForSeconds(duration);
+        //    isAttackingEnemy = false;
+        //    yield return new WaitForSeconds(.2f);
+        //    movementInput.enabled = true;
+        //    LerpCharacterAcceleration();
+        //}
+    }
+
+    float TargetDistance(GameObject target)
+    {
+        return Vector3.Distance(Ctx.transform.position, target.transform.position);
+    }
+
+
 }
