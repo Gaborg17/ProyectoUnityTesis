@@ -1286,6 +1286,7 @@ GameObject:
   - component: {fileID: 4709308056551275428}
   - component: {fileID: 6075009940639260961}
   - component: {fileID: 4115693414309834566}
+  - component: {fileID: 5674245230416500209}
   m_Layer: 0
   m_Name: pCube63_CasaPobre_lp
   m_TagString: Untagged
@@ -1365,6 +1366,28 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &5674245230416500209
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6655779775095695357}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2335174036103231114, guid: 6b1a34fd6aea3e247af9eadbc9734bae, type: 3}
 --- !u!1 &6842974595075465411
 GameObject:
   m_ObjectHideFlags: 0
@@ -1376,6 +1399,7 @@ GameObject:
   - component: {fileID: 91043267155782001}
   - component: {fileID: 1809076693993697971}
   - component: {fileID: 1021731021609878310}
+  - component: {fileID: 4844552445532723861}
   m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
@@ -1455,6 +1479,27 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4844552445532723861
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6842974595075465411}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6, y: 1, z: 8}
+  m_Center: {x: 0, y: -0.5, z: 0.00000047683716}
 --- !u!1 &7408864557716825009
 GameObject:
   m_ObjectHideFlags: 0
