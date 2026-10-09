@@ -25330,7 +25330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
   cameraCenter: {fileID: 301989746}
-  target: {fileID: 0}
+  target: {fileID: 683484406}
   ySensibility: 0.2
   xSensibility: 0.2
   smoothness: 1
@@ -27651,6 +27651,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 680587928}
   m_Mesh: {fileID: -8705631740590721609, guid: cbcb04ace17eb0c459ba961311ca623d, type: 3}
+--- !u!4 &683484406 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6251989413596571125, guid: 42c4dac1f976886488841bc802619079, type: 3}
+  m_PrefabInstance: {fileID: 1225922481}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &688156296
 PrefabInstance:
   m_ObjectHideFlags: 0
