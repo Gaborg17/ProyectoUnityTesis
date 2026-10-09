@@ -80,10 +80,10 @@ public class PlayerInCombatState : PlayerBaseState
 
     int animationCount = 0;
     string[] attacks;
-    public void Attack(GameObject target, float distance)
+    public void Attack(EnemyStateMachine target, float distance)
     {
         attacks = new string[] { "AirKick", "AirKick2", "AirPunch", "AirKick3" };
-        if (target == null)
+        if (target == null || target.gameObject.activeSelf == false)
         {
             AttackType("Hit", .2f, null, 0);
             return;
@@ -104,7 +104,7 @@ public class PlayerInCombatState : PlayerBaseState
         }
     }
 
-    private void AttackType(string attackTrigger, float cooldown, GameObject target, float movementDuration)
+    private void AttackType(string attackTrigger, float cooldown, EnemyStateMachine target, float movementDuration)
     {
         Ctx.PAnimator.SetTrigger(attackTrigger);
         if (target == null)
@@ -126,7 +126,7 @@ public class PlayerInCombatState : PlayerBaseState
         //}
     }
 
-    float TargetDistance(GameObject target)
+    float TargetDistance(EnemyStateMachine target)
     {
         return Vector3.Distance(Ctx.transform.position, target.transform.position);
     }

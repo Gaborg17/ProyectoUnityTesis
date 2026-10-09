@@ -6,7 +6,7 @@ public class EnemySelection : MonoBehaviour
     public LayerMask layerMask;
 
     public Camera cam;
-    public GameObject target;
+    public EnemyStateMachine target;
     void Start()
     {
         
@@ -20,46 +20,45 @@ public class EnemySelection : MonoBehaviour
     private void SelectEnemy()
     {
         
-        var forward = cam.transform.forward;
-        var right = cam.transform.right;
+        //var forward = cam.transform.forward;
+        //var right = cam.transform.right;
 
-        forward.y = 0f;
-        right.y = 0f;
+        //forward.y = 0f;
+        //right.y = 0f;
 
-        forward.Normalize();
-        right.Normalize();
+        //forward.Normalize();
+        //right.Normalize();
 
-        inputDirection = forward * InputManager.Instance.MoveDirection().y + right * InputManager.Instance.MoveDirection().x;
-        inputDirection = inputDirection.normalized;
+        //inputDirection = forward * InputManager.Instance.MoveDirection().y + right * InputManager.Instance.MoveDirection().x;
+        //inputDirection = inputDirection.normalized;
 
         RaycastHit info;
 
-        if (Physics.SphereCast(transform.position, 3f, inputDirection, out info, 5, layerMask))
+        if (Physics.SphereCast(transform.position, 3f, transform.forward, out info, 5, layerMask))
         {
-            Debug.Log(info.collider.gameObject.name);
-            target = info.collider.gameObject;
+            target = info.collider.transform.GetComponent<EnemyStateMachine>();
             //if (info.collider.transform.GetComponent<EnemyScript>().IsAttackable())
             //    currentTarget = info.collider.transform.GetComponent<EnemyScript>();
         }
     }
 
-    public GameObject CurrentTarge()
+    public EnemyStateMachine CurrentTarge()
     {
         return target;
     }
 
-    public void SetCurrentTarget(GameObject obj)
+    public void SetCurrentTarget(EnemyStateMachine enemyStateMachine)
     {
-        target = obj;
+        target = enemyStateMachine;
     }
 
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.black;
-        Gizmos.DrawRay(transform.position, inputDirection);
+        Gizmos.color = Color.red;
+        //Gizmos.DrawRay(transform.position, inputDirection);
         Gizmos.DrawWireSphere(transform.position, 1);
         if (target != null)
-            Gizmos.DrawSphere(target.transform.position, .5f);
+            Gizmos.DrawWireSphere(target.transform.position, .5f);
     }
 }

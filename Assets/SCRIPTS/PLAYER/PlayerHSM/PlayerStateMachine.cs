@@ -231,7 +231,7 @@ public class PlayerStateMachine : MonoBehaviour
         return direction.normalized;
     }
 
-    public IEnumerator Launch(GameObject target, float duration)
+    public IEnumerator Launch(EnemyStateMachine target, float duration)
     {
         canAttack = false;
 
@@ -268,7 +268,7 @@ public class PlayerStateMachine : MonoBehaviour
         canAttack = true;
     }
 
-    public void MoveToTarget(GameObject target, float duration)
+    public void MoveToTarget(EnemyStateMachine target, float duration)
     {
         StartCoroutine(Launch(target, duration));
     }
