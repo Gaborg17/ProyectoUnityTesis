@@ -64,9 +64,9 @@ public class EnemyRepositionState : EnemyBaseState
         float x = Mathf.Cos(currentAngle * Mathf.Deg2Rad) * orbitRadius;
         float z = Mathf.Sin(currentAngle * Mathf.Deg2Rad) * orbitRadius;
 
-        Vector3 targetPosition = Ctx.Player.position + new Vector3(x, 0, z);
+        Vector3 targetPosition = Ctx.AssignedTarget.position + new Vector3(x, 0, z);
         Ctx.Agent.SetDestination(targetPosition);
-        Ctx.transform.LookAt(Ctx.Player.position);
+        Ctx.transform.LookAt(Ctx.AssignedTarget.position);
 
         if (Mathf.Approximately(currentAngle, targetAngle))
         {

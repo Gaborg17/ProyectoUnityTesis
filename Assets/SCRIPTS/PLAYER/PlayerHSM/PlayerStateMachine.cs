@@ -152,22 +152,42 @@ public class PlayerStateMachine : MonoBehaviour
     {
         if (canAttack == false) return;
         Vector3 direction = CameraDirection();
-
-        if (direction.magnitude > 0.05f)
+        bool blockedBySteepWall = false;
+        if (direction.sqrMagnitude > 0.01f)
         {
             Vector3 velocity = CameraDirection() * Speed();
 
-            if (Physics.Raycast(transform.position, direction, out RaycastHit hit, 0.6f, 0, QueryTriggerInteraction.Ignore))
+            if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y - .4f, transform.position.z), direction, out RaycastHit hit, 0.3f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
             {
                 float wallAngle = Vector3.Angle(Vector3.up, hit.normal);
 
-                if (wallAngle > 45f && wallAngle < 92f)
+                if (wallAngle > 35f)
                 {
-                    velocity = Vector3.ProjectOnPlane(velocity, hit.normal);
+                    Vector3 wallNormal = hit.normal;
+                    wallNormal.y = 0f;
+                    wallNormal.Normalize();
+
+                    float intoWall = Vector3.Dot(velocity, wallNormal);
+
+                    if (intoWall < 0f)
+                    {
+                        velocity -= wallNormal * intoWall;
+                    }
+                    if (velocity.y > 0f)
+                    {
+                        velocity.y = 0f;
+                    }
+
+                    if (checker.IsGrounded())
+                    {
+                        blockedBySteepWall = true;
+                    }
                 }
             }
-
-            velocity.y = rb.linearVelocity.y;
+            if (!blockedBySteepWall && !checker.IsGrounded())
+            {
+                velocity.y = rb.linearVelocity.y;
+            }
             rb.linearVelocity = velocity;
 
             rb.useGravity = true;
@@ -185,8 +205,6 @@ public class PlayerStateMachine : MonoBehaviour
                 rb.useGravity = true;
             }
         }
-
-
     }
 
     private float Speed()

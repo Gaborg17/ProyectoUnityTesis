@@ -14,11 +14,15 @@ public class EnemyStateMachine : MonoBehaviour
     [SerializeField] private Transform[] destinos;
     private int destino;
 
+    private Transform assignedTarget;
+
     [SerializeField] private bool _isWalking;
 
     [SerializeField]protected bool _isInCombat;
 
     [SerializeField] protected BoxCollider _damageZone;
+
+    private CombatZoneManager _cManager;
 
 
     public Animator EnemyAnimator { get { return enemyAnim; } }
@@ -26,6 +30,7 @@ public class EnemyStateMachine : MonoBehaviour
 
     public Transform[] Destinos { get { return destinos; } }
     public int Destino { get { return destino; } set { destino = value; } }
+    public Transform AssignedTarget { get { return assignedTarget; } set { assignedTarget = value; } }
     public Transform Player {  get { return player; } }
 
     public bool isWalking { get { return _isWalking; } set { _isWalking = value; } }
@@ -33,6 +38,8 @@ public class EnemyStateMachine : MonoBehaviour
     public bool InCombat { get { return _isInCombat; } set { _isInCombat = value; } }
 
     public BoxCollider  DamageZone {  get { return _damageZone; } }
+
+    public CombatZoneManager CombatManager { get { return _cManager; } set { _cManager = value; } }
 
     EnemyBaseState _currentState;
     EnemyStateFactory _stateFactory;

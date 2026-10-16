@@ -14,7 +14,6 @@ public class EnemyChaseState : EnemyBaseState
 
     public override void EnterState()   
     {
-        Debug.Log("Chase");
         AgentModifiers();
         Ctx.EnemyAnimator.SetBool("IsWalking", true);
         Ctx.Agent.updateRotation = false;
@@ -39,8 +38,8 @@ public class EnemyChaseState : EnemyBaseState
 
     private void FollowPlayer()
     {
-        Ctx.Agent.SetDestination(Ctx.Player.position);
-        Ctx.transform.LookAt(Ctx.Player.position);
+        Ctx.Agent.SetDestination(Ctx.AssignedTarget.position);
+        Ctx.transform.LookAt(new Vector3(Ctx.AssignedTarget.position.x, Ctx.transform.position.y, Ctx.AssignedTarget.position.z));
 
     }
 
@@ -48,6 +47,8 @@ public class EnemyChaseState : EnemyBaseState
     {
         Ctx.Agent.isStopped = false;
         Ctx.Agent.stoppingDistance = .6f;
+        Ctx.Agent.speed = 2f;
+
     }
 
 }

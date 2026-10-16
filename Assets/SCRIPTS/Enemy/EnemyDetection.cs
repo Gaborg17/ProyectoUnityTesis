@@ -7,21 +7,26 @@ public class EnemyDetection : MonoBehaviour
     private Coroutine coroutine;
     [SerializeField] private float timeToStop;
 
+    private SphereCollider detectionCollider;
+
     private void Start()
     {
         eStateMAchine = GetComponentInParent<EnemyStateMachine>();
+        detectionCollider = GetComponent<SphereCollider>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
+            detectionCollider.radius = 7;
             if (coroutine != null)
             {
                 StopCoroutine(coroutine);
                 coroutine = null;
             }
-            eStateMAchine.InCombat = true;
+            
+            eStateMAchine.CombatManager.MatchUp();
         }
     }
 
@@ -38,6 +43,7 @@ public class EnemyDetection : MonoBehaviour
     private IEnumerator StopChasing()
     {
         yield return new WaitForSeconds(timeToStop);
+        detectionCollider.radius = 2.5f;
         eStateMAchine.InCombat = false;
         coroutine = null;
     }

@@ -41,11 +41,13 @@ public class EnemyWalkState : EnemyBaseState
     private void Walk()
     {
         Ctx.Agent.SetDestination(Ctx.Destinos[Ctx.Destino].position);
-        
+        Ctx.transform.LookAt(new Vector3(Ctx.Destinos[Ctx.Destino].position.x, Ctx.transform.position.y, Ctx.Destinos[Ctx.Destino].position.z));
     }
     private void AgentModifiers()
     {
         Ctx.Agent.isStopped = false;
         Ctx.Agent.stoppingDistance = 1;
+        Ctx.Agent.speed = 1;
+
     }
 }

@@ -10,6 +10,11 @@ public class EnemyDamageHandler : MonoBehaviour
         {
             other.GetComponent<IDamageable>().OnTakeDamage(damage);
         }
+
+        if (other.CompareTag("Ally"))
+        {
+            other.GetComponent<IDamageable>().OnTakeDamage(damage);
+        }
     }
 
     private void OnTriggerExit(Collider other)

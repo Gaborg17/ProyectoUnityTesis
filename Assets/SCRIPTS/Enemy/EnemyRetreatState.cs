@@ -39,12 +39,14 @@ public class EnemyRetreatState : EnemyBaseState
     {
         Vector3 targetPosition = Ctx.transform.position + (Ctx.transform.forward * -2f);
         Ctx.Agent.SetDestination(targetPosition);
-        Ctx.transform.LookAt(Ctx.Player.position);
+        Ctx.transform.LookAt(new Vector3(Ctx.AssignedTarget.position.x, Ctx.transform.position.y, Ctx.AssignedTarget.position.z));
     }
     private void AgentModifiers()
     {
         Ctx.Agent.isStopped = false;
         Ctx.Agent.stoppingDistance = 0f;
+        Ctx.Agent.speed = 1.5f;
+
     }
 }
 
