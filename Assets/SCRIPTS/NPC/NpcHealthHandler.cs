@@ -36,7 +36,8 @@ public class NpcHealthHandler : MonoBehaviour, IDamageable
 
         if(TutorialManager.Instance != null )
         {
-            if (TutorialManager.Instance.actualMission.missionType != MissionData.MissionType.DefeatNpc || TutorialManager.Instance.actualMission == null) return;
+            if (TutorialManager.Instance.actualMission == null) return;
+            if (TutorialManager.Instance.actualMission.missionType != MissionData.MissionType.DefeatNpc) return;
             TutorialManager.Instance.DefeatMissionValidate();
 
         }

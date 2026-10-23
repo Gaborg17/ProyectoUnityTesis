@@ -11,10 +11,6 @@ public class AllyCombatState : AllyBaseState
     {
         if (Ctx.InCombat) return;
 
-        if (Ctx.AssignedEnemy == null)
-        {
-            return;
-        }
 
         float distance = Vector3.Distance(Ctx.transform.position, Ctx.Player.transform.position);
         if (distance > 3)

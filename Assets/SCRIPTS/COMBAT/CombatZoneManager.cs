@@ -104,8 +104,7 @@ public class CombatZoneManager : MonoBehaviour
         foreach (var a in onAlly.Keys)
             if (a != null) { a.InCombat = false; a.AssignedEnemy = null; }
         ResetAssignments();
-        // zoneAllies is NOT cleared — allies may still be inside the trigger
-        // and OnTriggerEnter won't re-fire for them.
+        zoneAllies.Clear();
     }
 
     // Called by DeathWatcher.
@@ -199,7 +198,7 @@ public class CombatZoneManager : MonoBehaviour
         {
             if (a == null || !a.IsAlive) continue;
             a.AssignedEnemy = NearestForAlly(a);
-            a.InCombat = true;
+            a.InCombat = a.AssignedEnemy != null;
         }
     }
 

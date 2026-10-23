@@ -58,7 +58,8 @@ public class AllyWalkState : AllyBaseState
         float distance = Vector3.Distance(Ctx.transform.position, Ctx.Player.transform.position);
         if (distance > 20)
         {
-            Ctx.transform.position = destiny;
+            SwitchState(Factory.Idle());
+            Ctx.Agent.Warp(destiny);
         }
         else if (distance > 8)
         {
