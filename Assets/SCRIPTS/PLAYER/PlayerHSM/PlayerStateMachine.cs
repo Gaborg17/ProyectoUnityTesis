@@ -1,6 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
+public enum AttackType
+{
+    sword, gun
+}
 public class PlayerStateMachine : MonoBehaviour
 {
     private InputManager inputManager;
@@ -57,6 +61,16 @@ public class PlayerStateMachine : MonoBehaviour
     public bool canAttack;
 
     public GameObject temporalDamageCollider;
+
+    public bool canShoot;
+    public bool isAiming;
+    public AttackType attackMode;
+    public CameraController cameraController;
+
+    public GameObject crosshair;
+
+    public LayerMask damageMasks;
+    
     private void Awake()
     {
         inputManager = InputManager.Instance;
@@ -81,6 +95,7 @@ public class PlayerStateMachine : MonoBehaviour
             inputManager.OnJumpPerformed += RequestJump;
             //inputManager.OnInteractPerformed += HandleInteraction;
             inputManager.OnInventoryPerformed += HandleInteraction;
+            inputManager.OnWheelPerformed += ChangeAttackType;
         }
 
     }
@@ -92,6 +107,8 @@ public class PlayerStateMachine : MonoBehaviour
             inputManager.OnJumpPerformed -= RequestJump;
             //inputManager.OnInteractPerformed -= HandleInteraction;
             inputManager.OnInventoryPerformed -= HandleInteraction;
+            inputManager.OnWheelPerformed -= ChangeAttackType;
+
 
         }
     }
@@ -103,12 +120,15 @@ public class PlayerStateMachine : MonoBehaviour
             inputManager.OnJumpPerformed += RequestJump;
             //inputManager.OnInteractPerformed += HandleInteraction;
             inputManager.OnInventoryPerformed += HandleInteraction;
+            inputManager.OnWheelPerformed += ChangeAttackType;
+
         }
         if (GameManager.Instance.islaSeleccionada != null)
         {
             transform.position = GameManager.Instance.islaSeleccionada.posicionDeSpawn;
 
         }
+        cameraController = FindAnyObjectByType<CameraController>();
         Cursor.lockState = CursorLockMode.Locked;
     }
     private void OnDestroy()
@@ -118,6 +138,8 @@ public class PlayerStateMachine : MonoBehaviour
             inputManager.OnJumpPerformed -= RequestJump;
             //inputManager.OnInteractPerformed -= HandleInteraction;
             inputManager.OnInventoryPerformed -= HandleInteraction;
+            inputManager.OnWheelPerformed -= ChangeAttackType;
+
 
         }
     }
@@ -216,20 +238,35 @@ public class PlayerStateMachine : MonoBehaviour
     private Quaternion targetRotation;
     private void HandleRotation()
     {
-
+        if (isAiming)
+        {
+            RotateTowardsDirection(Camera.transform.forward);
+            return;
+        }
         if (inputManager.MoveDirection().sqrMagnitude > 0.01f)
         {
-
-            targetRotation = Quaternion.LookRotation(CameraDirection());
-
-            transform.rotation = Quaternion.RotateTowards(
-                transform.rotation,
-                targetRotation,
-                540f * Time.deltaTime
-            );
+            RotateTowardsDirection(CameraDirection());
 
         }
 
+    }
+    private void RotateTowardsDirection(Vector3 direction)
+    {
+        Vector3 flatDirection = direction;
+        flatDirection.y = 0f;
+
+        if (flatDirection.sqrMagnitude < 0.0001f)
+            flatDirection = Camera.transform.up;
+
+        flatDirection.Normalize();
+
+        Quaternion targetRotation = Quaternion.LookRotation(flatDirection);
+
+        transform.rotation = Quaternion.RotateTowards(
+            transform.rotation,
+            targetRotation,
+            540f * Time.deltaTime
+        );
     }
 
     private Vector3 CameraDirection()
@@ -289,5 +326,25 @@ public class PlayerStateMachine : MonoBehaviour
     public void MoveToTarget(EnemyStateMachine target, float duration)
     {
         StartCoroutine(Launch(target, duration));
+    }
+
+    public void ChangeAttackType()
+    {
+        Debug.Log(InputManager.MouseWheel());
+
+        if (isAiming == true) return;
+
+        if(InputManager.MouseWheel().y > 0)
+        {
+            attackMode = AttackType.gun;
+            cameraController.canAim = true;
+        }
+        else if(InputManager.MouseWheel().y < 0)
+        {
+            attackMode = AttackType.sword;
+            cameraController.canAim = false;
+
+        }
+
     }
 }

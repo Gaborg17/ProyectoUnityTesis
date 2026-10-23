@@ -211,6 +211,24 @@ public partial class @CharacterControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Aim"",
+                    ""type"": ""Button"",
+                    ""id"": ""b16d8fc1-f7c8-419c-b18d-91d869da0f00"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Change"",
+                    ""type"": ""Value"",
+                    ""id"": ""e61cabd9-fd83-47b3-beda-81dce0e02917"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -345,6 +363,28 @@ public partial class @CharacterControls: IInputActionCollection2, IDisposable
                     ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d05d2f7a-cc4e-42b1-b543-34faa296ffb3"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""314121cf-95d3-4ca8-9f25-e24e18b3947f"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Change"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -365,6 +405,8 @@ public partial class @CharacterControls: IInputActionCollection2, IDisposable
         m_Pirata_Inventory = m_Pirata.FindAction("Inventory", throwIfNotFound: true);
         m_Pirata_Pause = m_Pirata.FindAction("Pause", throwIfNotFound: true);
         m_Pirata_Sprint = m_Pirata.FindAction("Sprint", throwIfNotFound: true);
+        m_Pirata_Aim = m_Pirata.FindAction("Aim", throwIfNotFound: true);
+        m_Pirata_Change = m_Pirata.FindAction("Change", throwIfNotFound: true);
     }
 
     ~@CharacterControls()
@@ -561,6 +603,8 @@ public partial class @CharacterControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Pirata_Inventory;
     private readonly InputAction m_Pirata_Pause;
     private readonly InputAction m_Pirata_Sprint;
+    private readonly InputAction m_Pirata_Aim;
+    private readonly InputAction m_Pirata_Change;
     /// <summary>
     /// Provides access to input actions defined in input action map "Pirata".
     /// </summary>
@@ -604,6 +648,14 @@ public partial class @CharacterControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Pirata/Sprint".
         /// </summary>
         public InputAction @Sprint => m_Wrapper.m_Pirata_Sprint;
+        /// <summary>
+        /// Provides access to the underlying input action "Pirata/Aim".
+        /// </summary>
+        public InputAction @Aim => m_Wrapper.m_Pirata_Aim;
+        /// <summary>
+        /// Provides access to the underlying input action "Pirata/Change".
+        /// </summary>
+        public InputAction @Change => m_Wrapper.m_Pirata_Change;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -654,6 +706,12 @@ public partial class @CharacterControls: IInputActionCollection2, IDisposable
             @Sprint.started += instance.OnSprint;
             @Sprint.performed += instance.OnSprint;
             @Sprint.canceled += instance.OnSprint;
+            @Aim.started += instance.OnAim;
+            @Aim.performed += instance.OnAim;
+            @Aim.canceled += instance.OnAim;
+            @Change.started += instance.OnChange;
+            @Change.performed += instance.OnChange;
+            @Change.canceled += instance.OnChange;
         }
 
         /// <summary>
@@ -689,6 +747,12 @@ public partial class @CharacterControls: IInputActionCollection2, IDisposable
             @Sprint.started -= instance.OnSprint;
             @Sprint.performed -= instance.OnSprint;
             @Sprint.canceled -= instance.OnSprint;
+            @Aim.started -= instance.OnAim;
+            @Aim.performed -= instance.OnAim;
+            @Aim.canceled -= instance.OnAim;
+            @Change.started -= instance.OnChange;
+            @Change.performed -= instance.OnChange;
+            @Change.canceled -= instance.OnChange;
         }
 
         /// <summary>
@@ -807,5 +871,19 @@ public partial class @CharacterControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSprint(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Aim" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnAim(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Change" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnChange(InputAction.CallbackContext context);
     }
 }

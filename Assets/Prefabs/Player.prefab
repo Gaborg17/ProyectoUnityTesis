@@ -140,10 +140,18 @@ MonoBehaviour:
   _runSpeed: 3
   _jumpForce: 7
   _jumpRequested: 0
-  _damage: 1
+  _damage: 2
   isWalking: 0
   canAttack: 1
   temporalDamageCollider: {fileID: 5557000571083478949}
+  canShoot: 0
+  isAiming: 0
+  attackMode: 0
+  cameraController: {fileID: 0}
+  crosshair: {fileID: 0}
+  damageMasks:
+    serializedVersion: 2
+    m_Bits: 384
 --- !u!114 &3993549193618500520
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -113,6 +113,7 @@ GameObject:
   - component: {fileID: 7374824769441140254}
   - component: {fileID: 4775192410516368282}
   - component: {fileID: 2423938272102899536}
+  - component: {fileID: 1090836474798364621}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
@@ -205,7 +206,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStateMachine
   enemyAnim: {fileID: 6914891438528503294}
+  _isAlive: 1
   destinos:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   _isWalking: 0
   _isInCombat: 0
@@ -246,6 +253,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5, y: 0.9532552, z: 0.5}
   m_Center: {x: 0, y: 0.023372412, z: 0}
+--- !u!54 &1090836474798364621
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3466793039313997333}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &6655120414293691360
 GameObject:
   m_ObjectHideFlags: 0

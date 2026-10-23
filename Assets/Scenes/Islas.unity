@@ -17475,10 +17475,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c36492a2a953d4eae70953cd542786, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AllyStateMachine
+  _isAlive: 1
   allyAnim: {fileID: 898078840}
+  allySO: {fileID: 0}
   _isWalking: 0
   _isInCombat: 0
-  _damageZone: {fileID: 0}
+  _damageZone: {fileID: 665984208}
   playerDistance: 1.5
   playerSideStep: -1
 --- !u!4 &410103604
@@ -17495,6 +17497,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 898078841}
+  - {fileID: 665984210}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &410103605
@@ -22390,6 +22393,73 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
+--- !u!1 &558014930
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 558014933}
+  - component: {fileID: 558014931}
+  - component: {fileID: 558014932}
+  m_Layer: 9
+  m_Name: Damager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &558014931
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 558014930}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 0.5, y: 1, z: 0.4}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &558014932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 558014930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 311ac7f4e5da66d44b0f074d2aac68f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AllyDamageHandler
+  damage: 1
+--- !u!4 &558014933
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 558014930}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.30000305}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 819158969}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &560287635
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25008,6 +25078,73 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2075464500}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &665984207
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 665984210}
+  - component: {fileID: 665984208}
+  - component: {fileID: 665984209}
+  m_Layer: 9
+  m_Name: Damager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &665984208
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 665984207}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 0.5, y: 1, z: 0.4}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &665984209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 665984207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 311ac7f4e5da66d44b0f074d2aac68f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AllyDamageHandler
+  damage: 1
+--- !u!4 &665984210
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 665984207}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 410103604}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &672898692
 Mesh:
   m_ObjectHideFlags: 0
@@ -26501,6 +26638,7 @@ GameObject:
   m_Component:
   - component: {fileID: 703996047}
   - component: {fileID: 703996046}
+  - component: {fileID: 703996048}
   m_Layer: 0
   m_Name: CombatZone1
   m_TagString: Untagged
@@ -26523,10 +26661,11 @@ MonoBehaviour:
   enemies:
   - {fileID: 751475159}
   - {fileID: 1939532696}
-  alies:
-  - {fileID: 819158971}
-  - {fileID: 410103603}
   player: {fileID: 1320967812}
+  allyTag: Ally
+  maxEnemiesOnPlayer: 1
+  minEnemiesPerAlly: 2
+  maxEnemiesPerAlly: 3
 --- !u!4 &703996047
 Transform:
   m_ObjectHideFlags: 0
@@ -26536,12 +26675,33 @@ Transform:
   m_GameObject: {fileID: 703996045}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 238.11, y: 2.88, z: -115.56}
+  m_LocalPosition: {x: 238.89, y: 2.88, z: -117.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &703996048
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703996045}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 25, y: 6, z: 25}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &718818651 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7885588184721230403, guid: 4292039d5f1d73c42a2464b2bb7c42df, type: 3}
@@ -29021,6 +29181,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 407018108}
+  - {fileID: 558014933}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!195 &819158970
@@ -29057,10 +29218,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c36492a2a953d4eae70953cd542786, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AllyStateMachine
+  _isAlive: 1
   allyAnim: {fileID: 1043409446}
+  allySO: {fileID: 0}
   _isWalking: 0
   _isInCombat: 0
-  _damageZone: {fileID: 0}
+  _damageZone: {fileID: 558014931}
   playerDistance: 1.5
   playerSideStep: 1
 --- !u!65 &819158972
@@ -36189,6 +36352,10 @@ PrefabInstance:
     - target: {fileID: 4142185993005337477, guid: e9c7d3693d541c44db274a1ac6ed4e80, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7374824769441140254, guid: e9c7d3693d541c44db274a1ac6ed4e80, type: 3}
+      propertyPath: destinos.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7374824769441140254, guid: e9c7d3693d541c44db274a1ac6ed4e80, type: 3}
       propertyPath: 'destinos.Array.data[0]'
@@ -51571,6 +51738,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1309706217220766383, guid: 1adbd16e8a441c4449894eebc38d1c36, type: 3}
   m_PrefabInstance: {fileID: 1487630832}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1487630836 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8596764678094314308, guid: 1adbd16e8a441c4449894eebc38d1c36, type: 3}
+  m_PrefabInstance: {fileID: 1487630832}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1493172258 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7885588184721230403, guid: 4292039d5f1d73c42a2464b2bb7c42df, type: 3}
@@ -54974,6 +55146,15 @@ MonoBehaviour:
   minVerticalAngle: -80
   maxVerticalAngle: 30
   camDistance: 0
+  aimDistance: 0
+  distanceLerp: 12
+  aimOffset: {x: 0.6, y: 0.1, z: 0}
+  offsetLerp: 12
+  cam: {fileID: 0}
+  normalFov: 60
+  aimFov: 25
+  fovLerp: 12
+  canAim: 0
 --- !u!43 &1606120989
 Mesh:
   m_ObjectHideFlags: 0
@@ -68870,10 +69051,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7374824769441140254, guid: e9c7d3693d541c44db274a1ac6ed4e80, type: 3}
-      propertyPath: destinos.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7374824769441140254, guid: e9c7d3693d541c44db274a1ac6ed4e80, type: 3}
       propertyPath: 'destinos.Array.data[0]'
       value: 
       objectReference: {fileID: 1420046484}
@@ -70721,6 +70898,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7374824769441140254, guid: e9c7d3693d541c44db274a1ac6ed4e80, type: 3}
+      propertyPath: destinos.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7374824769441140254, guid: e9c7d3693d541c44db274a1ac6ed4e80, type: 3}
       propertyPath: 'destinos.Array.data[0]'
       value: 
       objectReference: {fileID: 1160471395}
@@ -71721,6 +71902,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStateMachine
   enemyAnim: {fileID: 837631228}
+  _isAlive: 1
   destinos:
   - {fileID: 242659591}
   _isWalking: 0
@@ -71949,6 +72131,10 @@ PrefabInstance:
       propertyPath: Camera
       value: 
       objectReference: {fileID: 2047598482}
+    - target: {fileID: 6888185061992840154, guid: 42c4dac1f976886488841bc802619079, type: 3}
+      propertyPath: crosshair
+      value: 
+      objectReference: {fileID: 1487630836}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

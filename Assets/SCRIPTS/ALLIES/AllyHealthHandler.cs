@@ -5,8 +5,11 @@ public class AllyHealthHandler : MonoBehaviour, IDamageable
     public int health;
     public int maxHealth;
 
+    private AllyStateMachine allyStateMAchine;
+
     private void Start()
     {
+        allyStateMAchine = GetComponent<AllyStateMachine>();
         health = maxHealth;
     }
     public void OnTakeDamage(int damage)
@@ -22,6 +25,7 @@ public class AllyHealthHandler : MonoBehaviour, IDamageable
 
     public void OnDeath()
     {
+        allyStateMAchine.IsAlive = false;
         gameObject.SetActive(false);
     }
 }

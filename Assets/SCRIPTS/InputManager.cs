@@ -17,6 +17,8 @@ public class InputManager : MonoBehaviour
     public event Action OnMovementPerformed;
     public event Action OnSprintPerformed;
     public event Action OnPausePerformed;
+    public event Action OnAimPerformed;
+    public event Action OnWheelPerformed;
 
     private void Awake()
     {
@@ -43,6 +45,8 @@ public class InputManager : MonoBehaviour
         controls.Pirata.Mover.performed += ctx => OnMovementPerformed?.Invoke();
         controls.Pirata.Sprint.performed += ctx => OnSprintPerformed?.Invoke();
         controls.Pirata.Pause.performed += ctx => OnPausePerformed?.Invoke();
+        controls.Pirata.Aim.performed += ctx => OnAimPerformed?.Invoke();
+        controls.Pirata.Change.performed += ctx => OnWheelPerformed?.Invoke();
         MoveKeyBindings();
 
     }
@@ -57,6 +61,8 @@ public class InputManager : MonoBehaviour
         controls.Pirata.Mover.performed -= ctx => OnMovementPerformed?.Invoke();
         controls.Pirata.Sprint.performed -= ctx => OnSprintPerformed?.Invoke();
         controls.Pirata.Pause.performed -= ctx => OnPausePerformed?.Invoke();
+        controls.Pirata.Aim.performed -= ctx => OnAimPerformed?.Invoke();
+        controls.Pirata.Change.performed -= ctx => OnWheelPerformed?.Invoke();
 
         controls.Disable();
     }
@@ -64,6 +70,10 @@ public class InputManager : MonoBehaviour
     public bool LeftMouseClicked()
     {
         return controls.MoverBarco.ClickIzq.IsPressed();
+    }
+    public bool RightMouseClicked()
+    {
+        return controls.Pirata.Aim.IsPressed();
     }
 
     public Vector2 MouseDelta()
@@ -108,6 +118,16 @@ public class InputManager : MonoBehaviour
     public bool IsPausePressed()
     {
         return controls.Pirata.Pause.IsPressed();
+    }
+    public Vector2 MouseWheel()
+    {
+
+        return controls.Pirata.Change.ReadValue<Vector2>();
+    }
+
+    public bool MouseWheelChange()
+    {
+        return controls.Pirata.Change.IsInProgress();
     }
 
     [HideInInspector]public string upKey;

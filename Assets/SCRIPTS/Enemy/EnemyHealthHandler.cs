@@ -7,9 +7,11 @@ public class EnemyHealthHandler : MonoBehaviour, IDamageable
     public int maxHealth;
 
     [SerializeField] private int dropAmount;
+    private EnemyStateMachine eStateMachine;
 
     private void Start()
     {
+        eStateMachine = GetComponent<EnemyStateMachine>();
         health = maxHealth;
     }
     public void OnTakeDamage(int damage)
@@ -25,7 +27,7 @@ public class EnemyHealthHandler : MonoBehaviour, IDamageable
 
     public void OnDeath()
     {
-
+        eStateMachine.IsAlive = false;
         gameObject.SetActive(false);
         GetComponent<DropOnDeath>().DropLoot(dropAmount);
         if (TutorialManager.Instance != null)

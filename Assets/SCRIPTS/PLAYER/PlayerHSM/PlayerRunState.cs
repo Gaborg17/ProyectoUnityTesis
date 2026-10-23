@@ -17,9 +17,13 @@ public class PlayerRunState : PlayerBaseState
 
 
 
-        if (Ctx.InputManager.AttackIsPressed())
+        if (Ctx.InputManager.AttackIsPressed() && Ctx.attackMode == AttackType.sword)
         {
             SwitchState(Factory.InCombat());
+        }
+        if (Ctx.InputManager.RightMouseClicked() && Ctx.attackMode == AttackType.gun)
+        {
+            SwitchState(Factory.Aiming());
         }
     }
 

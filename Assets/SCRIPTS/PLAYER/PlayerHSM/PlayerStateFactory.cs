@@ -8,6 +8,7 @@ enum PlayerStates
     grounded,
     inCombat,
     run,
+    aiming
 }
 public class PlayerStateFactory
 {
@@ -22,6 +23,7 @@ public class PlayerStateFactory
         _states[PlayerStates.grounded] = new PlayerGroundedState(_context, this);
         _states[PlayerStates.inCombat] = new PlayerInCombatState(_context, this);
         _states[PlayerStates.run] = new PlayerRunState(_context, this);
+        _states[PlayerStates.aiming] = new PlayerRangedState(_context, this);
     }
 
     public PlayerBaseState Idle()
@@ -49,5 +51,8 @@ public class PlayerStateFactory
         return _states[PlayerStates.inCombat];
     }
 
-
+    public PlayerBaseState Aiming()
+    {
+        return _states[PlayerStates.aiming];
+    }
 }

@@ -3,7 +3,9 @@ using UnityEngine.AI;
 
 public class AllyStateMachine : MonoBehaviour
 {
+    [SerializeField] private bool _isAlive = true;
     [SerializeField] private Animator allyAnim;
+    [SerializeField] private AlliesSO allySO;
 
     private NavMeshAgent agent;
 
@@ -20,6 +22,7 @@ public class AllyStateMachine : MonoBehaviour
 
 
     public Animator AllyAnimator { get { return allyAnim; } }
+    public AlliesSO AllySO { get { return allySO; } set { allySO = value; } }
     public NavMeshAgent Agent { get { return agent; } }
 
     public Transform Player { get { return player; } }
@@ -28,6 +31,7 @@ public class AllyStateMachine : MonoBehaviour
     public bool isWalking { get { return _isWalking; } set { _isWalking = value; } }
 
     public bool InCombat { get { return _isInCombat; } set { _isInCombat = value; } }
+    public bool IsAlive { get { return _isAlive; } set { _isAlive = value; } }
 
     public BoxCollider DamageZone { get { return _damageZone; } }
 

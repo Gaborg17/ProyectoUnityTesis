@@ -6,6 +6,7 @@ public class AllyChaseState : AllyBaseState
 : base(currentContext, allyStateFactory) { }
     public override void CheckSwitchState()
     {
+
         if (!Ctx.Agent.pathPending && Ctx.Agent.remainingDistance <= Ctx.Agent.stoppingDistance)
         {
             SwitchState(Factory.Attack());
@@ -35,6 +36,11 @@ public class AllyChaseState : AllyBaseState
 
     private void GoToEnemy()
     {
+        if (Ctx.AssignedEnemy == null)
+        {
+            Ctx.InCombat = false;
+            return;
+        }
         Ctx.Agent.SetDestination(Ctx.AssignedEnemy.position);
         Ctx.transform.LookAt(new Vector3(Ctx.AssignedEnemy.position.x, Ctx.transform.position.y, Ctx.AssignedEnemy.position.z));
 

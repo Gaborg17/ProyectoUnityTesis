@@ -16,9 +16,13 @@ public class PlayerIdleState : PlayerBaseState
                 SwitchState(Factory.Walk());
             }
         }
-        if (Ctx.InputManager.AttackIsPressed())
+        if (Ctx.InputManager.AttackIsPressed() && Ctx.attackMode == AttackType.sword)
         {
             SwitchState(Factory.InCombat());
+        }
+        if (Ctx.InputManager.RightMouseClicked() && Ctx.attackMode == AttackType.gun)
+        {
+            SwitchState(Factory.Aiming());
         }
     }
 

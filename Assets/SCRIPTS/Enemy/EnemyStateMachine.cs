@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class EnemyStateMachine : MonoBehaviour
 {
     [SerializeField] private Animator enemyAnim;
+    [SerializeField] private bool _isAlive = true;
 
     private NavMeshAgent agent;
 
@@ -36,6 +37,7 @@ public class EnemyStateMachine : MonoBehaviour
     public bool isWalking { get { return _isWalking; } set { _isWalking = value; } }
 
     public bool InCombat { get { return _isInCombat; } set { _isInCombat = value; } }
+    public bool IsAlive { get { return _isAlive; } set { _isAlive = value; } }
 
     public BoxCollider  DamageZone {  get { return _damageZone; } }
 

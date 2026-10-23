@@ -19,7 +19,7 @@ public class EnemyDetection : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            detectionCollider.radius = 7;
+            detectionCollider.radius = 15;
             if (coroutine != null)
             {
                 StopCoroutine(coroutine);
