@@ -63,6 +63,9 @@ Material:
     - _Refraction_Scale: 1
     - _Refraction_Speed: 0.5
     - _Refraction_Strenght: 0
+    - _RippleDensity: 60
+    - _RippleSpeed: 1
+    - _RippleThicknes: 4.23
     - _Speed: 2.1
     - _Speed_1: -2.1
     - _SrcBlend: 1
@@ -81,6 +84,7 @@ Material:
     - _Direction: {r: 0.38, g: 0, b: 0, a: 0}
     - _Direction_1: {r: 0.38, g: 0, b: -1, a: 0}
     - _Foam_Color: {r: 0.740566, g: 1, b: 0.9864475, a: 1}
+    - _RippleColor: {r: 0, g: 0.41568628, b: 0.7254902, a: 1}
     - _Shallow_Water: {r: 0.48584908, g: 1, b: 0.9798373, a: 1}
     - _Water_Color: {r: 0, g: 0.926527, b: 1, a: 1}
   m_BuildTextureStacks: []
