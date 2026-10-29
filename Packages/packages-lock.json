@@ -1,9 +1,9 @@
 {
   "dependencies": {
     "app.rive.rive-unity": {
-      "version": "file:C:/Users/noelf/Downloads/rive-unity-0.5.2/rive-unity-0.5.2/package",
+      "version": "file:app.rive.rive-unity",
       "depth": 0,
-      "source": "local",
+      "source": "embedded",
       "dependencies": {
         "com.unity.shadergraph": "14.0.11"
       }
