@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -59,7 +60,18 @@ public class AllyWalkState : AllyBaseState
         if (distance > 20)
         {
             SwitchState(Factory.Idle());
-            Ctx.Agent.Warp(destiny);
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(destiny, out hit, 1.5f, NavMesh.AllAreas))
+            {
+                if (Ctx.Agent.Warp(hit.position))
+                {
+                    Ctx.Agent.isStopped = false;
+                }
+                else
+                {
+                    Ctx.Agent.isStopped = true;
+                }
+            }
         }
         else if (distance > 8)
         {

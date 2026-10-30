@@ -70,6 +70,8 @@ public class PlayerStateMachine : MonoBehaviour
     public GameObject crosshair;
 
     public LayerMask damageMasks;
+
+    public GameObject shootParticles;
     
     private void Awake()
     {

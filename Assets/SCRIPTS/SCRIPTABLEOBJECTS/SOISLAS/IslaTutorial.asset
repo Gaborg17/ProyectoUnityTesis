@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IslasSO
   tipoDeIsla: 2
   isla: 0
-  posicionDeSpawn: {x: 280, y: 0.5, z: -100}
+  posicionDeSpawn: {x: 374, y: -0.7, z: -90}

@@ -8,6 +8,8 @@ public class EnemyHealthHandler : MonoBehaviour, IDamageable
 
     [SerializeField] private int dropAmount;
     private EnemyStateMachine eStateMachine;
+    public GameObject particlePrefab;
+    public GameObject particlePrefabInstance;
 
     private void Start()
     {
@@ -17,8 +19,9 @@ public class EnemyHealthHandler : MonoBehaviour, IDamageable
     public void OnTakeDamage(int damage)
     {
         health -= damage;
+        particlePrefabInstance = Instantiate(particlePrefab, transform.position, transform.rotation);
 
-        if(health <= 0)
+        if (health <= 0)
         {
             OnDeath();
         }
@@ -28,6 +31,7 @@ public class EnemyHealthHandler : MonoBehaviour, IDamageable
     public void OnDeath()
     {
         eStateMachine.IsAlive = false;
+        Destroy(particlePrefabInstance, .3f);
         gameObject.SetActive(false);
         GetComponent<DropOnDeath>().DropLoot(dropAmount);
         if (TutorialManager.Instance != null)

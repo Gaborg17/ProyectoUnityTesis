@@ -44,7 +44,7 @@ public class PlayerRangedState : PlayerBaseState
         Ctx.isAiming = false;
         Ctx.crosshair.SetActive(false);
         Ctx.canShoot = true;
-
+        Ctx.shootParticles.SetActive(false);
     }
 
     public override void InitializeSubState()
@@ -65,7 +65,7 @@ public class PlayerRangedState : PlayerBaseState
     public void Shoot()
     {
         Ctx.canShoot = false;
-
+        Ctx.shootParticles.SetActive(true);
         Ray ray = shootRay();
         RaycastHit hit;
 
@@ -73,7 +73,7 @@ public class PlayerRangedState : PlayerBaseState
         {
             var damageable = hit.collider.GetComponent<IDamageable>();
             if (damageable != null)
-                damageable.OnTakeDamage(Ctx.Damage * 10);
+                damageable.OnTakeDamage(Ctx.Damage * 3);
 
             Debug.DrawLine(ray.origin, hit.point, Color.red, 1f);
         }

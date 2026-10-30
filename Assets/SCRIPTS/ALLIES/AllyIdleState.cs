@@ -1,9 +1,10 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AllyIdleState : AllyBaseState
 {
     public AllyIdleState(AllyStateMachine currentContext, AllyStateFactory allyStateFactory)
-: base(currentContext, allyStateFactory) 
+: base(currentContext, allyStateFactory)
     {
         IsRootState = true;
     }
@@ -15,10 +16,15 @@ public class AllyIdleState : AllyBaseState
         }
 
         float distance = Vector3.Distance(Ctx.transform.position, Ctx.Player.transform.position);
-        if(distance > 3)
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(Ctx.Player.transform.position, out hit, 1.5f, NavMesh.AllAreas))
         {
-            SwitchState(Factory.Walk());
+            if (distance > 3)
+            {
+                SwitchState(Factory.Walk());
+            }
         }
+
     }
 
     public override void EnterState()

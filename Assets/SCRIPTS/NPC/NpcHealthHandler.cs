@@ -10,6 +10,9 @@ public class NpcHealthHandler : MonoBehaviour, IDamageable
 
     private NpcStateMachine stateMachine;
 
+    public GameObject particlePrefab;
+    public GameObject particlePrefabInstance;
+
     private void Start()
     {
         stateMachine = GetComponent<NpcStateMachine>();
@@ -18,6 +21,7 @@ public class NpcHealthHandler : MonoBehaviour, IDamageable
     public void OnTakeDamage(int damage)
     {
         health -= damage;
+        particlePrefabInstance = Instantiate(particlePrefab, transform.position, transform.rotation);
         if (!stateMachine.Escaping)
         {
             stateMachine.Escape();
@@ -33,7 +37,7 @@ public class NpcHealthHandler : MonoBehaviour, IDamageable
     {
         gameObject.SetActive(false);
         GetComponent<DropOnDeath>().DropLoot(dropAmount);
-
+        Destroy(particlePrefabInstance, 1f);
         if(TutorialManager.Instance != null )
         {
             if (TutorialManager.Instance.actualMission == null) return;

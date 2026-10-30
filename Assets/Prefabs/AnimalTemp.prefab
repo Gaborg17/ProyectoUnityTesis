@@ -98,6 +98,8 @@ MonoBehaviour:
   health: 0
   maxHealth: 5
   dropAmount: 5
+  particlePrefab: {fileID: 2068178974038025844, guid: 99c70017f10b2474c94518a9a4335fb3, type: 3}
+  particlePrefabInstance: {fileID: 0}
 --- !u!114 &8073063609998654825
 MonoBehaviour:
   m_ObjectHideFlags: 0

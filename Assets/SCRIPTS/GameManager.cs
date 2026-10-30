@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public event Action UpdateResources;
     public event Action<int> UpdatePlayerHealth;
     public event Action Allies;
+    public event Action ActiveAllies;
     public event Action Tripulation;
     public event Action GameOver;
     public event Action OnEndgame;
@@ -229,6 +230,7 @@ public class GameManager : MonoBehaviour
                 oro -= allyToAdd.recruitmentPrice;
                 allies[i] = allyToAdd;
                 allyToAdd.OnAddedToTeam();
+                UpdateActiveAllies();
                 return true;
             }
         }
@@ -267,6 +269,11 @@ public class GameManager : MonoBehaviour
         Tripulation?.Invoke();
     }
 
+    public void UpdateActiveAllies()
+    {
+        ActiveAllies?.Invoke();
+    }
+
 
     public void OnShipDeath()
     {
@@ -286,6 +293,7 @@ public class GameManager : MonoBehaviour
 
     public void ToggleCursor()
     {
+        if (SceneManager.GetActiveScene().name == "MapaIslas") return;
         showCursor = !showCursor;
         switch (showCursor)
         {
@@ -312,4 +320,5 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 1f;
         }
     }
+
 }
