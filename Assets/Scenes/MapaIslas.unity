@@ -2871,6 +2871,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a43dd507c480da94bab50453ca0cfe1e, type: 2}
   islasPueblo:
   - {fileID: 11400000, guid: 88d562c8243e64b4eb023e6a0fc2fcf7, type: 2}
+  - {fileID: 11400000, guid: 03aa52def8f0518478ef96f8704f1f78, type: 2}
   actualBoat: {fileID: 11400000, guid: 406d4034f44faee43bdd4385ed3eef41, type: 2}
   shipHealth: 0
   maxshipHealth: 0
@@ -2903,6 +2904,7 @@ MonoBehaviour:
   tutorialCompleted: 0
   IsPaused: 0
   showCursor: 0
+  attackerType: 0
 --- !u!4 &583251929
 Transform:
   m_ObjectHideFlags: 0

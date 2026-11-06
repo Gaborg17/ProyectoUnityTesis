@@ -43,6 +43,7 @@ public class EnemyDetection : MonoBehaviour
     private IEnumerator StopChasing()
     {
         yield return new WaitForSeconds(timeToStop);
+        Debug.Log("StopChase");
         detectionCollider.radius = 2.5f;
         eStateMAchine.InCombat = false;
         coroutine = null;

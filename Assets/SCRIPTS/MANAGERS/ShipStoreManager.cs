@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,9 +12,11 @@ public class ShipStoreManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI shipLives;
     [SerializeField] private TextMeshProUGUI shipBonus;
     [SerializeField] private TextMeshProUGUI shipPrice;
+    [SerializeField] private TextMeshProUGUI noticeText;
 
     [SerializeField] private Button buyButton;
 
+    private Coroutine messageToShow;
     private int shipInDisplay = 0;
 
     private GameManager gm; 
@@ -34,6 +37,17 @@ public class ShipStoreManager : MonoBehaviour
             gm.UpdateTripulationLimit();
             gm.maxshipHealth = ships[shipInDisplay].boatHealth;
             gm.shipHealth = gm.maxshipHealth;
+            if (messageToShow == null)
+            {
+                messageToShow = StartCoroutine(DisplayMessage($"{gm.actualBoat.name} was bought"));
+            }
+        }
+        else
+        {
+            if (messageToShow == null)
+            {
+                messageToShow = StartCoroutine(DisplayMessage($"You don´t have enough gold to buy this ship"));
+            }
         }
 
         
@@ -92,5 +106,14 @@ public class ShipStoreManager : MonoBehaviour
         canvasTab.SetActive(false);
         playerCam.SetActive(true);
         GameManager.Instance.ToggleCursor();
+    }
+
+    public IEnumerator DisplayMessage(string messageText)
+    {
+        noticeText.gameObject.SetActive(true);
+        noticeText.text = messageText;
+        yield return new WaitForSeconds(0.8f);
+        noticeText.gameObject.SetActive(false);
+        messageToShow = null;
     }
 }

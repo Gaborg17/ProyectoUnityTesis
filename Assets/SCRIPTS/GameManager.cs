@@ -76,6 +76,7 @@ public class GameManager : MonoBehaviour
     public bool IsPaused;
     public bool showCursor = false;
 
+    public Attackers attackerType;
     private InputManager inputManager;
     private void Awake()
     {
@@ -321,4 +322,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public enum Attackers
+    {
+        Pirate, Marine
+    }
 }

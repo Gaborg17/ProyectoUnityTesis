@@ -42,6 +42,13 @@ public class PlayerHealthHandler : MonoBehaviour, IDamageable
             return;
         }
         Scene actualScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(actualScene.name);
+        if(actualScene.name == "ShipBattle")
+        {
+            SceneManager.LoadScene("Islas");
+        }
+        else
+        {
+            SceneManager.LoadScene(actualScene.name);
+        }
     }
 }

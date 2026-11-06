@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,12 +15,10 @@ public class CombatZoneManager : MonoBehaviour
     [SerializeField] private int minEnemiesPerAlly = 2;
     [SerializeField] private int maxEnemiesPerAlly = 3;
 
-    // Assignment state
     private readonly List<EnemyStateMachine> unassigned = new();
     private readonly List<EnemyStateMachine> onPlayer = new();
     private readonly Dictionary<AllyStateMachine, List<EnemyStateMachine>> onAlly = new();
 
-    // Persistent ally roster — allies never leave mid-combat
     private readonly HashSet<AllyStateMachine> zoneAllies = new();
 
     private bool isEngaged;
@@ -56,21 +55,17 @@ public class CombatZoneManager : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        // Only the player leaving ends combat. Allies never leave mid-combat.
         if (player != null && other.transform.IsChildOf(player.transform) && isEngaged)
             Disengage();
     }
 
-    // ── Public API ─────────────────────────────────────────────
 
-    // Called by any enemy that detects the player.
     public void MatchUp()
     {
         if (isEngaged) return;
         isEngaged = true;
         ResetAssignments();
 
-        // Player's share first
         foreach (var e in enemies)
         {
             if (e == null || !e.IsAlive) continue;
@@ -78,7 +73,6 @@ public class CombatZoneManager : MonoBehaviour
             else unassigned.Add(e);
         }
 
-        // Each living ally gets its minimum
         foreach (var ally in zoneAllies)
         {
             if (ally == null || !ally.IsAlive) continue;
@@ -106,10 +100,19 @@ public class CombatZoneManager : MonoBehaviour
         ResetAssignments();
         zoneAllies.Clear();
     }
+    public IEnumerator EndBattle(ShipBattleManager sBM)
+    {
+        yield return new WaitForSeconds(1f);
+        sBM.defeatedEnemies++;
 
-    // Called by DeathWatcher.
+    }
     public void OnEnemyDied(EnemyStateMachine enemy)
     {
+        ShipBattleManager shipB = FindAnyObjectByType<ShipBattleManager>();
+        if (shipB != null)
+        {
+            StartCoroutine(EndBattle(shipB));
+        }
         if (!isEngaged) return;
 
         bool wasOnPlayer = onPlayer.Remove(enemy);
@@ -118,7 +121,6 @@ public class CombatZoneManager : MonoBehaviour
             if (kv.Value.Remove(enemy)) { owner = kv.Key; break; }
         unassigned.Remove(enemy);
 
-        // Whoever lost their target gets priority from the pool
         if (wasOnPlayer && onPlayer.Count < maxEnemiesOnPlayer)
         {
             var e = PopPool();
@@ -133,8 +135,6 @@ public class CombatZoneManager : MonoBehaviour
         DistributeExtras();
         ApplyAssignments();
     }
-
-    // Called by DeathWatcher.
     public void OnAllyDied(AllyStateMachine ally)
     {
         zoneAllies.Remove(ally);
@@ -147,8 +147,6 @@ public class CombatZoneManager : MonoBehaviour
         DistributeExtras();
         ApplyAssignments();
     }
-
-    // ── Internal ──────────────────────────────────────────────
 
     private void ResetAssignments()
     {
@@ -214,7 +212,6 @@ public class CombatZoneManager : MonoBehaviour
     {
         if (ally == null || !onAlly.TryGetValue(ally, out var list)) return null;
 
-        // Keep current target if still valid and in the group
         if (ally.AssignedEnemy != null)
             foreach (var e in list)
                 if (e != null && e.IsAlive && e.transform == ally.AssignedEnemy)

@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum AttackType
 {
@@ -125,7 +126,7 @@ public class PlayerStateMachine : MonoBehaviour
             inputManager.OnWheelPerformed += ChangeAttackType;
 
         }
-        if (GameManager.Instance.islaSeleccionada != null)
+        if (GameManager.Instance.islaSeleccionada != null && SceneManager.GetActiveScene().name == "Islas")
         {
             transform.position = GameManager.Instance.islaSeleccionada.posicionDeSpawn;
 

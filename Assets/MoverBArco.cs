@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class MoverBArco : MonoBehaviour
 {
-    [SerializeField]private Transform barco;
+    [SerializeField] private Transform barco;
     [SerializeField] private float velocidad;//Velocidad a la que se va a mover el barco
 
     public Transform destino { get; set; }//Lugar al que se va a mover le barco
@@ -38,7 +38,7 @@ public class MoverBArco : MonoBehaviour
         cam.transform.position = GameManager.Instance.CamPosition;
     }
 
-    
+
     void Update()
     {
         if (InputManager.Instance.LeftMouseClicked() && isMoving == false)
@@ -67,9 +67,9 @@ public class MoverBArco : MonoBehaviour
     }
     private void Clicked()
     {
-        
+
         Ray ray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
-        if(Physics.Raycast(ray, out RaycastHit hit))
+        if (Physics.Raycast(ray, out RaycastHit hit))
         {
             IClickable clickable = hit.collider.GetComponent<IClickable>();
             if (clickable != null)
@@ -78,7 +78,7 @@ public class MoverBArco : MonoBehaviour
                 islaActual = destino.parent.gameObject.name;
                 GameManager.Instance.islaActual = islaActual;
                 midpoint = (barco.position + destino.position) / 2;
-                if(moveCoroutine == null)
+                if (moveCoroutine == null)
                 {
                     moveCoroutine = StartCoroutine(MoverAIsla());
                 }
@@ -109,7 +109,7 @@ public class MoverBArco : MonoBehaviour
         GameManager.Instance.boatPosition = destino.position;
         barco.rotation = destino.rotation;
         GameManager.Instance.boatRotation = destino.rotation;
-        
+
         yield return new WaitForSeconds(.3f);
         moveCoroutine = null;
         isMoving = false;
@@ -130,7 +130,7 @@ public class MoverBArco : MonoBehaviour
     {
         eventDisplay.SetActive(true);
         eventName.text = "Treasure Found";
-        int treasurelvl =  GameManager.Instance.travelEventHandler.GetRandomChest();
+        int treasurelvl = GameManager.Instance.travelEventHandler.GetRandomChest();
         eventDescription.text = $"Tresure of level {treasurelvl} was found";
         acceptButton.onClick.RemoveAllListeners();
         acceptButton.onClick.AddListener(() =>
@@ -170,6 +170,7 @@ public class MoverBArco : MonoBehaviour
         acceptButton.onClick.AddListener(() =>
         {
             HideEventDisplay();
+            Battle(GameManager.Attackers.Pirate);
         });
         leaveButton.gameObject.SetActive(false);
 
@@ -184,6 +185,7 @@ public class MoverBArco : MonoBehaviour
         acceptButton.onClick.AddListener(() =>
         {
             HideEventDisplay();
+            Battle(GameManager.Attackers.Marine);
 
         });
         leaveButton.gameObject.SetActive(false);
@@ -195,4 +197,11 @@ public class MoverBArco : MonoBehaviour
         eventDisplay.SetActive(false);
         continueMovement = true;
     }
+
+    private void Battle(GameManager.Attackers attackers)
+    {
+        SceneManager.LoadScene("ShipBattle");
+        GameManager.Instance.attackerType = attackers;
+    }
+
 }

@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MapaIslas.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
+    path: Assets/Scenes/ShipBattle.unity
+    guid: 273c98f6898108442959439ce631da39
+  - enabled: 1
     path: Assets/Scenes/Pruebas.unity
     guid: 263fa63ba10951b4aacc3a5df7ac16f5
   m_configObjects:
