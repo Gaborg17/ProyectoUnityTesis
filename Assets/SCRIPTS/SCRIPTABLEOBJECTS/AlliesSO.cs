@@ -19,6 +19,8 @@ public abstract class AlliesSO : ScriptableObject
     public int maxInTeam;
     public abstract string Description { get; }
 
+    public GameObject AllyPrefab;
+
 
 
     public virtual void AllyAbility()

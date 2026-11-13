@@ -16,7 +16,7 @@ public class BarcoSO : ScriptableObject
 
     public int repairCost;
 
-
+    public GameObject boatGO;
 
 
 }

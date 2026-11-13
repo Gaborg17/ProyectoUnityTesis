@@ -102,17 +102,18 @@ public class GameManager : MonoBehaviour
     {
         if (inputManager != null)
         {
-
+            if (inputManager.IsPausePressed())
+            {
+                Pause();
+            }
         }
         else
         {
             inputManager = InputManager.Instance;
+
         }
 
-        if (inputManager.IsPausePressed() && IsPaused == false)
-        {
-            Pause();
-        }
+
 
     }
     private void OnDestroy()

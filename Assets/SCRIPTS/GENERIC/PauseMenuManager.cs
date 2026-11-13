@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,15 +7,17 @@ public class PauseMenuManager : MonoBehaviour
     public GameObject PauseMenu;
     public GameObject activeMenu;
     public GameObject activeSettingsMenu;
-
+    public GameObject fpsCounter;
 
     private void Start()
     {
         GameManager.Instance.OnPause += ActivatePauseMenu;
     }
+
     private void OnDisable()
     {
         GameManager.Instance.OnPause -= ActivatePauseMenu;
+
     }
     private void OnDestroy()
     {
@@ -23,7 +26,9 @@ public class PauseMenuManager : MonoBehaviour
     public void ActivatePauseMenu()
     {
         PauseMenu.SetActive(GameManager.Instance.IsPaused);
+
     }
+
     public void Continue()
     {
         PauseMenu.SetActive(false);

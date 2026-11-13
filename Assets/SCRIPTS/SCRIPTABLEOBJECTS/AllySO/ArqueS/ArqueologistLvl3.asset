@@ -20,6 +20,7 @@ MonoBehaviour:
   recruitmentPrice: 150
   damage: 0
   maxInTeam: 1
+  AllyPrefab: {fileID: 8143229901878839667, guid: 3dcb09579f1f9b148ab3d6d5ab53c751, type: 3}
   probabilities:
   - 10
   - 20

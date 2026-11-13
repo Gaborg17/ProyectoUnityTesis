@@ -19,12 +19,14 @@ public class RecruitmentManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI GoldCount;
 
     [SerializeField] private AlliesSO actualAlly;
+    [SerializeField] private GameObject actualAllyGO;
 
     [SerializeField] private Transform allyDisplayPoint;
 
 
     [SerializeField] private AllyFamily[] allyTypes;
 
+    private Coroutine ModelCoroutine;
     private int currentAllyType = 0;
     private int currentLevel;
 
@@ -51,7 +53,14 @@ public class RecruitmentManager : MonoBehaviour
 
 
         allyType.text = allyTypes[currentAllyType].name;
+        if (ModelCoroutine != null)
+        {
+            StopCoroutine(ModelCoroutine);
+            ModelCoroutine = null;
+        }
         SetInfo(currentLevel);
+        
+
     }
 
     public void ChangeLevelToDisplay(int level)
@@ -74,6 +83,7 @@ public class RecruitmentManager : MonoBehaviour
         allyPrice.text = allyTypes[currentAllyType].levels[level].recruitmentPrice.ToString();
         actualAlly = allyTypes[currentAllyType].levels[level];
         //Change 3D model
+        ModelCoroutine = StartCoroutine(ModelChange());
     }
 
     [SerializeField] private GameObject cameraTab;
@@ -178,5 +188,12 @@ public class RecruitmentManager : MonoBehaviour
         messageCoroutine = null;
     }
 
-
+    public IEnumerator ModelChange()
+    {
+        yield return new WaitForSeconds(0.2f);
+        actualAllyGO.SetActive(false);
+        Destroy(actualAllyGO);
+        actualAllyGO =  Instantiate(actualAlly.AllyPrefab, allyDisplayPoint);
+        ModelCoroutine = null;
+    }
 }

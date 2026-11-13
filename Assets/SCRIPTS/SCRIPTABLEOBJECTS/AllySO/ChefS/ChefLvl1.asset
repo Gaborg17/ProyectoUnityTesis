@@ -20,4 +20,5 @@ MonoBehaviour:
   recruitmentPrice: 20
   damage: 0
   maxInTeam: 1
+  AllyPrefab: {fileID: 690340471950296992, guid: 22676cb76918e4d40b14b6ddceddc25d, type: 3}
   foodCostModifier: 0.2

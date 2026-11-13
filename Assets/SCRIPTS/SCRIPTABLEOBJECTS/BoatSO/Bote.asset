@@ -20,3 +20,4 @@ MonoBehaviour:
   wasOwned: 1
   inStorePrice: 0
   repairCost: 0
+  boatGO: {fileID: 919132149155446097, guid: 7fbb92b51e691584ebb8cb9bfc33be2f, type: 3}

@@ -17,5 +17,7 @@ MonoBehaviour:
   boatHealth: 2
   maxAllies: 2
   canBeAttacked: 0
+  wasOwned: 0
   inStorePrice: 50
   repairCost: 100
+  boatGO: {fileID: 919132149155446097, guid: 17c650993cdf78c4ca2bccf209329934, type: 3}

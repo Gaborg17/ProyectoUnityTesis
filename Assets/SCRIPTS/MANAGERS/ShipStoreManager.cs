@@ -15,8 +15,11 @@ public class ShipStoreManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI noticeText;
 
     [SerializeField] private Button buyButton;
+    [SerializeField] private GameObject actualBoatGO;
 
+    [SerializeField] private Transform boatDisplayPoint;
     private Coroutine messageToShow;
+    private Coroutine boatModelChange;
     private int shipInDisplay = 0;
 
     private GameManager gm; 
@@ -57,6 +60,11 @@ public class ShipStoreManager : MonoBehaviour
     {
         shipInDisplay--;
         if (shipInDisplay < 0) shipInDisplay = ships.Length -1;
+        if (boatModelChange != null)
+        {
+            StopCoroutine(boatModelChange);
+            boatModelChange = null;
+        }
         ChangeShipData();
 
         CheckIfOwned();
@@ -66,6 +74,11 @@ public class ShipStoreManager : MonoBehaviour
     {
         shipInDisplay++;
         if (shipInDisplay > ships.Length -1) shipInDisplay = 0;
+        if (boatModelChange != null)
+        {
+            StopCoroutine(boatModelChange);
+            boatModelChange = null;
+        }
         ChangeShipData();
 
         CheckIfOwned();
@@ -92,6 +105,7 @@ public class ShipStoreManager : MonoBehaviour
         shipLives.text = $"Lives: {shipData.boatHealth}";
         shipBonus.text = "";
         shipPrice.text = $"${shipData.inStorePrice}";
+        boatModelChange = StartCoroutine(ModelChangeBoat());
     }
 
 
@@ -115,5 +129,14 @@ public class ShipStoreManager : MonoBehaviour
         yield return new WaitForSeconds(0.8f);
         noticeText.gameObject.SetActive(false);
         messageToShow = null;
+    }
+
+    public IEnumerator ModelChangeBoat()
+    {
+        yield return new WaitForSeconds(0.2f);
+        actualBoatGO.SetActive(false);
+        Destroy(actualBoatGO);
+        actualBoatGO = Instantiate(ships[shipInDisplay].boatGO, boatDisplayPoint);
+        boatModelChange = null;
     }
 }

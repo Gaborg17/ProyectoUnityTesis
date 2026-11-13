@@ -21,7 +21,7 @@ public class AllyStateMachine : MonoBehaviour
     private CombatZoneManager _cManager;
 
 
-    public Animator AllyAnimator { get { return allyAnim; } }
+    public Animator AllyAnimator { get { return allyAnim; } set { allyAnim = value; } }
     public AlliesSO AllySO { get { return allySO; } set { allySO = value; } }
     public NavMeshAgent Agent { get { return agent; } }
 

@@ -39,7 +39,17 @@ public class AlliesManager : MonoBehaviour
         {
             if(GameManager.Instance.allies[i] != null)
             {
-                AlliesInGame[i].SetActive(true);
+                if (AlliesInGame[i].activeSelf == false)
+                {
+                    AllyStateMachine ally = AlliesInGame[i].GetComponent<AllyStateMachine>();
+                    ally.AllySO = GameManager.Instance.allies[i];
+                    GameObject allyGO = Instantiate(ally.AllySO.AllyPrefab, AlliesInGame[i].transform);
+                    allyGO.transform.localPosition = new Vector3(0f, -0.5f, 0f);
+                    ally.AllyAnimator = allyGO.GetComponent<Animator>();
+                    ally.enabled = true;
+                    AlliesInGame[i].SetActive(true);
+                }
+
             }
         }
     }

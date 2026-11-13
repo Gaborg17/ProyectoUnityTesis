@@ -117,7 +117,7 @@ public class InputManager : MonoBehaviour
 
     public bool IsPausePressed()
     {
-        return controls.Pirata.Pause.IsPressed();
+        return controls.Pirata.Pause.WasPerformedThisFrame();
     }
     public Vector2 MouseWheel()
     {
