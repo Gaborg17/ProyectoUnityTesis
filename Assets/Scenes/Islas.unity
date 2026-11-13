@@ -1659,7 +1659,7 @@ MonoBehaviour:
   showFps: 0
   windowed: 0
   vsync: 0
-  resolutionIndex: 0
+  resolutionIndex: -1
   fpsIndex: 3
   targetFPS: -1
 --- !u!43 &37378756

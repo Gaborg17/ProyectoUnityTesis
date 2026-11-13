@@ -21,8 +21,8 @@ public class VideoSettings : MonoBehaviour
     {
         settingsManager = SettingsManager.Instance;
 
-        InitializeSettings();
         CheckResolution();
+        InitializeSettings();
     }
     private void Update()
     {
@@ -46,7 +46,6 @@ public class VideoSettings : MonoBehaviour
 
         fpsLimiterDropDown.value = settingsManager.fpsIndex;
         fpsLimiterDropDown.RefreshShownValue();
-
         ApplyVSync();
     }
 
@@ -103,8 +102,8 @@ public class VideoSettings : MonoBehaviour
             string option = resolutions[i].width + " x " + resolutions[i].height;
             options.Add(option);
 
-            if (resolutions[i].width == Screen.width &&
-                resolutions[i].height == Screen.height)
+            if (Screen.fullScreen && resolutions[i].width == Screen.currentResolution.width &&
+                resolutions[i].height == Screen.currentResolution.height)
             {
                 actualResolution = uniqueResolutions.Count - 1;
             }
@@ -112,8 +111,8 @@ public class VideoSettings : MonoBehaviour
         resolutions = uniqueResolutions.ToArray();
 
         resolutionsDropdown.AddOptions(options);
-        resolutionsDropdown.value = actualResolution;
-        settingsManager.resolutionIndex = actualResolution;
+        resolutionsDropdown.value = uniqueResolutions.Count - 1;
+        settingsManager.resolutionIndex = uniqueResolutions.Count - 1;
         resolutionsDropdown.RefreshShownValue();
         //resolutionsDropdown.value = PlayerPrefs.GetInt("resolution", 0);
     }
@@ -121,9 +120,9 @@ public class VideoSettings : MonoBehaviour
     public void ChangeResolution(int resolutionIndex)
     {
         //PlayerPrefs.SetInt("resolution", resolutionsDropdown.value);
-
+        Debug.Log(resolutionIndex);
         Resolution resolution = resolutions[resolutionIndex];
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreenMode);
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
         settingsManager.resolutionIndex = resolutionIndex;
     }
 
