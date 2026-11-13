@@ -73,6 +73,7 @@ public class VideoSettings : MonoBehaviour
 
     public void ApplyVSync()
     {
+        settingsManager.vsync = vsyncButton.isOn;
         QualitySettings.vSyncCount = settingsManager.vsync ? 1 : 0;
 
         Application.targetFrameRate = settingsManager.vsync
