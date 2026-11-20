@@ -26,10 +26,18 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float normalFov = 60f;
     [SerializeField] private float aimFov = 40f;
     [SerializeField] private float fovLerp = 12f;
+    [Header("Wall Collision")]
+    [SerializeField] private LayerMask collisionLayers;
+    [SerializeField] private float collisionRadius = 0.3f;
+    [SerializeField] private float safetyMargin = 0.15f;
+    [SerializeField] private float minDistance = 0.5f;
+    [SerializeField] private float collisionInSpeed = 25f;
+    [SerializeField] private float collisionOutSpeed = 8f;
     private Vector2 smoothedCam;
     private Vector2 camPos;
 
     private float currentDistance;
+    private float smoothedDistance;
     private Vector3 currentOffset;
     private float currentFov;
     public bool canAim;
@@ -43,7 +51,7 @@ public class CameraController : MonoBehaviour
         if (cam == null) cam = GetComponent<Camera>();
 
         currentDistance = camDistance;
-        currentOffset = Vector3.zero;
+        smoothedDistance = camDistance + Mathf.Abs(cam.transform.localPosition.z); currentOffset = Vector3.zero;
         currentFov = normalFov;
     }
 
@@ -66,8 +74,22 @@ public class CameraController : MonoBehaviour
         camPos.y = Mathf.Clamp(camPos.y,minVerticalAngle,maxVerticalAngle);
 
         cameraCenter.localRotation = Quaternion.Euler(-camPos.y, camPos.x, 0);
-        Vector3 position = cameraCenter.localRotation * new Vector3(0.0f, 0.0f, -camDistance) + target.position;
+        float camLocalZ = Mathf.Abs(cam.transform.localPosition.z);
+        float desiredDistance = currentDistance + camLocalZ;
 
+        Vector3 dir = cameraCenter.localRotation * Vector3.back;
+
+        float allowedDistance = desiredDistance;
+        if (Physics.SphereCast(target.position,collisionRadius,dir,out RaycastHit hit,desiredDistance,collisionLayers,QueryTriggerInteraction.Ignore))
+        {
+            allowedDistance = Mathf.Clamp(hit.distance - safetyMargin, minDistance, desiredDistance);
+        }
+
+        float speed = allowedDistance < smoothedDistance ? collisionInSpeed : collisionOutSpeed;
+        smoothedDistance = Mathf.Lerp(smoothedDistance, allowedDistance, Time.deltaTime * speed);
+
+        float effectiveCamDistance = smoothedDistance - camLocalZ;
+        Vector3 position = cameraCenter.localRotation * new Vector3(0f, 0f, -effectiveCamDistance) + target.position;
         cameraCenter.localPosition = position;
     }
 
