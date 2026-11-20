@@ -3,75 +3,69 @@ using UnityEngine;
 [ExecuteAlways]
 public class UniversalFaceController : MonoBehaviour
 {
-    [Header("Ojos")]
-    [Tooltip("Arrastra la malla de los ojos de ESTE personaje")]
+    [Header("Ojos (18 caras: 0-17)")]
     public Renderer eyeRenderer;
-    public int eyeColumnas = 0;
-    public int eyeFilas = 0;
-    public float eyeIndex = 0f;
+    [Range(0, 17)] public int eyeIndex = 0;
 
-    [Header("Boca")]
-    [Tooltip("Arrastra la malla de la boca de ESTE personaje")]
+    [Header("Boca (12 caras: 0-11)")]
     public Renderer mouthRenderer;
-    public int mouthColumnas = 0;
-    public int mouthFilas = 0;
-    public float mouthIndex = 0f;
+    [Range(0, 11)] public int mouthIndex = 0;
 
-    [Header("Material")]
+    // Usa "_BaseMap" en URP o "_MainTex" en Built-in
     public string texturePropertyName = "_BaseMap";
 
-    // Memoria para no actualizar si no hay cambios
-    private int prevEyeIndex = -1;
-    private int prevMouthIndex = -1;
-
-    private MaterialPropertyBlock eyePropBlock;
-    private MaterialPropertyBlock mouthPropBlock;
+    private int prevEye = -1;
+    private int prevMouth = -1;
+    private MaterialPropertyBlock eyeBlock;
+    private MaterialPropertyBlock mouthBlock;
+    private Animator animator;
 
     void OnEnable()
     {
-        // Limpiamos la memoria al darle Play
-        prevEyeIndex = -1;
-        prevMouthIndex = -1;
-        eyePropBlock = null;
-        mouthPropBlock = null;
+        animator = GetComponentInParent<Animator>();
+        prevEye = -1;
+        prevMouth = -1;
     }
 
     void LateUpdate()
     {
-        // Revisamos y actualizamos los Ojos
-        int currentEye = Mathf.RoundToInt(eyeIndex);
-        if (currentEye != prevEyeIndex)
+        // Mientras el Animator esté mezclando, se ignora el valor
+        // y se deja la última cara. Al terminar la transición se aplica la nueva.
+        if (Application.isPlaying && animator != null && IsAnyLayerInTransition())
+            return;
+
+        if (eyeIndex != prevEye)
         {
-            UpdateFacePart(eyeRenderer, eyeColumnas, eyeFilas, currentEye, ref eyePropBlock);
-            prevEyeIndex = currentEye;
+            Apply(eyeRenderer, ref eyeBlock, eyeIndex, 3, 6);
+            prevEye = eyeIndex;
         }
 
-        // Revisamos y actualizamos la Boca
-        int currentMouth = Mathf.RoundToInt(mouthIndex);
-        if (currentMouth != prevMouthIndex)
+        if (mouthIndex != prevMouth)
         {
-            UpdateFacePart(mouthRenderer, mouthColumnas, mouthFilas, currentMouth, ref mouthPropBlock);
-            prevMouthIndex = currentMouth;
+            Apply(mouthRenderer, ref mouthBlock, mouthIndex, 4, 3);
+            prevMouth = mouthIndex;
         }
     }
 
-    // Función universal matemática que sirve para cualquier parte de la cara
-    void UpdateFacePart(Renderer rend, int col, int fil, int index, ref MaterialPropertyBlock block)
+    bool IsAnyLayerInTransition()
     {
-        if (rend == null || col <= 0 || fil <= 0) return;
+        for (int i = 0; i < animator.layerCount; i++)
+            if (animator.IsInTransition(i)) return true;
+        return false;
+    }
+
+    void Apply(Renderer rend, ref MaterialPropertyBlock block, int index, int col, int fil)
+    {
+        if (rend == null) return;
         if (block == null) block = new MaterialPropertyBlock();
 
-        int maxIndex = (col * fil) - 1;
-        int safeIndex = Mathf.Clamp(index, 0, maxIndex);
+        index = Mathf.Clamp(index, 0, col * fil - 1);
 
-        float stepX = 1f / col;
-        float stepY = 1f / fil;
-
-        float offsetX = (safeIndex % col) * stepX;
-        float offsetY = -(safeIndex / col) * stepY;
+        float x = (index % col) * (1f / col);
+        float y = -(index / col) * (1f / fil);
 
         rend.GetPropertyBlock(block);
-        block.SetVector(texturePropertyName + "_ST", new Vector4(1f, 1f, offsetX, offsetY));
+        block.SetVector(texturePropertyName + "_ST", new Vector4(1f, 1f, x, y));
         rend.SetPropertyBlock(block);
     }
 }

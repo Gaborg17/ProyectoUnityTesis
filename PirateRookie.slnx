@@ -3,6 +3,7 @@
   <Project Path="Assembly-CSharp.csproj" />
   <Project Path="Rive.Editor.Components.csproj" />
   <Project Path="Rive.Runtime.csproj" />
+  <Project Path="Assembly-CSharp-firstpass.csproj" />
   <Project Path="Rive.Editor.csproj" />
   <Project Path="Assembly-CSharp-Editor.csproj" />
 </Solution>
